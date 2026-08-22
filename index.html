@@ -1,11 +1,205 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8" />
-  <title>My Portfolio</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AShop - Premium Robux Provider</title>
+
+    <!-- Google Fonts: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- React 18 & ReactDOM -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    
+    <!-- Babel Standalone (Compiles JSX in the browser) -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            DEFAULT: '#80A4C6', // Your Light Blue
+                            dark: '#5a82a8',
+                            light: '#a6c2d9'
+                        },
+                        slate: {
+                            900: '#0f172a',
+                            950: '#020617', // Deep dark background
+                        }
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'glow': 'glow 2s ease-in-out infinite alternate',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        glow: {
+                            'from': { boxShadow: '0 0 10px -5px #80A4C6' },
+                            'to': { boxShadow: '0 0 20px 5px rgba(128, 164, 198, 0.4)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #020617;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f172a; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #80A4C6; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #5a82a8; 
+        }
+    </style>
 </head>
-<body style="font-family: sans-serif; text-align: center; padding-top: 50px;">
-  <h1>Portfolio Under Construction</h1>
-  <p>Check back soon!</p>
-</body>
-</html>
+<body class="antialiased selection:bg-brand selection:text-white">
+    
+    <!-- React Root -->
+    <div id="root"></div>
+
+    <!-- React Application Code -->
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        // --- COMPONENTS ---
+
+        const Navbar = () => {
+            const [isScrolled, setIsScrolled] = useState(false);
+            const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+            const [lang, setLang] = useState('EN');
+
+            // Handle scroll effect for navbar blur
+            useEffect(() => {
+                const handleScroll = () => setIsScrolled(window.scrollY > 20);
+                window.addEventListener('scroll', handleScroll);
+                return () => window.removeEventListener('scroll', handleScroll);
+            }, []);
+
+            const toggleLang = () => setLang(lang === 'EN' ? 'MM' : 'EN');
+
+            const navLinks = [
+                { name: 'Guides', href: '#guides' },
+                { name: 'Reviews', href: '#reviews' },
+                { name: 'FAQ', href: '#faq' },
+                { name: 'About', href: '#about' }
+            ];
+
+            return (
+                <nav className={`fixed w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-slate-950/80 backdrop-blur-md py-4 border-b border-slate-800' : 'bg-transparent py-6'}`}>
+                    <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
+                        
+                        {/* LEFT: Logo */}
+                        <a href="#" className="flex items-center gap-2 group">
+                            <div className="w-10 h-10 rounded-xl bg-brand/20 flex items-center justify-center border border-brand/50 group-hover:border-brand transition-colors duration-300">
+                                <i className="fa-solid fa-cube text-brand text-xl"></i>
+                            </div>
+                            <span className="text-2xl font-bold tracking-tight text-white group-hover:text-brand transition-colors duration-300">
+                                ASHOP
+                            </span>
+                        </a>
+
+                        {/* CENTER: Desktop Links */}
+                        <div className="hidden md:flex items-center gap-8">
+                            {navLinks.map((link) => (
+                                <a key={link.name} href={link.href} className="text-sm font-medium text-slate-300 hover:text-brand transition-colors duration-300">
+                                    {link.name}
+                                </a>
+                            ))}
+                        </div>
+
+                        {/* RIGHT: Lang & Buy Now */}
+                        <div className="hidden md:flex items-center gap-6">
+                            <button onClick={toggleLang} className="text-sm font-medium text-slate-300 hover:text-brand transition-colors flex items-center gap-2">
+                                <i className="fa-solid fa-globe"></i>
+                                {lang}
+                            </button>
+                            <a href="https://t.me/YourBotLink" target="_blank" className="bg-brand text-slate-950 px-6 py-2.5 rounded-full font-semibold hover:bg-white transition-all duration-300 shadow-[0_0_15px_rgba(128,164,198,0.3)] hover:shadow-[0_0_25px_rgba(128,164,198,0.6)] transform hover:-translate-y-0.5">
+                                Buy Now
+                            </a>
+                        </div>
+
+                        {/* Mobile Menu Button */}
+                        <button className="md:hidden text-2xl text-slate-300 hover:text-brand transition-colors" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+                            <i className={`fa-solid ${mobileMenuOpen ? 'fa-xmark' : 'fa-bars'}`}></i>
+                        </button>
+                    </div>
+
+                    {/* Mobile Menu Dropdown */}
+                    {mobileMenuOpen && (
+                        <div className="md:hidden absolute top-full left-0 w-full bg-slate-900 border-b border-slate-800 py-4 px-6 flex flex-col gap-4 shadow-2xl">
+                            {navLinks.map((link) => (
+                                <a key={link.name} href={link.href} onClick={() => setMobileMenuOpen(false)} className="text-lg font-medium text-slate-300 hover:text-brand">
+                                    {link.name}
+                                </a>
+                            ))}
+                            <div className="h-px w-full bg-slate-800 my-2"></div>
+                            <div className="flex items-center justify-between">
+                                <button onClick={toggleLang} className="text-lg font-medium text-slate-300 hover:text-brand flex items-center gap-2">
+                                    <i className="fa-solid fa-globe"></i> Language: {lang}
+                                </button>
+                                <a href="https://t.me/YourBotLink" className="bg-brand text-slate-950 px-6 py-2 rounded-lg font-semibold text-center">
+                                    Buy Now
+                                </a>
+                            </div>
+                        </div>
+                    )}
+                </nav>
+            );
+        };
+
+        const Hero = () => {
+            return (
+                <section id="home" className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
+                    {/* Background glow effects */}
+                    <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-brand/10 rounded-full blur-[120px] pointer-events-none"></div>
+                    <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-brand/5 rounded-full blur-[100px] pointer-events-none"></div>
+
+                    <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center gap-12 relative z-10">
+                        {/* Text Content */}
+                        <div className="flex-1 text-center md:text-left">
+                            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-800/50 border border-slate-700 mb-6 backdrop-blur-sm">
+                                <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
+                                <span className="text-xs font-medium text-slate-300 uppercase tracking-wider">Fastest Delivery in Myanmar</span>
+                            </div>
+                            <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight mb-6 leading-tight">
+                                Premium <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand to-brand-light">Robux</span> <br/>
+                                Delivered Instantly.
+                            </h1>
+                            <p className="text-lg text-slate-400 mb-10 max-w-xl mx-auto md:mx-0">
+                                Upgrade your Roblox experience with AShop. Safe, automated MMQR payments, and instant group payouts. Join thousands of satisfied customers today.
+                            </p>
+                            <div className="flex flex-col sm:flex-row items-center gap-4 justify-center md:justify-start">
+                                <a href="https://t.me/YourBotLink" className="w-full sm:w-auto px-8 py-4 rounded-xl bg-brand text-slate-950 font-bold text-lg hover:bg-white transition-all duration-300 hover:shadow-[0_0_30px_rgba(128,164,198,0.5)] flex items-center justify-center gap-3 transform hover:-translate-y-1">
+                                    <i className="fa-brands fa-telegram text-xl"></i>
+                                    Open Telegram Bot
+                                </a>
+                                <
