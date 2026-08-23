@@ -31,14 +31,9 @@
                     },
                     colors: {
                         brand: {
-                            DEFAULT: '#38BDF8', // Bright Electric Sky Blue
+                            DEFAULT: '#38BDF8', 
                             dark: '#0284C7',
                             light: '#7DD3FC',
-                            glow: '#00E5FF'
-                        },
-                        gold: {
-                            DEFAULT: '#F59E0B',
-                            light: '#FDE047'
                         },
                         slate: {
                             800: '#1e293b',
@@ -48,14 +43,9 @@
                         }
                     },
                     animation: {
-                        'float': 'float 5s ease-in-out infinite',
                         'pulse-glow': 'pulseGlow 2s ease-in-out infinite',
                     },
                     keyframes: {
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0)' },
-                            '50%': { transform: 'translateY(-12px)' },
-                        },
                         pulseGlow: {
                             '0%, 100%': { opacity: '0.6', transform: 'scale(1)' },
                             '50%': { opacity: '1', transform: 'scale(1.05)' },
@@ -108,13 +98,11 @@
                 return () => window.removeEventListener('scroll', handleScroll);
             }, []);
 
-            const toggleLang = () => setLang(lang === 'EN' ? 'MM' : 'EN');
-
             const navLinks = [
                 { name: 'Features', href: '#features' },
-                { name: 'Pricelist', href: '#pricelist' },
                 { name: 'FAQ', href: '#faq' },
-                { name: 'Contact', href: '#contact' }
+                { name: 'Contact', href: '#contact' },
+                { name: 'About', href: '#about' }
             ];
 
             return (
@@ -148,12 +136,18 @@
 
                         {/* Actions */}
                         <div className="hidden md:flex items-center gap-6">
-                            <button onClick={toggleLang} className="text-sm font-medium text-slate-300 hover:text-brand transition-colors flex items-center gap-2">
-                                <i className="fa-solid fa-globe text-brand"></i>
-                                {lang}
-                            </button>
-                            <a href="https://t.me/YourBotLink" target="_blank" className="bg-brand text-slate-950 px-6 py-2.5 rounded-full font-bold hover:bg-white transition-all duration-300 shadow-[0_0_20px_rgba(56,189,248,0.4)] hover:shadow-[0_0_30px_rgba(56,189,248,0.8)] transform hover:-translate-y-0.5">
-                                Buy Now
+                            {/* EN / MM Toggle */}
+                            <div className="flex items-center gap-1.5 text-sm font-bold bg-slate-900/60 px-3 py-1.5 rounded-full border border-slate-800">
+                                <button onClick={() => setLang('EN')} className={`transition-colors ${lang === 'EN' ? 'text-brand drop-shadow-[0_0_8px_rgba(56,189,248,0.8)]' : 'text-slate-500 hover:text-slate-300'}`}>
+                                    EN
+                                </button>
+                                <span className="text-slate-700">/</span>
+                                <button onClick={() => setLang('MM')} className={`transition-colors ${lang === 'MM' ? 'text-brand drop-shadow-[0_0_8px_rgba(56,189,248,0.8)]' : 'text-slate-500 hover:text-slate-300'}`}>
+                                    MM
+                                </button>
+                            </div>
+                            <a href="https://t.me/ashopacey" target="_blank" className="bg-brand text-slate-950 px-6 py-2.5 rounded-full font-bold hover:bg-white transition-all duration-300 shadow-[0_0_20px_rgba(56,189,248,0.4)] hover:shadow-[0_0_30px_rgba(56,189,248,0.8)] transform hover:-translate-y-0.5">
+                                Order Now
                             </a>
                         </div>
 
@@ -173,11 +167,13 @@
                             ))}
                             <div className="h-px w-full bg-slate-800 my-2"></div>
                             <div className="flex items-center justify-between pt-2">
-                                <button onClick={toggleLang} className="text-lg font-medium text-slate-300 hover:text-brand flex items-center gap-2">
-                                    <i className="fa-solid fa-globe text-brand"></i> Language: {lang}
-                                </button>
-                                <a href="https://t.me/YourBotLink" className="bg-brand text-slate-950 px-6 py-2.5 rounded-xl font-bold">
-                                    Buy Now
+                                <div className="flex items-center gap-2 text-lg font-bold">
+                                    <button onClick={() => setLang('EN')} className={lang === 'EN' ? 'text-brand' : 'text-slate-500'}>EN</button>
+                                    <span className="text-slate-700">/</span>
+                                    <button onClick={() => setLang('MM')} className={lang === 'MM' ? 'text-brand' : 'text-slate-500'}>MM</button>
+                                </div>
+                                <a href="https://t.me/ashopacey" className="bg-brand text-slate-950 px-6 py-2.5 rounded-xl font-bold">
+                                    Order Now
                                 </a>
                             </div>
                         </div>
@@ -188,74 +184,35 @@
 
         const Hero = () => {
             return (
-                <section id="home" className="relative min-h-screen flex items-center justify-center pt-24 pb-16 overflow-hidden">
+                <section id="home" className="relative min-h-[90vh] flex items-center justify-center pt-24 pb-16 overflow-hidden">
                     {/* Background Neon Glows */}
-                    <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-brand/15 rounded-full blur-[140px] pointer-events-none"></div>
-                    <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-blue-600/10 rounded-full blur-[120px] pointer-events-none"></div>
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-brand/15 rounded-full blur-[150px] pointer-events-none"></div>
 
-                    <div className="max-w-7xl mx-auto px-6 flex flex-col lg:flex-row items-center gap-14 relative z-10">
-                        {/* Hero Text */}
-                        <div className="flex-1 text-center lg:text-left">
-                            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-850/80 border border-sky-500/30 mb-6 backdrop-blur-md shadow-[0_0_15px_rgba(56,189,248,0.15)]">
-                                <span className="w-2.5 h-2.5 rounded-full bg-brand shadow-[0_0_10px_#38bdf8] animate-pulse"></span>
-                                <span className="text-xs font-bold text-sky-200 uppercase tracking-widest">Fast Automated Delivery</span>
-                            </div>
-                            <h1 className="text-5xl md:text-7xl font-black tracking-tight mb-6 leading-tight">
-                                Premium <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand via-sky-300 to-blue-400 drop-shadow-[0_0_20px_rgba(56,189,248,0.3)]">Robux</span> <br/>
-                                Delivered Instantly.
-                            </h1>
-                            <p className="text-base md:text-lg text-slate-300 mb-10 max-w-xl mx-auto lg:mx-0 font-normal leading-relaxed">
-                                Upgrade your Roblox experience with AShop. Safe transactions, automated MMQR payment verification, and instant group payouts under 60 seconds.
-                            </p>
-                            <div className="flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start">
-                                <a href="https://t.me/YourBotLink" target="_blank" className="w-full sm:w-auto px-8 py-4 rounded-xl bg-brand text-slate-950 font-extrabold text-base md:text-lg hover:bg-white transition-all duration-300 shadow-[0_0_25px_rgba(56,189,248,0.4)] hover:shadow-[0_0_35px_rgba(56,189,248,0.7)] flex items-center justify-center gap-3 transform hover:-translate-y-1">
-                                    <i className="fa-brands fa-telegram text-xl"></i>
-                                    Open Telegram Bot
-                                </a>
-                                <a href="#pricelist" className="w-full sm:w-auto px-8 py-4 rounded-xl bg-slate-850/90 border border-slate-700/80 hover:border-brand/60 text-white font-bold text-base md:text-lg transition-all duration-300 flex items-center justify-center gap-3 hover:bg-slate-800">
-                                    View Pricelist
-                                </a>
-                            </div>
+                    <div className="max-w-4xl mx-auto px-6 flex flex-col items-center text-center relative z-10">
+                        
+                        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-850/80 border border-sky-500/30 mb-6 backdrop-blur-md shadow-[0_0_15px_rgba(56,189,248,0.15)]">
+                            <span className="w-2.5 h-2.5 rounded-full bg-brand shadow-[0_0_10px_#38bdf8] animate-pulse"></span>
+                            <span className="text-xs font-bold text-sky-200 uppercase tracking-widest">Fast & Reliable Service</span>
                         </div>
-
-                        {/* Status Showcase Card */}
-                        <div className="flex-1 w-full max-w-lg">
-                            <div className="relative p-8 bg-gradient-to-b from-slate-850/95 to-slate-900/95 border border-sky-500/25 rounded-3xl backdrop-blur-2xl animate-float shadow-[0_0_40px_rgba(56,189,248,0.12)]">
-                                
-                                <div className="flex items-center justify-between pb-6 border-b border-slate-800">
-                                    <div>
-                                        <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider">System Status</p>
-                                        <p className="text-2xl font-extrabold text-white">Instant Available</p>
-                                    </div>
-                                    <div className="w-12 h-12 rounded-2xl bg-brand/15 border border-brand/40 flex items-center justify-center text-brand shadow-[0_0_15px_rgba(56,189,248,0.3)]">
-                                        <i className="fa-solid fa-bolt text-xl"></i>
-                                    </div>
-                                </div>
-
-                                <div className="py-6 space-y-4">
-                                    <div className="flex justify-between items-center p-3.5 rounded-xl bg-slate-900/70 border border-slate-800">
-                                        <span className="text-sm text-slate-400 font-medium">Payment Gateway</span>
-                                        <span className="text-sm font-semibold text-sky-200">KBZPay / WavePay MMQR</span>
-                                    </div>
-                                    <div className="flex justify-between items-center p-3.5 rounded-xl bg-slate-900/70 border border-slate-800">
-                                        <span className="text-sm text-slate-400 font-medium">Transfer Method</span>
-                                        <span className="text-sm font-semibold text-sky-200">Instant Group Payout</span>
-                                    </div>
-                                    <div className="flex justify-between items-center p-3.5 rounded-xl bg-slate-900/70 border border-slate-800">
-                                        <span className="text-sm text-slate-400 font-medium">Delivery Speed</span>
-                                        <span className="text-sm font-bold text-brand flex items-center gap-1.5">
-                                            <i className="fa-solid fa-gauge-high"></i> Under 60 Seconds
-                                        </span>
-                                    </div>
-                                </div>
-
-                                <div className="pt-2 flex items-center justify-between text-xs text-slate-400">
-                                    <span className="flex items-center gap-1.5 text-sky-300 font-medium">
-                                        <i className="fa-solid fa-shield-halved"></i> 100% Clean Funds
-                                    </span>
-                                    <span className="text-slate-500 font-medium">24/7 Automated</span>
-                                </div>
-                            </div>
+                        
+                        <h1 className="text-5xl md:text-7xl font-black tracking-tight mb-6 leading-tight">
+                            Cheapest <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand via-sky-300 to-blue-400 drop-shadow-[0_0_20px_rgba(56,189,248,0.3)]">Robux</span> <br/>
+                            Fastest Services.
+                        </h1>
+                        
+                        <p className="text-base md:text-lg text-slate-300 mb-10 max-w-2xl mx-auto font-normal leading-relaxed">
+                            Upgrade your Roblox experience with AShop. We provide safe transactions, support for easy local payments, and dedicated customer service to get you your items quickly.
+                        </p>
+                        
+                        <div className="flex flex-col sm:flex-row items-center gap-5 justify-center w-full sm:w-auto">
+                            <a href="https://t.me/ashopacey" target="_blank" className="w-full sm:w-auto px-8 py-4 rounded-xl bg-brand text-slate-950 font-extrabold text-base md:text-lg hover:bg-white transition-all duration-300 shadow-[0_0_25px_rgba(56,189,248,0.4)] hover:shadow-[0_0_35px_rgba(56,189,248,0.7)] flex items-center justify-center gap-3 transform hover:-translate-y-1">
+                                <i className="fa-brands fa-telegram text-xl"></i>
+                                Order in Telegram
+                            </a>
+                            <a href="#how-to-buy" className="w-full sm:w-auto px-8 py-4 rounded-xl bg-slate-850/90 border border-slate-700/80 hover:border-brand/60 text-white font-bold text-base md:text-lg transition-all duration-300 flex items-center justify-center gap-3 hover:bg-slate-800">
+                                <i className="fa-solid fa-circle-question text-brand"></i>
+                                How to buy
+                            </a>
                         </div>
                     </div>
                 </section>
@@ -264,13 +221,13 @@
 
         const Features = () => {
             const items = [
-                { icon: 'fa-shield-halved', title: '100% Safe Funds', desc: 'All Robux is cleanly sourced via legitimate group payouts and verified developer earnings.' },
-                { icon: 'fa-qrcode', title: 'Automated MMQR', desc: 'Instant slip verification. Pay via KBZPay or WavePay and get your Robux credited automatically.' },
-                { icon: 'fa-headset', title: 'Direct Live Support', desc: 'Got questions? Reach our support team instantly through our Telegram bot or Discord server.' }
+                { icon: 'fa-shield-halved', title: '100% Safe Funds', desc: 'All Robux is cleanly sourced via legitimate methods and verified developer earnings to keep your account safe.' },
+                { icon: 'fa-wallet', title: 'Easy Local Payments', desc: 'Pay easily using local payment methods including KBZPay and WavePay. No credit card required.' },
+                { icon: 'fa-headset', title: 'Direct Live Support', desc: 'Got questions? Reach our support team directly through our Telegram for personal assistance with your order.' }
             ];
 
             return (
-                <section id="features" className="py-24 max-w-7xl mx-auto px-6 border-t border-slate-800/50">
+                <section id="features" className="py-20 max-w-7xl mx-auto px-6 border-t border-slate-800/50">
                     <h2 className="text-3xl md:text-4xl font-extrabold text-center mb-12">
                         Why Choose <span className="text-brand">AShop</span>
                     </h2>
@@ -289,14 +246,143 @@
             );
         };
 
+        const FAQ = () => {
+            return (
+                <section id="faq" className="py-20 max-w-4xl mx-auto px-6 border-t border-slate-800/50">
+                    <h2 className="text-3xl md:text-4xl font-extrabold text-center mb-12">Frequently Asked Questions</h2>
+                    
+                    <div className="space-y-6">
+                        {/* How To Buy Section */}
+                        <div id="how-to-buy" className="p-6 bg-slate-900/80 border border-brand/30 rounded-2xl shadow-[0_0_20px_rgba(56,189,248,0.1)] scroll-mt-24">
+                            <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-3">
+                                <i className="fa-solid fa-cart-shopping text-brand"></i> How do I place an order?
+                            </h3>
+                            <ol className="list-decimal list-inside space-y-3 text-slate-300">
+                                <li>Click the <strong>Order in Telegram</strong> button to message our official account.</li>
+                                <li>Tell us how much Robux you want to purchase.</li>
+                                <li>We will provide our KBZPay or WavePay details.</li>
+                                <li>Send the payment and reply with the screenshot/slip.</li>
+                                <li>We will process your order and transfer the Robux to your account!</li>
+                            </ol>
+                        </div>
+
+                        <div className="p-6 bg-slate-900/50 border border-slate-800 rounded-2xl">
+                            <h3 className="text-lg font-bold text-white mb-2">Is this service safe for my Roblox account?</h3>
+                            <p className="text-slate-400">Yes! We strictly use clean funds from verified sources. We do not use exploits, meaning your account is 100% safe from bans.</p>
+                        </div>
+                    </div>
+                </section>
+            );
+        };
+
+        const Contact = () => {
+            return (
+                <section id="contact" className="py-20 max-w-5xl mx-auto px-6 border-t border-slate-800/50">
+                    <div className="text-center mb-12">
+                        <h2 className="text-3xl md:text-4xl font-extrabold mb-4">Connect With Us</h2>
+                        <p className="text-slate-400">Follow us on social media or reach out directly for support.</p>
+                    </div>
+
+                    <div className="grid md:grid-cols-2 gap-8">
+                        {/* Social Links */}
+                        <div className="p-8 bg-slate-900/80 border border-slate-800 rounded-2xl">
+                            <h3 className="text-xl font-bold mb-6 text-white">Official Channels</h3>
+                            <div className="space-y-4">
+                                <a href="https://www.facebook.com/share/1RrZdwAgap/" target="_blank" className="flex items-center gap-4 p-4 rounded-xl bg-slate-850 border border-slate-800 hover:border-[#1877F2] hover:bg-[#1877F2]/10 transition group">
+                                    <i className="fa-brands fa-facebook text-2xl text-slate-400 group-hover:text-[#1877F2] transition"></i>
+                                    <span className="font-medium text-slate-200">Facebook</span>
+                                </a>
+                                <a href="https://www.tiktok.com/@ashopacey" target="_blank" className="flex items-center gap-4 p-4 rounded-xl bg-slate-850 border border-slate-800 hover:border-[#ff0050] hover:bg-[#ff0050]/10 transition group">
+                                    <i className="fa-brands fa-tiktok text-2xl text-slate-400 group-hover:text-[#ff0050] transition"></i>
+                                    <span className="font-medium text-slate-200">TikTok</span>
+                                </a>
+                                <a href="https://www.youtube.com/@ashopacey" target="_blank" className="flex items-center gap-4 p-4 rounded-xl bg-slate-850 border border-slate-800 hover:border-[#FF0000] hover:bg-[#FF0000]/10 transition group">
+                                    <i className="fa-brands fa-youtube text-2xl text-slate-400 group-hover:text-[#FF0000] transition"></i>
+                                    <span className="font-medium text-slate-200">YouTube</span>
+                                </a>
+                                <a href="https://discord.gg/69dMVE8qj5" target="_blank" className="flex items-center gap-4 p-4 rounded-xl bg-slate-850 border border-slate-800 hover:border-[#5865F2] hover:bg-[#5865F2]/10 transition group">
+                                    <i className="fa-brands fa-discord text-2xl text-slate-400 group-hover:text-[#5865F2] transition"></i>
+                                    <span className="font-medium text-slate-200">Discord Community</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        {/* Direct Contact Card */}
+                        <div className="p-8 bg-slate-900/80 border border-slate-800 rounded-2xl flex flex-col justify-center">
+                            <h3 className="text-xl font-bold mb-6 text-white">Direct Support</h3>
+                            <div className="p-6 bg-slate-850 border border-brand/30 rounded-xl relative overflow-hidden">
+                                {/* Decorative background element */}
+                                <div className="absolute -right-6 -top-6 w-24 h-24 bg-brand/10 rounded-full blur-2xl"></div>
+                                
+                                <div className="flex items-center gap-5 relative z-10">
+                                    {/* Profile Picture Placeholder */}
+                                    <div className="w-16 h-16 rounded-full bg-slate-800 border-2 border-brand flex items-center justify-center overflow-hidden flex-shrink-0">
+                                        <i className="fa-solid fa-user text-slate-500 text-2xl"></i>
+                                        {/* To add your image later, replace the <i> tag above with: 
+                                        <img src="./your-profile.png" alt="Acey" className="w-full h-full object-cover" /> */}
+                                    </div>
+                                    <div>
+                                        <h4 className="text-white font-extrabold text-xl">Acey</h4>
+                                        <p className="text-slate-400 text-sm mb-1">Owner & Support</p>
+                                        <a href="https://t.me/aceyredd" target="_blank" className="text-brand font-medium hover:text-white transition flex items-center gap-1.5">
+                                            @aceyredd <i className="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                <a href="https://t.me/aceyredd" target="_blank" className="mt-6 w-full py-3 rounded-lg bg-brand/10 border border-brand/30 text-brand font-bold flex items-center justify-center gap-2 hover:bg-brand hover:text-slate-950 transition">
+                                    <i className="fa-brands fa-telegram text-lg"></i> Message on Telegram
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            );
+        };
+
+        const About = () => {
+            return (
+                <section id="about" className="py-20 max-w-4xl mx-auto px-6 border-t border-slate-800/50">
+                    <div className="text-center mb-10">
+                        <div className="w-16 h-16 mx-auto rounded-2xl bg-brand/10 border border-brand/30 flex items-center justify-center text-brand text-3xl mb-6">
+                            <i className="fa-solid fa-store"></i>
+                        </div>
+                        <h2 className="text-3xl md:text-4xl font-extrabold mb-6">About AShop</h2>
+                        <p className="text-slate-300 text-lg leading-relaxed">
+                            Welcome to AShop! We are dedicated to providing the Myanmar community with the cheapest and fastest Robux services. Our goal is to make purchasing digital goods accessible, easy, and completely secure using local payment methods you already trust. 
+                        </p>
+                    </div>
+                    <div className="grid sm:grid-cols-2 gap-6 mt-12">
+                        <div className="p-6 bg-slate-900/50 border border-slate-800 rounded-xl text-center">
+                            <i className="fa-solid fa-handshake text-brand text-2xl mb-4"></i>
+                            <h3 className="text-white font-bold mb-2">Our Policy</h3>
+                            <p className="text-sm text-slate-400">Customer satisfaction is our top priority. We guarantee delivery on all valid orders and ensure transparent communication.</p>
+                        </div>
+                        <div className="p-6 bg-slate-900/50 border border-slate-800 rounded-xl text-center">
+                            <i className="fa-solid fa-clock text-brand text-2xl mb-4"></i>
+                            <h3 className="text-white font-bold mb-2">Working Hours</h3>
+                            <p className="text-sm text-slate-400">We aim to fulfill orders as fast as possible. Drop us a message on Telegram, and we will assist you right away.</p>
+                        </div>
+                    </div>
+                </section>
+            );
+        };
+
         const Footer = () => {
             return (
-                <footer id="contact" className="border-t border-slate-800/80 py-12 bg-slate-950">
-                    <div className="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row justify-between items-center gap-6">
-                        <p className="text-slate-500 text-sm">© {new Date().getFullYear()} AShop. All rights reserved.</p>
-                        <div className="flex gap-6 text-slate-400">
-                            <a href="https://t.me/YourBotLink" target="_blank" className="hover:text-brand transition"><i className="fa-brands fa-telegram text-xl"></i></a>
-                            <a href="#" className="hover:text-brand transition"><i className="fa-brands fa-discord text-xl"></i></a>
+                <footer className="border-t border-slate-800/80 py-10 bg-slate-950">
+                    <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
+                        <div className="flex items-center gap-2">
+                            <img src="./ashoplogo_20260806_144414_0000.png" alt="Logo" className="w-6 h-6 rounded" onError={(e) => { e.target.style.display='none' }} />
+                            <p className="text-slate-500 font-medium">© {new Date().getFullYear()} AShop. All rights reserved.</p>
+                        </div>
+                        
+                        {/* Footer Mini Socials */}
+                        <div className="flex gap-5">
+                            <a href="https://www.facebook.com/share/1RrZdwAgap/" target="_blank" className="text-slate-500 hover:text-[#1877F2] transition"><i className="fa-brands fa-facebook text-xl"></i></a>
+                            <a href="https://www.tiktok.com/@ashopacey" target="_blank" className="text-slate-500 hover:text-[#ff0050] transition"><i className="fa-brands fa-tiktok text-xl"></i></a>
+                            <a href="https://www.youtube.com/@ashopacey" target="_blank" className="text-slate-500 hover:text-[#FF0000] transition"><i className="fa-brands fa-youtube text-xl"></i></a>
+                            <a href="https://discord.gg/69dMVE8qj5" target="_blank" className="text-slate-500 hover:text-[#5865F2] transition"><i className="fa-brands fa-discord text-xl"></i></a>
+                            <a href="https://t.me/ashopacey" target="_blank" className="text-slate-500 hover:text-[#229ED9] transition"><i className="fa-brands fa-telegram text-xl"></i></a>
                         </div>
                     </div>
                 </footer>
@@ -305,10 +391,13 @@
 
         const App = () => {
             return (
-                <div className="min-h-screen bg-slate-950 flex flex-col justify-between">
+                <div className="min-h-screen bg-slate-950 flex flex-col">
                     <Navbar />
                     <Hero />
                     <Features />
+                    <FAQ />
+                    <Contact />
+                    <About />
                     <Footer />
                 </div>
             );
