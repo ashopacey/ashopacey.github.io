@@ -31,13 +31,13 @@
                     },
                     colors: {
                         brand: {
-                            DEFAULT: '#80A4C6', // Your Light Blue
+                            DEFAULT: '#80A4C6',
                             dark: '#5a82a8',
                             light: '#a6c2d9'
                         },
                         slate: {
                             900: '#0f172a',
-                            950: '#020617', // Deep dark background
+                            950: '#020617',
                         }
                     },
                     animation: {
@@ -47,7 +47,7 @@
                     keyframes: {
                         float: {
                             '0%, 100%': { transform: 'translateY(0)' },
-                            '50%': { transform: 'translateY(-20px)' },
+                            '50%': { transform: 'translateY(-15px)' },
                         },
                         glow: {
                             'from': { boxShadow: '0 0 10px -5px #80A4C6' },
@@ -90,14 +90,11 @@
     <script type="text/babel">
         const { useState, useEffect } = React;
 
-        // --- COMPONENTS ---
-
         const Navbar = () => {
             const [isScrolled, setIsScrolled] = useState(false);
             const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
             const [lang, setLang] = useState('EN');
 
-            // Handle scroll effect for navbar blur
             useEffect(() => {
                 const handleScroll = () => setIsScrolled(window.scrollY > 20);
                 window.addEventListener('scroll', handleScroll);
@@ -107,17 +104,17 @@
             const toggleLang = () => setLang(lang === 'EN' ? 'MM' : 'EN');
 
             const navLinks = [
-                { name: 'Guides', href: '#guides' },
-                { name: 'Reviews', href: '#reviews' },
+                { name: 'Features', href: '#features' },
+                { name: 'Pricelist', href: '#pricelist' },
                 { name: 'FAQ', href: '#faq' },
-                { name: 'About', href: '#about' }
+                { name: 'Contact', href: '#contact' }
             ];
 
             return (
                 <nav className={`fixed w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-slate-950/80 backdrop-blur-md py-4 border-b border-slate-800' : 'bg-transparent py-6'}`}>
                     <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
                         
-                        {/* LEFT: Logo */}
+                        {/* Logo */}
                         <a href="#" className="flex items-center gap-2 group">
                             <div className="w-10 h-10 rounded-xl bg-brand/20 flex items-center justify-center border border-brand/50 group-hover:border-brand transition-colors duration-300">
                                 <i className="fa-solid fa-cube text-brand text-xl"></i>
@@ -127,7 +124,7 @@
                             </span>
                         </a>
 
-                        {/* CENTER: Desktop Links */}
+                        {/* Desktop Navigation Links */}
                         <div className="hidden md:flex items-center gap-8">
                             {navLinks.map((link) => (
                                 <a key={link.name} href={link.href} className="text-sm font-medium text-slate-300 hover:text-brand transition-colors duration-300">
@@ -136,7 +133,7 @@
                             ))}
                         </div>
 
-                        {/* RIGHT: Lang & Buy Now */}
+                        {/* Actions */}
                         <div className="hidden md:flex items-center gap-6">
                             <button onClick={toggleLang} className="text-sm font-medium text-slate-300 hover:text-brand transition-colors flex items-center gap-2">
                                 <i className="fa-solid fa-globe"></i>
@@ -147,7 +144,7 @@
                             </a>
                         </div>
 
-                        {/* Mobile Menu Button */}
+                        {/* Mobile Menu Toggle Button */}
                         <button className="md:hidden text-2xl text-slate-300 hover:text-brand transition-colors" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
                             <i className={`fa-solid ${mobileMenuOpen ? 'fa-xmark' : 'fa-bars'}`}></i>
                         </button>
@@ -178,28 +175,120 @@
 
         const Hero = () => {
             return (
-                <section id="home" className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
-                    {/* Background glow effects */}
+                <section id="home" className="relative min-h-screen flex items-center justify-center pt-24 overflow-hidden">
                     <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-brand/10 rounded-full blur-[120px] pointer-events-none"></div>
                     <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-brand/5 rounded-full blur-[100px] pointer-events-none"></div>
 
                     <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center gap-12 relative z-10">
-                        {/* Text Content */}
                         <div className="flex-1 text-center md:text-left">
                             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-800/50 border border-slate-700 mb-6 backdrop-blur-sm">
                                 <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
-                                <span className="text-xs font-medium text-slate-300 uppercase tracking-wider">Fastest Delivery in Myanmar</span>
+                                <span className="text-xs font-medium text-slate-300 uppercase tracking-wider">Fast Automated Delivery</span>
                             </div>
                             <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight mb-6 leading-tight">
                                 Premium <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand to-brand-light">Robux</span> <br/>
                                 Delivered Instantly.
                             </h1>
                             <p className="text-lg text-slate-400 mb-10 max-w-xl mx-auto md:mx-0">
-                                Upgrade your Roblox experience with AShop. Safe, automated MMQR payments, and instant group payouts. Join thousands of satisfied customers today.
+                                Upgrade your Roblox experience with AShop. Safe transactions, automated MMQR payment verification, and instant group payouts.
                             </p>
                             <div className="flex flex-col sm:flex-row items-center gap-4 justify-center md:justify-start">
-                                <a href="https://t.me/YourBotLink" className="w-full sm:w-auto px-8 py-4 rounded-xl bg-brand text-slate-950 font-bold text-lg hover:bg-white transition-all duration-300 hover:shadow-[0_0_30px_rgba(128,164,198,0.5)] flex items-center justify-center gap-3 transform hover:-translate-y-1">
+                                <a href="https://t.me/YourBotLink" target="_blank" className="w-full sm:w-auto px-8 py-4 rounded-xl bg-brand text-slate-950 font-bold text-lg hover:bg-white transition-all duration-300 hover:shadow-[0_0_30px_rgba(128,164,198,0.5)] flex items-center justify-center gap-3 transform hover:-translate-y-1">
                                     <i className="fa-brands fa-telegram text-xl"></i>
                                     Open Telegram Bot
                                 </a>
-                                <
+                                <a href="#pricelist" className="w-full sm:w-auto px-8 py-4 rounded-xl bg-slate-900 border border-slate-800 text-slate-200 font-bold text-lg hover:border-brand/50 transition-all duration-300 flex items-center justify-center gap-3">
+                                    View Pricelist
+                                </a>
+                            </div>
+                        </div>
+
+                        {/* Showcase Feature Card */}
+                        <div className="flex-1 flex justify-center">
+                            <div className="relative w-full max-w-md p-8 bg-slate-900/60 border border-slate-800 rounded-2xl backdrop-blur-xl animate-float shadow-2xl">
+                                <div className="flex items-center justify-between pb-6 border-b border-slate-800">
+                                    <div>
+                                        <p className="text-xs text-slate-400">Stock Status</p>
+                                        <p className="text-xl font-bold text-white">Instant Available</p>
+                                    </div>
+                                    <div className="w-12 h-12 rounded-xl bg-green-500/10 border border-green-500/30 flex items-center justify-center text-green-400">
+                                        <i className="fa-solid fa-bolt text-xl"></i>
+                                    </div>
+                                </div>
+                                <div className="py-6 space-y-4">
+                                    <div className="flex justify-between items-center text-sm">
+                                        <span className="text-slate-400">Payment Gateway</span>
+                                        <span className="font-semibold text-slate-200">KBZPay / WavePay MMQR</span>
+                                    </div>
+                                    <div className="flex justify-between items-center text-sm">
+                                        <span className="text-slate-400">Transfer Method</span>
+                                        <span className="font-semibold text-slate-200">Instant Group Payout</span>
+                                    </div>
+                                    <div className="flex justify-between items-center text-sm">
+                                        <span className="text-slate-400">Delivery Speed</span>
+                                        <span className="font-semibold text-brand">Under 60 Seconds</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            );
+        };
+
+        const Features = () => {
+            const items = [
+                { icon: 'fa-shield-halved', title: '100% Safe & Clean', desc: 'Sourced strictly through verified developer funds and clean group payouts.' },
+                { icon: 'fa-qrcode', title: 'Automated MMQR', desc: 'No waiting for admin confirmation. Scan QR, verify slip, and receive items.' },
+                { icon: 'fa-headset', title: '24/7 Support', desc: 'Direct ticket system on Telegram and Discord for instant assistance.' }
+            ];
+
+            return (
+                <section id="features" className="py-24 max-w-7xl mx-auto px-6">
+                    <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">Why Choose <span className="text-brand">AShop</span></h2>
+                    <div className="grid md:grid-cols-3 gap-8">
+                        {items.map((item, idx) => (
+                            <div key={idx} className="p-8 bg-slate-900/40 border border-slate-800 rounded-2xl hover:border-brand/40 transition duration-300">
+                                <div className="w-12 h-12 rounded-xl bg-brand/10 border border-brand/30 flex items-center justify-center text-brand text-xl mb-6">
+                                    <i className={`fa-solid ${item.icon}`}></i>
+                                </div>
+                                <h3 className="text-xl font-bold mb-3">{item.title}</h3>
+                                <p className="text-slate-400 text-sm leading-relaxed">{item.desc}</p>
+                            </div>
+                        ))}
+                    </div>
+                </section>
+            );
+        };
+
+        const Footer = () => {
+            return (
+                <footer id="contact" className="border-t border-slate-800/80 py-12 bg-slate-950">
+                    <div className="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row justify-between items-center gap-6">
+                        <p className="text-slate-500 text-sm">© {new Date().getFullYear()} AShop. All rights reserved.</p>
+                        <div className="flex gap-6 text-slate-400">
+                            <a href="https://t.me/YourBotLink" target="_blank" className="hover:text-brand transition"><i className="fa-brands fa-telegram text-xl"></i></a>
+                            <a href="#" className="hover:text-brand transition"><i className="fa-brands fa-discord text-xl"></i></a>
+                        </div>
+                    </div>
+                </footer>
+            );
+        };
+
+        const App = () => {
+            return (
+                <div className="min-h-screen bg-slate-950 flex flex-col justify-between">
+                    <Navbar />
+                    <Hero />
+                    <Features />
+                    <Footer />
+                </div>
+            );
+        };
+
+        // React 18 Root Mounting
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
