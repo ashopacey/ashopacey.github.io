@@ -6,7 +6,7 @@
     <title>AShop - Premium Robux Provider</title>
 
     <!-- Google Fonts: Inter -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -15,7 +15,7 @@
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     
-    <!-- Babel Standalone (Compiles JSX in the browser) -->
+    <!-- Babel Standalone -->
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
     <!-- Tailwind CSS -->
@@ -31,27 +31,34 @@
                     },
                     colors: {
                         brand: {
-                            DEFAULT: '#80A4C6',
-                            dark: '#5a82a8',
-                            light: '#a6c2d9'
+                            DEFAULT: '#38BDF8', // Bright Electric Sky Blue
+                            dark: '#0284C7',
+                            light: '#7DD3FC',
+                            glow: '#00E5FF'
+                        },
+                        gold: {
+                            DEFAULT: '#F59E0B',
+                            light: '#FDE047'
                         },
                         slate: {
-                            900: '#0f172a',
-                            950: '#020617',
+                            800: '#1e293b',
+                            850: '#131d31',
+                            900: '#0b1329',
+                            950: '#030712',
                         }
                     },
                     animation: {
-                        'float': 'float 6s ease-in-out infinite',
-                        'glow': 'glow 2s ease-in-out infinite alternate',
+                        'float': 'float 5s ease-in-out infinite',
+                        'pulse-glow': 'pulseGlow 2s ease-in-out infinite',
                     },
                     keyframes: {
                         float: {
                             '0%, 100%': { transform: 'translateY(0)' },
-                            '50%': { transform: 'translateY(-15px)' },
+                            '50%': { transform: 'translateY(-12px)' },
                         },
-                        glow: {
-                            'from': { boxShadow: '0 0 10px -5px #80A4C6' },
-                            'to': { boxShadow: '0 0 20px 5px rgba(128, 164, 198, 0.4)' },
+                        pulseGlow: {
+                            '0%, 100%': { opacity: '0.6', transform: 'scale(1)' },
+                            '50%': { opacity: '1', transform: 'scale(1.05)' },
                         }
                     }
                 }
@@ -61,7 +68,7 @@
 
     <style>
         body {
-            background-color: #020617;
+            background-color: #030712;
             color: #ffffff;
             overflow-x: hidden;
         }
@@ -70,18 +77,18 @@
             width: 8px;
         }
         ::-webkit-scrollbar-track {
-            background: #0f172a; 
+            background: #030712; 
         }
         ::-webkit-scrollbar-thumb {
-            background: #80A4C6; 
+            background: #38BDF8; 
             border-radius: 4px;
         }
         ::-webkit-scrollbar-thumb:hover {
-            background: #5a82a8; 
+            background: #0284C7; 
         }
     </style>
 </head>
-<body class="antialiased selection:bg-brand selection:text-white">
+<body class="antialiased selection:bg-brand selection:text-slate-950">
     
     <!-- React Root -->
     <div id="root"></div>
@@ -111,23 +118,29 @@
             ];
 
             return (
-                <nav className={`fixed w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-slate-950/80 backdrop-blur-md py-4 border-b border-slate-800' : 'bg-transparent py-6'}`}>
+                <nav className={`fixed w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-slate-950/85 backdrop-blur-lg py-4 border-b border-slate-800/80 shadow-lg' : 'bg-transparent py-6'}`}>
                     <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
                         
                         {/* Logo */}
-                        <a href="#" className="flex items-center gap-2 group">
-                            <div className="w-10 h-10 rounded-xl bg-brand/20 flex items-center justify-center border border-brand/50 group-hover:border-brand transition-colors duration-300">
-                                <i className="fa-solid fa-cube text-brand text-xl"></i>
-                            </div>
-                            <span className="text-2xl font-bold tracking-tight text-white group-hover:text-brand transition-colors duration-300">
+                        <a href="#" className="flex items-center gap-3 group">
+                            <img 
+                                src="./ashoplogo_20260806_144414_0000.png" 
+                                alt="AShop Logo" 
+                                onError={(e) => { 
+                                    e.target.onerror = null; 
+                                    e.target.src = "https://placehold.co/40x40/0b1329/38BDF8?text=A"; 
+                                }}
+                                className="w-10 h-10 rounded-xl object-cover border border-brand/40 group-hover:border-brand transition-colors duration-300 shadow-[0_0_15px_rgba(56,189,248,0.25)]"
+                            />
+                            <span className="text-2xl font-black tracking-tight text-white group-hover:text-brand transition-colors duration-300">
                                 ASHOP
                             </span>
                         </a>
 
-                        {/* Desktop Navigation Links */}
+                        {/* Desktop Links */}
                         <div className="hidden md:flex items-center gap-8">
                             {navLinks.map((link) => (
-                                <a key={link.name} href={link.href} className="text-sm font-medium text-slate-300 hover:text-brand transition-colors duration-300">
+                                <a key={link.name} href={link.href} className="text-sm font-medium text-slate-300 hover:text-brand transition-colors duration-200">
                                     {link.name}
                                 </a>
                             ))}
@@ -136,15 +149,15 @@
                         {/* Actions */}
                         <div className="hidden md:flex items-center gap-6">
                             <button onClick={toggleLang} className="text-sm font-medium text-slate-300 hover:text-brand transition-colors flex items-center gap-2">
-                                <i className="fa-solid fa-globe"></i>
+                                <i className="fa-solid fa-globe text-brand"></i>
                                 {lang}
                             </button>
-                            <a href="https://t.me/YourBotLink" target="_blank" className="bg-brand text-slate-950 px-6 py-2.5 rounded-full font-semibold hover:bg-white transition-all duration-300 shadow-[0_0_15px_rgba(128,164,198,0.3)] hover:shadow-[0_0_25px_rgba(128,164,198,0.6)] transform hover:-translate-y-0.5">
+                            <a href="https://t.me/YourBotLink" target="_blank" className="bg-brand text-slate-950 px-6 py-2.5 rounded-full font-bold hover:bg-white transition-all duration-300 shadow-[0_0_20px_rgba(56,189,248,0.4)] hover:shadow-[0_0_30px_rgba(56,189,248,0.8)] transform hover:-translate-y-0.5">
                                 Buy Now
                             </a>
                         </div>
 
-                        {/* Mobile Menu Toggle Button */}
+                        {/* Mobile Menu Button */}
                         <button className="md:hidden text-2xl text-slate-300 hover:text-brand transition-colors" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
                             <i className={`fa-solid ${mobileMenuOpen ? 'fa-xmark' : 'fa-bars'}`}></i>
                         </button>
@@ -152,18 +165,18 @@
 
                     {/* Mobile Menu Dropdown */}
                     {mobileMenuOpen && (
-                        <div className="md:hidden absolute top-full left-0 w-full bg-slate-900 border-b border-slate-800 py-4 px-6 flex flex-col gap-4 shadow-2xl">
+                        <div className="md:hidden absolute top-full left-0 w-full bg-slate-900/95 backdrop-blur-xl border-b border-slate-800 py-6 px-6 flex flex-col gap-4 shadow-2xl">
                             {navLinks.map((link) => (
-                                <a key={link.name} href={link.href} onClick={() => setMobileMenuOpen(false)} className="text-lg font-medium text-slate-300 hover:text-brand">
+                                <a key={link.name} href={link.href} onClick={() => setMobileMenuOpen(false)} className="text-lg font-medium text-slate-200 hover:text-brand">
                                     {link.name}
                                 </a>
                             ))}
                             <div className="h-px w-full bg-slate-800 my-2"></div>
-                            <div className="flex items-center justify-between">
+                            <div className="flex items-center justify-between pt-2">
                                 <button onClick={toggleLang} className="text-lg font-medium text-slate-300 hover:text-brand flex items-center gap-2">
-                                    <i className="fa-solid fa-globe"></i> Language: {lang}
+                                    <i className="fa-solid fa-globe text-brand"></i> Language: {lang}
                                 </button>
-                                <a href="https://t.me/YourBotLink" className="bg-brand text-slate-950 px-6 py-2 rounded-lg font-semibold text-center">
+                                <a href="https://t.me/YourBotLink" className="bg-brand text-slate-950 px-6 py-2.5 rounded-xl font-bold">
                                     Buy Now
                                 </a>
                             </div>
@@ -175,59 +188,72 @@
 
         const Hero = () => {
             return (
-                <section id="home" className="relative min-h-screen flex items-center justify-center pt-24 overflow-hidden">
-                    <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-brand/10 rounded-full blur-[120px] pointer-events-none"></div>
-                    <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-brand/5 rounded-full blur-[100px] pointer-events-none"></div>
+                <section id="home" className="relative min-h-screen flex items-center justify-center pt-24 pb-16 overflow-hidden">
+                    {/* Background Neon Glows */}
+                    <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-brand/15 rounded-full blur-[140px] pointer-events-none"></div>
+                    <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-blue-600/10 rounded-full blur-[120px] pointer-events-none"></div>
 
-                    <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center gap-12 relative z-10">
-                        <div className="flex-1 text-center md:text-left">
-                            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-800/50 border border-slate-700 mb-6 backdrop-blur-sm">
-                                <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
-                                <span className="text-xs font-medium text-slate-300 uppercase tracking-wider">Fast Automated Delivery</span>
+                    <div className="max-w-7xl mx-auto px-6 flex flex-col lg:flex-row items-center gap-14 relative z-10">
+                        {/* Hero Text */}
+                        <div className="flex-1 text-center lg:text-left">
+                            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-850/80 border border-sky-500/30 mb-6 backdrop-blur-md shadow-[0_0_15px_rgba(56,189,248,0.15)]">
+                                <span className="w-2.5 h-2.5 rounded-full bg-brand shadow-[0_0_10px_#38bdf8] animate-pulse"></span>
+                                <span className="text-xs font-bold text-sky-200 uppercase tracking-widest">Fast Automated Delivery</span>
                             </div>
-                            <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight mb-6 leading-tight">
-                                Premium <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand to-brand-light">Robux</span> <br/>
+                            <h1 className="text-5xl md:text-7xl font-black tracking-tight mb-6 leading-tight">
+                                Premium <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand via-sky-300 to-blue-400 drop-shadow-[0_0_20px_rgba(56,189,248,0.3)]">Robux</span> <br/>
                                 Delivered Instantly.
                             </h1>
-                            <p className="text-lg text-slate-400 mb-10 max-w-xl mx-auto md:mx-0">
-                                Upgrade your Roblox experience with AShop. Safe transactions, automated MMQR payment verification, and instant group payouts.
+                            <p className="text-base md:text-lg text-slate-300 mb-10 max-w-xl mx-auto lg:mx-0 font-normal leading-relaxed">
+                                Upgrade your Roblox experience with AShop. Safe transactions, automated MMQR payment verification, and instant group payouts under 60 seconds.
                             </p>
-                            <div className="flex flex-col sm:flex-row items-center gap-4 justify-center md:justify-start">
-                                <a href="https://t.me/YourBotLink" target="_blank" className="w-full sm:w-auto px-8 py-4 rounded-xl bg-brand text-slate-950 font-bold text-lg hover:bg-white transition-all duration-300 hover:shadow-[0_0_30px_rgba(128,164,198,0.5)] flex items-center justify-center gap-3 transform hover:-translate-y-1">
+                            <div className="flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start">
+                                <a href="https://t.me/YourBotLink" target="_blank" className="w-full sm:w-auto px-8 py-4 rounded-xl bg-brand text-slate-950 font-extrabold text-base md:text-lg hover:bg-white transition-all duration-300 shadow-[0_0_25px_rgba(56,189,248,0.4)] hover:shadow-[0_0_35px_rgba(56,189,248,0.7)] flex items-center justify-center gap-3 transform hover:-translate-y-1">
                                     <i className="fa-brands fa-telegram text-xl"></i>
                                     Open Telegram Bot
                                 </a>
-                                <a href="#pricelist" className="w-full sm:w-auto px-8 py-4 rounded-xl bg-slate-900 border border-slate-800 text-slate-200 font-bold text-lg hover:border-brand/50 transition-all duration-300 flex items-center justify-center gap-3">
+                                <a href="#pricelist" className="w-full sm:w-auto px-8 py-4 rounded-xl bg-slate-850/90 border border-slate-700/80 hover:border-brand/60 text-white font-bold text-base md:text-lg transition-all duration-300 flex items-center justify-center gap-3 hover:bg-slate-800">
                                     View Pricelist
                                 </a>
                             </div>
                         </div>
 
-                        {/* Showcase Feature Card */}
-                        <div className="flex-1 flex justify-center">
-                            <div className="relative w-full max-w-md p-8 bg-slate-900/60 border border-slate-800 rounded-2xl backdrop-blur-xl animate-float shadow-2xl">
+                        {/* Status Showcase Card */}
+                        <div className="flex-1 w-full max-w-lg">
+                            <div className="relative p-8 bg-gradient-to-b from-slate-850/95 to-slate-900/95 border border-sky-500/25 rounded-3xl backdrop-blur-2xl animate-float shadow-[0_0_40px_rgba(56,189,248,0.12)]">
+                                
                                 <div className="flex items-center justify-between pb-6 border-b border-slate-800">
                                     <div>
-                                        <p className="text-xs text-slate-400">Stock Status</p>
-                                        <p className="text-xl font-bold text-white">Instant Available</p>
+                                        <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider">System Status</p>
+                                        <p className="text-2xl font-extrabold text-white">Instant Available</p>
                                     </div>
-                                    <div className="w-12 h-12 rounded-xl bg-green-500/10 border border-green-500/30 flex items-center justify-center text-green-400">
+                                    <div className="w-12 h-12 rounded-2xl bg-brand/15 border border-brand/40 flex items-center justify-center text-brand shadow-[0_0_15px_rgba(56,189,248,0.3)]">
                                         <i className="fa-solid fa-bolt text-xl"></i>
                                     </div>
                                 </div>
+
                                 <div className="py-6 space-y-4">
-                                    <div className="flex justify-between items-center text-sm">
-                                        <span className="text-slate-400">Payment Gateway</span>
-                                        <span className="font-semibold text-slate-200">KBZPay / WavePay MMQR</span>
+                                    <div className="flex justify-between items-center p-3.5 rounded-xl bg-slate-900/70 border border-slate-800">
+                                        <span className="text-sm text-slate-400 font-medium">Payment Gateway</span>
+                                        <span className="text-sm font-semibold text-sky-200">KBZPay / WavePay MMQR</span>
                                     </div>
-                                    <div className="flex justify-between items-center text-sm">
-                                        <span className="text-slate-400">Transfer Method</span>
-                                        <span className="font-semibold text-slate-200">Instant Group Payout</span>
+                                    <div className="flex justify-between items-center p-3.5 rounded-xl bg-slate-900/70 border border-slate-800">
+                                        <span className="text-sm text-slate-400 font-medium">Transfer Method</span>
+                                        <span className="text-sm font-semibold text-sky-200">Instant Group Payout</span>
                                     </div>
-                                    <div className="flex justify-between items-center text-sm">
-                                        <span className="text-slate-400">Delivery Speed</span>
-                                        <span className="font-semibold text-brand">Under 60 Seconds</span>
+                                    <div className="flex justify-between items-center p-3.5 rounded-xl bg-slate-900/70 border border-slate-800">
+                                        <span className="text-sm text-slate-400 font-medium">Delivery Speed</span>
+                                        <span className="text-sm font-bold text-brand flex items-center gap-1.5">
+                                            <i className="fa-solid fa-gauge-high"></i> Under 60 Seconds
+                                        </span>
                                     </div>
+                                </div>
+
+                                <div className="pt-2 flex items-center justify-between text-xs text-slate-400">
+                                    <span className="flex items-center gap-1.5 text-sky-300 font-medium">
+                                        <i className="fa-solid fa-shield-halved"></i> 100% Clean Funds
+                                    </span>
+                                    <span className="text-slate-500 font-medium">24/7 Automated</span>
                                 </div>
                             </div>
                         </div>
@@ -238,21 +264,23 @@
 
         const Features = () => {
             const items = [
-                { icon: 'fa-shield-halved', title: '100% Safe & Clean', desc: 'Sourced strictly through verified developer funds and clean group payouts.' },
-                { icon: 'fa-qrcode', title: 'Automated MMQR', desc: 'No waiting for admin confirmation. Scan QR, verify slip, and receive items.' },
-                { icon: 'fa-headset', title: '24/7 Support', desc: 'Direct ticket system on Telegram and Discord for instant assistance.' }
+                { icon: 'fa-shield-halved', title: '100% Safe Funds', desc: 'All Robux is cleanly sourced via legitimate group payouts and verified developer earnings.' },
+                { icon: 'fa-qrcode', title: 'Automated MMQR', desc: 'Instant slip verification. Pay via KBZPay or WavePay and get your Robux credited automatically.' },
+                { icon: 'fa-headset', title: 'Direct Live Support', desc: 'Got questions? Reach our support team instantly through our Telegram bot or Discord server.' }
             ];
 
             return (
-                <section id="features" className="py-24 max-w-7xl mx-auto px-6">
-                    <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">Why Choose <span className="text-brand">AShop</span></h2>
+                <section id="features" className="py-24 max-w-7xl mx-auto px-6 border-t border-slate-800/50">
+                    <h2 className="text-3xl md:text-4xl font-extrabold text-center mb-12">
+                        Why Choose <span className="text-brand">AShop</span>
+                    </h2>
                     <div className="grid md:grid-cols-3 gap-8">
                         {items.map((item, idx) => (
-                            <div key={idx} className="p-8 bg-slate-900/40 border border-slate-800 rounded-2xl hover:border-brand/40 transition duration-300">
-                                <div className="w-12 h-12 rounded-xl bg-brand/10 border border-brand/30 flex items-center justify-center text-brand text-xl mb-6">
+                            <div key={idx} className="p-8 bg-slate-900/80 border border-slate-800 rounded-2xl hover:border-brand/50 transition-all duration-300 hover:shadow-[0_0_25px_rgba(56,189,248,0.1)] group">
+                                <div className="w-14 h-14 rounded-2xl bg-brand/10 border border-brand/30 flex items-center justify-center text-brand text-2xl mb-6 group-hover:bg-brand group-hover:text-slate-950 transition-all duration-300 shadow-[0_0_15px_rgba(56,189,248,0.2)]">
                                     <i className={`fa-solid ${item.icon}`}></i>
                                 </div>
-                                <h3 className="text-xl font-bold mb-3">{item.title}</h3>
+                                <h3 className="text-xl font-bold mb-3 text-white">{item.title}</h3>
                                 <p className="text-slate-400 text-sm leading-relaxed">{item.desc}</p>
                             </div>
                         ))}
@@ -286,7 +314,6 @@
             );
         };
 
-        // React 18 Root Mounting
         const root = ReactDOM.createRoot(document.getElementById('root'));
         root.render(<App />);
     </script>
