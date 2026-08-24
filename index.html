@@ -5,11 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AShop - Premium Robux Provider</title>
     <!-- Prevents the White Flash in Dark Mode -->
-    <script>
-        if (localStorage.getItem('darkMode') === 'true') {
-            document.documentElement.classList.add('dark');
-        }
-    </script>
+    <script>if (localStorage.getItem('darkMode') === 'true') { document.documentElement.classList.add('dark'); }</script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
@@ -23,8 +19,8 @@
                 extend: {
                     fontFamily: { sans: ['Inter', 'sans-serif'] },
                     colors: { brand: { DEFAULT: '#0EA5E9', dark: '#0284C7', light: '#38BDF8' } },
-                    animation: { 'pulse-glow': 'pulseGlow 2s ease-in-out infinite', 'float': 'float 6s ease-in-out infinite', 'float-slow': 'float 8s ease-in-out infinite' },
-                    keyframes: { pulseGlow: { '0%, 100%': { opacity: '0.6', transform: 'scale(1)' }, '50%': { opacity: '1', transform: 'scale(1.05)' } }, float: { '0%, 100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-15px)' } }, fadeIn: { '0%': { opacity: '0', transform: 'translateX(-10px)' }, '100%': { opacity: '1', transform: 'translateX(0)' } } }
+                    animation: { 'pulse-glow': 'pulseGlow 2s ease-in-out infinite', 'float': 'float 6s ease-in-out infinite', 'float-slow': 'float 8s ease-in-out infinite', 'menu-pop': 'menuPop 0.25s ease-out forwards' },
+                    keyframes: { pulseGlow: { '0%, 100%': { opacity: '0.6', transform: 'scale(1)' }, '50%': { opacity: '1', transform: 'scale(1.05)' } }, float: { '0%, 100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-15px)' } }, fadeIn: { '0%': { opacity: '0', transform: 'translateX(-10px)' }, '100%': { opacity: '1', transform: 'translateX(0)' } }, menuPop: { '0%': { opacity: '0', transform: 'scale(0.96)' }, '100%': { opacity: '1', transform: 'scale(1)' } } }
                 }
             }
         }
@@ -56,24 +52,23 @@
                 liveOrders: "154 Orders Completed", cheapest: "Cheapest Robux,", fastest: "Fastest Services.",
                 desc: "Your go-to Roblox Shop in Myanmar. AShop makes buying Robux simple and secure with", descBold: "local payment methods, fast delivery, and reliable support whenever you need it.",
                 openTelegram: "Open in Telegram", viewGuides: "View Guides", usernameText: "only need username", paid: "Paid", payKpay: "Pay with KBZ pay",
-                robux: "Robux", fastDeliv: "Fast Delivery", successTxt: "1000 Robux Successfully transferred via group payout.", orderComp: "Order complete.",
+                robux: "Robux", fastDeliv: "Fast Delivery", successTxt: "1000 Robux Successfully transferred via group payout.",
                 whyChoose: "Why Choose", safeFunds: "100% Safe Funds", safeFundsDesc: "All Robux is cleanly sourced via legitimate methods and verified developer earnings to keep your account safe.",
                 easyPay: "Easy Local Payments", easyPayDesc: "Pay easily using local payment methods including KBZPay and WavePay. No credit card required.",
                 liveSup: "Direct Live Support", liveSupDesc: "Got questions? Reach our support team directly through our Telegram for personal assistance with your order.",
                 connect: "Connect With Us", connectDesc: "Join our community for updates and frequent giveaways.", socials: "Social Media Links", owner: "Owner & Support",
                 msgTele: "Message on Telegram", genSup: "For general support, orders and business inquiries.", rights: "AShop. All rights reserved.",
                 tos: "Terms of Service", policy: "Privacy Policy", joinComm: "Join our community", notAffil: "Not affiliated with Roblox Corporation. All trademarks belong to their respective owners.",
+                backHome: "Back to Home", lastUpdated: "Last updated:", readPolicy: "Read the Privacy Policy", readTos: "Read the Terms of Service",
                 guidesTitle: "Guides & FAQ", guidesDesc: "Everything you need to know about purchasing and receiving your items safely.", howToBuy: "How do I place an order?", isSafe: "Is this service safe for my Roblox account?",
                 aboutTitle: "About AShop", aboutDesc: "Welcome to AShop! We are dedicated to providing the Myanmar community with the cheapest and fastest Robux services. Our goal is to make purchasing digital goods accessible, easy, and completely secure using local payment methods you already trust.", ourPolicy: "Our Policy", policyDesc: "Customer satisfaction is our top priority. We guarantee delivery on all valid orders and ensure transparent communication throughout the process.", workingHours: "Working Hours", hoursDesc: "We aim to fulfill orders as fast as possible. Drop us a message on Telegram, and we will assist you right away.",
-                backHome: "Back to Home", lastUpdated: "Last updated:", readPolicy: "Read the Privacy Policy", readTos: "Read the Terms of Service",
-                // ToS EN
+                mobFeatures: "Features", mobFeaturesDesc: "what we offer", mobContactTab: "Contact", mobContactDesc: "check our social media accounts", mobGuides: "How to buy", mobGuidesDesc: "guides and faq", mobAbout: "About AShop", mobAboutDesc: "learn more about ashop", explore: "Explore", preferences: "Preferences",
                 tosWelcome: "Welcome to AShop. By purchasing any products or using our services, you agree to be bound by the following Terms of Service.",
                 tosH1: "1. Payment & Currency", tosP1_1: "We exclusively accept payments in Myanmar Kyat (MMK). Transactions must be completed via our designated KBZPay or WavePay accounts. We may accept alternative payment platforms under specific conditions; you must request and receive approval from us prior to sending any funds.", tosP1_2: "Valid proof of payment (receipt/slip) must be provided immediately after transferring funds. AShop reserves the right to manually verify payments, place orders on hold, or cancel orders without fulfillment if we suspect fraudulent activity, manipulated receipts, or triangle scams.",
                 tosH2: "2. Refunds & Cancellations", tosP2_1: "All sales are final. We do not provide refunds for initiated orders (processed but pending arrival on the user's end) or completed orders.", tosL1_title: "Ineligibility:", tosL1_desc: "If you place an order but your account is not currently eligible to receive it, you will not lose your funds. Your order will remain pending until you fulfill the eligibility requirements. Refunds will not be issued for impatience.", tosL2_title: "User Error:", tosL2_desc: "We do not issue refunds if a buyer misspells their username resulting in a completed order to the wrong account. Furthermore, we reserve the right to decline refunds for manual mistakes made on the buyer's end, such as accidentally sending surplus funds.", tosL3_title: "Third-Party Moderation:", tosL3_desc: "We are not responsible for, and will not issue refunds for, any actions taken by third-party moderators (e.g., Roblox Corporation or game developers), including account suspensions, bans, or item removals.",
                 tosH3: "3. Platform Independence", tosP3: "AShop is an independent service and is not affiliated, endorsed, or associated in any way with Roblox Corporation or its subsidiaries. You hold sole responsibility for adhering to the Terms of Service of Roblox and the policies of your chosen payment provider.",
                 tosH4: "4. Refusal of Service", tosP4: "We reserve the right to refuse service, terminate transactions, or ban users from our platforms without prior notice if we suspect malicious intent, rule-breaking, or any behavior that threatens the security of our shop and community.",
                 tosH5: "5. Support", tosP5: "If you encounter any issues or require assistance with your order, please direct message @aceyredd on Telegram.",
-                // Policy EN
                 polWelcome: "At AShop, we respect your privacy. We currently do not utilize automated data-collection bots on our website, meaning we only process the information strictly necessary to fulfill your manual transactions.",
                 polH1: "1. Information We Collect", polP1_1: "To successfully process a standard Robux delivery, we only ask for your designated Roblox Username.", polP1_2: "For payment verification, we may ask for the name registered to your KBZPay, WavePay, or alternative payment account, alongside related transaction slips. This information is used explicitly for manual verification and is never utilized for secondary purposes.",
                 polH2: "2. Account Security & Credentials", polP2: "We will never ask for your Roblox password for standard transactions. If you ever require a specialized service that necessitates logging in (such as providing temporary email or password access), we guarantee that this sensitive information will not be stored, misused, or sold under any circumstances once the service concludes.",
@@ -82,34 +77,35 @@
                 polH5: "5. Support & Data Inquiries", polP5: "If you have any questions regarding our data footprint, privacy practices, or require assistance, please direct message @aceyredd on Telegram for support."
             },
             MM: {
-                navFeatures: "အချက်အလက်များ", navContact: "ဆက်သွယ်ရန်", navGuides: "လမ်းညွှန်", navAbout: "အကြောင်း", buyNow: "ယခုဝယ်မည်",
-                liveOrders: "အော်ဒါ ၁၅၄ ခု ပြီးဆုံးပါပြီ", cheapest: "စျေးအသက်သာဆုံး Robux၊", fastest: "အမြန်ဆန်ဆုံး ဝန်ဆောင်မှု။",
-                desc: "မြန်မာနိုင်ငံရှိ သင့်အတွက် အကောင်းဆုံး Roblox ဆိုင်။ AShop သည် Robux ဝယ်ယူခြင်းကို ပိုမိုလွယ်ကူလုံခြုံစေပြီး ", descBold: "ပြည်တွင်းငွေပေးချေမှုစနစ်များ၊ အမြန်ဆန်ဆုံးပို့ဆောင်မှုနှင့် ယုံကြည်ရသော ဝန်ဆောင်မှုများကို ပေးစွမ်းပါသည်။",
-                openTelegram: "Telegram တွင် ဖွင့်မည်", viewGuides: "လမ်းညွှန်များကို ဖတ်မည်", usernameText: "username သာလိုအပ်သည်", paid: "ငွေပေးချေပြီး", payKpay: "KBZ pay ဖြင့်ပေးချေသည်",
-                robux: "Robux", fastDeliv: "အမြန်ပို့ဆောင်မှု", successTxt: "Robux 1000 ကို group payout မှတစ်ဆင့် အောင်မြင်စွာလွှဲပြောင်းပြီးပါပြီ။", orderComp: "အော်ဒါပြီးဆုံးပါပြီ။",
-                whyChoose: "ဘာကြောင့်ရွေးချယ်သင့်တာလဲ", safeFunds: "၁၀၀% လုံခြုံစိတ်ချရသော ငွေကြေး", safeFundsDesc: "သင့်အကောင့်လုံခြုံစေရန် Robux အားလုံးကို တရားဝင်နည်းလမ်းများနှင့် verified developer များထံမှသာ ရယူထားပါသည်။",
-                easyPay: "လွယ်ကူသော ငွေပေးချေမှု", easyPayDesc: "KBZPay နှင့် WavePay အပါအဝင် ပြည်တွင်းငွေပေးချေမှုစနစ်များဖြင့် အလွယ်တကူ ပေးချေနိုင်ပါသည်။",
-                liveSup: "တိုက်ရိုက် အကူအညီ", liveSupDesc: "မေးခွန်းများရှိပါက ကျွန်ုပ်တို့၏ Telegram မှတစ်ဆင့် တိုက်ရိုက်ဆက်သွယ်မေးမြန်းနိုင်ပါသည်။",
-                connect: "ကျွန်ုပ်တို့နှင့် ဆက်သွယ်ရန်", connectDesc: "အသစ်သစ်သောအရာများနှင့် လက်ဆောင်များအတွက် ကျွန်ုပ်တို့၏ community သို့ ဝင်ရောက်ပါ။", socials: "လူမှုကွန်ရက် လင့်ခ်များ", owner: "ပိုင်ရှင် နှင့် အကူအညီပေးသူ",
-                msgTele: "Telegram တွင် စာပို့ရန်", genSup: "အထွေထွေအကူအညီ၊ အော်ဒါများနှင့် စီးပွားရေးဆိုင်ရာများအတွက်။", rights: "AShop. မူပိုင်ခွင့်များရယူထားသည်။",
-                tos: "စည်းကမ်းချက်များ", policy: "ကိုယ်ရေးကိုယ်တာမူဝါဒ", joinComm: "Community သို့ ဝင်ရောက်ရန်", notAffil: "Roblox Corporation နှင့် သက်ဆိုင်ခြင်းမရှိပါ။ ကုန်အမှတ်တံဆိပ်အားလုံးသည် ၎င်းတို့၏ သက်ဆိုင်ရာပိုင်ရှင်များသာဖြစ်သည်။",
-                guidesTitle: "လမ်းညွှန် နှင့် အမေးများသောမေးခွန်းများ", guidesDesc: "ဝယ်ယူခြင်းနှင့် ပစ္စည်းလက်ခံခြင်းအတွက် သိထားသင့်သောအရာများ။", howToBuy: "အော်ဒါဘယ်လိုတင်ရမလဲ?", isSafe: "ကျွန်တော့်အကောင့်အတွက် လုံခြုံမှုရှိပါသလား?",
-                aboutTitle: "AShop အကြောင်း", aboutDesc: "AShop မှကြိုဆိုပါသည်! မြန်မာနိုင်ငံရှိ ကစားသမားများအတွက် စျေးအသက်သာဆုံးနှင့် အမြန်ဆန်ဆုံး Robux ဝန်ဆောင်မှုများကို ပေးအပ်ရန် ရည်ရွယ်ပါသည်။", ourPolicy: "ကျွန်ုပ်တို့၏ မူဝါဒ", policyDesc: "ဝယ်ယူသူများ စိတ်ကျေနပ်မှုရရှိစေရန် အထူးဦးစားပေးပါသည်။ အော်ဒါများကို မှန်ကန်မြန်ဆန်စွာ ပို့ဆောင်ပေးမည်ဟု အာမခံပါသည်။", workingHours: "အလုပ်လုပ်ချိန်", hoursDesc: "အော်ဒါများကို အမြန်ဆန်ဆုံး ပို့ဆောင်ပေးနိုင်ရန် ကြိုးစားနေပါသည်။ Telegram မှတစ်ဆင့် စာပို့ပြီး ဆက်သွယ်နိုင်ပါသည်။",
-                backHome: "ပင်မစာမျက်နှာသို့ ပြန်သွားမည်", lastUpdated: "နောက်ဆုံးပြင်ဆင်ခဲ့သည့်ရက် -", readPolicy: "ကိုယ်ရေးကိုယ်တာမူဝါဒကို ဖတ်ရန်", readTos: "စည်းကမ်းချက်များကို ဖတ်ရန်",
-                // ToS MM
-                tosWelcome: "AShop မှကြိုဆိုပါသည်! ဝန်ဆောင်မှုများကို အသုံးပြုခြင်းဖြင့် အောက်ပါစည်းကမ်းချက်များကို သဘောတူလက်ခံရာရောက်ပါသည်။",
-                tosH1: "၁။ ငွေပေးချေမှုစနစ် နှင့် ငွေကြေး", tosP1_1: "ငွေပေးချေမှုအားလုံးကို မြန်မာကျပ်ငွေ (MMK) ဖြင့်သာ လက်ခံပါသည်။ KBZPay သို့မဟုတ် WavePay ဖြင့်သာ ပေးချေရပါမည်။ အခြားသော ငွေပေးချေမှုစနစ်များကို အခြေအနေပေါ်မူတည်၍ လက်ခံနိုင်သော်လည်း ကြိုတင်မေးမြန်းခွင့်ပြုချက်ရယူရန် လိုအပ်ပါသည်။", tosP1_2: "ငွေလွှဲပြီးပါက ငွေလွှဲပြေစာ (Slip) ကို ချက်ချင်းပေးပို့ရပါမည်။ လိမ်လည်မှုများ၊ ပြေစာအတုများနှင့် Triangle Scam များဟု သံသယရှိပါက အော်ဒါကို ယာယီဆိုင်းငံ့ထားခြင်း၊ သို့မဟုတ် ဖျက်သိမ်းပိုင်ခွင့်ရှိပါသည်။",
-                tosH2: "၂။ ငွေပြန်အမ်းခြင်း နှင့် အော်ဒါဖျက်သိမ်းခြင်း", tosP2_1: "ဝယ်ယူမှုအားလုံးသည် အပြီးသတ်ဖြစ်ပြီး လုပ်ဆောင်ဆဲ သို့မဟုတ် ပြီးစီးသွားသောအော်ဒါများအတွက် ငွေပြန်အမ်းမည်မဟုတ်ပါ။", tosL1_title: "သတ်မှတ်ချက်မပြည့်မီခြင်း -", tosL1_desc: "သင့်အကောင့်သည် Robux လက်ခံရန် သတ်မှတ်ချက်မပြည့်မီပါက အော်ဒါကို ဆိုင်းငံ့ထားမည်ဖြစ်ပြီး ငွေပြန်အမ်းမည်မဟုတ်ပါ။ သတ်မှတ်ချက်ပြည့်မီချိန်တွင်မှသာ ဆက်လက်လုပ်ဆောင်ပေးမည်ဖြစ်သည်။", tosL2_title: "ဝယ်ယူသူ၏ အမှားများ -", tosL2_desc: "ဝယ်ယူသူဘက်မှ Username အမှားပေးခြင်းကြောင့် အခြားအကောင့်သို့ ရောက်ရှိသွားပါက တာဝန်ယူမည်မဟုတ်ပါ။ ပိုမိုငွေလွှဲမိခြင်း အစရှိသော အမှားများအတွက်လည်း ငွေပြန်အမ်းပေးမည်မဟုတ်ပါ။", tosL3_title: "တတိယအဖွဲ့အစည်းများ၏ လုပ်ဆောင်ချက်များ -", tosL3_desc: "Roblox Corporation မှ အကောင့်ပိတ်ခြင်း၊ ပစ္စည်းများရုပ်သိမ်းခြင်း အစရှိသော ပြဿနာများအတွက် ကျွန်ုပ်တို့မှ တာဝန်ယူမည်မဟုတ်ဘဲ ငွေပြန်အမ်းပေးမည်မဟုတ်ပါ။",
-                tosH3: "၃။ ပလက်ဖောင်း လွတ်လပ်မှု", tosP3: "AShop သည် Roblox Corporation နှင့် မည်သို့မျှ သက်ဆိုင်မှုမရှိသော သီးခြားဝန်ဆောင်မှုတစ်ခုဖြစ်သည်။ သုံးစွဲသူသည် Roblox ၏ စည်းကမ်းချက်များနှင့် မိမိအသုံးပြုသော ငွေပေးချေမှုစနစ်၏ စည်းကမ်းများကို လိုက်နာရန် ကိုယ်တိုင်တာဝန်ယူရမည်ဖြစ်သည်။",
-                tosH4: "၄။ ဝန်ဆောင်မှုငြင်းပယ်ခွင့်", tosP4: "အွန်လိုင်းစတိုးနှင့် အသိုင်းအဝိုင်း၏ လုံခြုံရေးကို ထိခိုက်စေနိုင်သော အပြုအမူ၊ စည်းကမ်းဖောက်ဖျက်မှုများ ရှိပါက အသိပေးခြင်းမရှိဘဲ ဝန်ဆောင်မှုငြင်းပယ်ခြင်း၊ ပိတ်ပင်ခြင်းများကို ပြုလုပ်ပိုင်ခွင့်ရှိသည်။",
-                tosH5: "၅။ အကူအညီရယူရန်", tosP5: "အော်ဒါနှင့်ပတ်သက်၍ အကူအညီလိုအပ်ပါက Telegram ရှိ @aceyredd သို့ တိုက်ရိုက် စာပို့နိုင်ပါသည်။",
-                // Policy MM
+                navFeatures: "Features", navContact: "Contact", navGuides: "Guides", navAbout: "About", buyNow: "Buy Now",
+                cheapest: "Cheapest Robux,", fastest: "Fastest Services.",
+                openTelegram: "Open in Telegram", viewGuides: "View Guides", usernameText: "only need username", paid: "Paid", payKpay: "Pay with KBZ pay",
+                robux: "Robux", fastDeliv: "Fast Delivery", successTxt: "1000 Robux Successfully transferred via group payout.",
+                whyChoose: "Why Choose", safeFunds: "100% Safe Funds", easyPay: "Easy Local Payments", liveSup: "Direct Live Support",
+                connect: "Connect With Us", connectDesc: "Join our community for updates and frequent giveaways.", socials: "Social Media Links", owner: "Owner & Support",
+                msgTele: "Message on Telegram", genSup: "For general support, orders and business inquiries.", rights: "AShop. All rights reserved.",
+                tos: "Terms of Service", policy: "Privacy Policy", joinComm: "Join our community", notAffil: "Not affiliated with Roblox Corporation. All trademarks belong to their respective owners.",
+                backHome: "Back to Home", lastUpdated: "Last updated:", readPolicy: "Read the Privacy Policy", readTos: "Read the Terms of Service",
+                guidesTitle: "Guides & FAQ", guidesDesc: "Everything you need to know about purchasing and receiving your items safely.", howToBuy: "How do I place an order?", isSafe: "Is this service safe for my Roblox account?",
+                aboutTitle: "About AShop", aboutDesc: "Welcome to AShop! We are dedicated to providing the Myanmar community with the cheapest and fastest Robux services. Our goal is to make purchasing digital goods accessible, easy, and completely secure using local payment methods you already trust.", ourPolicy: "Our Policy", policyDesc: "Customer satisfaction is our top priority. We guarantee delivery on all valid orders and ensure transparent communication throughout the process.", workingHours: "Working Hours", hoursDesc: "We aim to fulfill orders as fast as possible. Drop us a message on Telegram, and we will assist you right away.",
+                mobFeatures: "Features", mobFeaturesDesc: "what we offer", mobContactTab: "Contact", mobContactDesc: "check our social media accounts", mobGuides: "How to buy", mobGuidesDesc: "guides and faq", mobAbout: "About AShop", mobAboutDesc: "learn more about ashop", explore: "Explore", preferences: "Preferences",
+                liveOrders: "Order 154 ခု ပြီးမြောက်ပါပြီ",
+                desc: "မြန်မာနိုင်ငံရှိ သင့်အတွက် အကောင်းဆုံး Roblox Shop။ AShop တွင် Robux များကို ", descBold: "ပြည်တွင်းငွေပေးချေမှုစနစ်များဖြင့် လွယ်ကူမြန်ဆန်စွာ ဝယ်ယူနိုင်ပြီး ယုံကြည်စိတ်ချရသော ဝန်ဆောင်မှုကို ရရှိနိုင်ပါသည်။",
+                safeFundsDesc: "သင့်အကောင့်လုံခြုံရေးအတွက် Robux များကို တရားဝင်နည်းလမ်းများ၊ verified developer များထံမှသာ ရယူထားပါသည်။",
+                easyPayDesc: "KBZPay နှင့် WavePay အပါအဝင် ပြည်တွင်းငွေပေးချေမှုစနစ်များဖြင့် အလွယ်တကူ ပေးချေနိုင်ပါသည်။",
+                liveSupDesc: "မေးမြန်းလိုသည်များရှိပါက ကျွန်ုပ်တို့၏ Telegram သို့ တိုက်ရိုက် ဆက်သွယ်မေးမြန်းနိုင်ပါသည်။",
+                tosWelcome: "AShop မှကြိုဆိုပါသည်! ဝန်ဆောင်မှုများကို အသုံးပြုခြင်းဖြင့် အောက်ပါ Terms of Service ကို သဘောတူလက်ခံရာရောက်ပါသည်။",
+                tosH1: "၁။ Payment & Currency", tosP1_1: "ငွေပေးချေမှုအားလုံးကို မြန်မာကျပ်ငွေ (MMK) ဖြင့်သာ လက်ခံပါသည်။ KBZPay သို့မဟုတ် WavePay ဖြင့်သာ ပေးချေရပါမည်။ အခြားငွေပေးချေမှုစနစ်များကို အသုံးပြုလိုပါက ကြိုတင်မေးမြန်းခွင့်ပြုချက်ရယူရန် လိုအပ်ပါသည်။", tosP1_2: "ငွေလွှဲပြီးပါက ငွေလွှဲပြေစာ (Receipt) ကို ချက်ချင်းပေးပို့ရပါမည်။ လိမ်လည်မှုများ၊ ပြေစာအတုများနှင့် Triangle Scam များဟု သံသယရှိပါက အော်ဒါကို ယာယီဆိုင်းငံ့ထားခြင်း၊ သို့မဟုတ် ဖျက်သိမ်းပိုင်ခွင့်ရှိပါသည်။",
+                tosH2: "၂။ Refunds & Cancellations", tosP2_1: "ဝယ်ယူမှုအားလုံးသည် အပြီးသတ်ဖြစ်ပြီး လုပ်ဆောင်ဆဲ သို့မဟုတ် ပြီးစီးသွားသောအော်ဒါများအတွက် ငွေပြန်အမ်းမည်မဟုတ်ပါ။", tosL1_title: "Ineligibility:", tosL1_desc: "သင့်အကောင့်သည် Robux လက်ခံရန် သတ်မှတ်ချက်မပြည့်မီပါက အော်ဒါကို ဆိုင်းငံ့ထားမည်ဖြစ်ပြီး ငွေပြန်အမ်းမည်မဟုတ်ပါ။ သတ်မှတ်ချက်ပြည့်မီချိန်တွင်မှသာ ဆက်လက်လုပ်ဆောင်ပေးမည်ဖြစ်သည်။", tosL2_title: "User Error:", tosL2_desc: "ဝယ်ယူသူဘက်မှ Username အမှားပေးခြင်းကြောင့် အခြားအကောင့်သို့ ရောက်ရှိသွားပါက တာဝန်ယူမည်မဟုတ်ပါ။ ပိုမိုငွေလွှဲမိခြင်း အစရှိသော အမှားများအတွက်လည်း ငွေပြန်အမ်းပေးမည်မဟုတ်ပါ။", tosL3_title: "Third-Party Moderation:", tosL3_desc: "Roblox Corporation မှ အကောင့်ပိတ်ခြင်း၊ ပစ္စည်းများရုပ်သိမ်းခြင်း အစရှိသော ပြဿနာများအတွက် ကျွန်ုပ်တို့မှ တာဝန်ယူမည်မဟုတ်ဘဲ ငွေပြန်အမ်းပေးမည်မဟုတ်ပါ။",
+                tosH3: "၃။ Platform Independence", tosP3: "AShop သည် Roblox Corporation နှင့် မည်သို့မျှ သက်ဆိုင်မှုမရှိသော သီးခြားဝန်ဆောင်မှုတစ်ခုဖြစ်သည်။ သုံးစွဲသူသည် Roblox ၏ စည်းကမ်းချက်များနှင့် မိမိအသုံးပြုသော ငွေပေးချေမှုစနစ်၏ စည်းကမ်းများကို လိုက်နာရန် ကိုယ်တိုင်တာဝန်ယူရမည်ဖြစ်သည်။",
+                tosH4: "၄။ Refusal of Service", tosP4: "အွန်လိုင်းစတိုးနှင့် အသိုင်းအဝိုင်း၏ လုံခြုံရေးကို ထိခိုက်စေနိုင်သော အပြုအမူ၊ စည်းကမ်းဖောက်ဖျက်မှုများ ရှိပါက အသိပေးခြင်းမရှိဘဲ ဝန်ဆောင်မှုငြင်းပယ်ခြင်း၊ ပိတ်ပင်ခြင်းများကို ပြုလုပ်ပိုင်ခွင့်ရှိသည်။",
+                tosH5: "၅။ Support", tosP5: "အော်ဒါနှင့်ပတ်သက်၍ အကူအညီလိုအပ်ပါက Telegram ရှိ @aceyredd သို့ တိုက်ရိုက် စာပို့နိုင်ပါသည်။",
                 polWelcome: "AShop တွင် သုံးစွဲသူများ၏ ကိုယ်ရေးကိုယ်တာလုံခြုံမှုကို လေးစားပါသည်။ ကျွန်ုပ်တို့သည် အော်ဒါများလုပ်ဆောင်ရန် အမှန်တကယ် လိုအပ်သော အချက်အလက်များကိုသာ ကောက်ယူပါသည်။",
-                polH1: "၁။ ကောက်ယူသော အချက်အလက်များ", polP1_1: "Robux အော်ဒါများကို လုပ်ဆောင်ရန်အတွက် သင့်၏ Roblox Username ကိုသာ လိုအပ်ပါသည်။", polP1_2: "ငွေပေးချေမှုကို စစ်ဆေးရန်အတွက် သင့်၏ KBZPay, WavePay စသည့် ငွေပေးချေမှု အကောင့်အမည်နှင့် ပြေစာများကို တောင်းဆိုနိုင်ပါသည်။ ထိုအချက်အလက်များကို ငွေပေးချေမှု မှန်ကန်ကြောင်း စစ်ဆေးရန်သာ အသုံးပြုမည်ဖြစ်သည်။",
-                polH2: "၂။ အကောင့်လုံခြုံရေး", polP2: "ပုံမှန်အော်ဒါများအတွက် သင့် Roblox Password ကို မည်သည့်အခါမျှ တောင်းခံမည်မဟုတ်ပါ။ အထူးဝန်ဆောင်မှုများအတွက် အကောင့်ဝင်ရန် လိုအပ်ပါက သင့်အချက်အလက်များကို ဝန်ဆောင်မှုပြီးဆုံးပါက သိမ်းဆည်းထားခြင်း၊ အလွဲသုံးစားလုပ်ခြင်း သို့မဟုတ် ရောင်းချခြင်းများ လုံးဝ ပြုလုပ်မည်မဟုတ်ပါ။",
-                polH3: "၃။ အများပြည်သူနှင့် ဆက်သွယ်မှုများ", polP3: "ကျွန်ုပ်တို့၏ Community, Group Chat များတွင် မိမိသဘောအလျောက် မျှဝေလိုက်သော ကိုယ်ရေးကိုယ်တာ အချက်အလက်များအတွက် သုံးစွဲသူကိုယ်တိုင်သာ တာဝန်ယူရမည်ဖြစ်သည်။",
-                polH4: "၄။ အသက်ကန့်သတ်ချက်", polP4: "AShop တွင် ဝယ်ယူရန် အသက် ၁၃ နှစ်နှင့်အထက် ဖြစ်ရမည်။ အသက် ၁၃ နှစ်အောက် ကလေးများ၏ အချက်အလက်များကို မိဘအုပ်ထိန်းသူ၏ ခွင့်ပြုချက်မရှိဘဲ ရယူမည်မဟုတ်ပါ။ အကယ်၍ ဤစည်းကမ်းကို ချိုးဖောက်ပါက သုံးစွဲသူတွင်သာ တာဝန်ရှိသည်။",
-                polH5: "၅။ အကူအညီရယူရန်", polP5: "ကိုယ်ရေးကိုယ်တာမူဝါဒနှင့် ပတ်သက်၍ မေးမြန်းလိုသည်များရှိပါက Telegram ရှိ @aceyredd သို့ ဆက်သွယ်နိုင်ပါသည်။"
+                polH1: "၁။ Information We Collect", polP1_1: "Robux အော်ဒါများကို လုပ်ဆောင်ရန်အတွက် သင့်၏ Roblox Username ကိုသာ လိုအပ်ပါသည်။", polP1_2: "ငွေပေးချေမှုကို စစ်ဆေးရန်အတွက် သင့်၏ KBZPay, WavePay စသည့် ငွေပေးချေမှု အကောင့်အမည်နှင့် ပြေစာများကို တောင်းဆိုနိုင်ပါသည်။ ထိုအချက်အလက်များကို ငွေပေးချေမှု မှန်ကန်ကြောင်း စစ်ဆေးရန်သာ အသုံးပြုမည်ဖြစ်သည်။",
+                polH2: "၂။ Account Security & Credentials", polP2: "ပုံမှန်အော်ဒါများအတွက် သင့် Roblox Password ကို မည်သည့်အခါမျှ တောင်းခံမည်မဟုတ်ပါ။ အထူးဝန်ဆောင်မှုများအတွက် အကောင့်ဝင်ရန် လိုအပ်ပါက သင့်အချက်အလက်များကို ဝန်ဆောင်မှုပြီးဆုံးပါက သိမ်းဆည်းထားခြင်း၊ အလွဲသုံးစားလုပ်ခြင်း သို့မဟုတ် ရောင်းချခြင်းများ လုံးဝ ပြုလုပ်မည်မဟုတ်ပါ။",
+                polH3: "၃။ Public Communications", polP3: "ကျွန်ုပ်တို့၏ Community, Group Chat များတွင် မိမိသဘောအလျောက် မျှဝေလိုက်သော ကိုယ်ရေးကိုယ်တာ အချက်အလက်များအတွက် သုံးစွဲသူကိုယ်တိုင်သာ တာဝန်ယူရမည်ဖြစ်သည်။",
+                polH4: "၄။ Age Restrictions", polP4: "AShop တွင် ဝယ်ယူရန် အသက် ၁၃ နှစ်နှင့်အထက် ဖြစ်ရမည်။ ဤစည်းကမ်းကို ချိုးဖောက်ပါက သုံးစွဲသူတွင်သာ တာဝန်ရှိသည်။",
+                polH5: "၅။ Support & Data Inquiries", polP5: "ကိုယ်ရေးကိုယ်တာမူဝါဒနှင့် ပတ်သက်၍ မေးမြန်းလိုသည်များရှိပါက Telegram ရှိ @aceyredd သို့ ဆက်သွယ်နိုင်ပါသည်။"
             }
         };
 
@@ -124,25 +120,34 @@
                 return () => window.removeEventListener('scroll', handleScroll);
             }, []);
 
+            useEffect(() => {
+                if (mobileMenuOpen) document.body.style.overflow = 'hidden';
+                else document.body.style.overflow = '';
+                return () => { document.body.style.overflow = ''; }
+            }, [mobileMenuOpen]);
+
             const navLinks = [
-                { name: t.navFeatures, href: '#features', id: 'features' },
-                { name: t.navContact, href: '#contact', id: 'contact' },
+                { name: t.navFeatures, href: 'index.html#features', id: 'features' },
+                { name: t.navContact, href: 'index.html#contact', id: 'contact' },
                 { name: t.navGuides, href: 'guides.html', id: 'guides' },
                 { name: t.navAbout, href: 'about.html', id: 'about' }
             ];
 
             const handleNavClick = (e, href) => {
-                if (href.startsWith('#')) {
-                    e.preventDefault();
-                    const targetId = href.split('#')[1];
-                    const el = document.getElementById(targetId);
-                    if (el) {
-                        const rect = el.getBoundingClientRect();
-                        if (Math.abs(rect.top) < 150) {
-                            window.scrollBy({ top: -10, behavior: 'smooth' });
-                            setTimeout(() => el.scrollIntoView({ behavior: 'smooth' }), 150);
-                        } else {
-                            el.scrollIntoView({ behavior: 'smooth' });
+                const isIndex = window.location.pathname.endsWith('index.html') || window.location.pathname === '/' || window.location.pathname.endsWith('/');
+                if (href.startsWith('index.html#')) {
+                    if (isIndex) {
+                        e.preventDefault();
+                        const targetId = href.split('#')[1];
+                        const el = document.getElementById(targetId);
+                        if (el) {
+                            const rect = el.getBoundingClientRect();
+                            if (Math.abs(rect.top) < 150) {
+                                window.scrollBy({ top: -10, behavior: 'smooth' });
+                                setTimeout(() => el.scrollIntoView({ behavior: 'smooth' }), 150);
+                            } else {
+                                el.scrollIntoView({ behavior: 'smooth' });
+                            }
                         }
                         setMobileMenuOpen(false);
                     }
@@ -150,65 +155,71 @@
             };
 
             return (
-                <nav className={`fixed w-full z-50 transition-all duration-300 ${isScrolled ? 'glass-panel py-4' : 'bg-transparent py-6'}`}>
-                    <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
+                <nav className={`fixed w-full z-[60] transition-all duration-300 ${isScrolled ? 'glass-panel py-4' : 'bg-transparent py-4 md:py-6'}`}>
+                    <div className="max-w-7xl mx-auto px-4 md:px-6 flex items-center justify-between relative z-[70]">
                         <a href="index.html" className="flex items-center gap-3 group">
-                            <img src="./ashoplogo_20260806_144414_0000.png" alt="AShop Logo" onError={(e) => { e.target.onerror = null; e.target.src = "https://placehold.co/40x40/e0f2fe/0ea5e9?text=A"; }} className="w-10 h-10 rounded-xl object-cover border-2 border-white dark:border-slate-800 shadow-md group-hover:shadow-brand/40 transition-all duration-300" />
-                            <span className="text-2xl font-black tracking-tight text-slate-900 dark:text-white group-hover:text-brand transition-colors duration-300">ASHOP</span>
+                            <img src="./ashoplogo_20260806_144414_0000.png" alt="AShop Logo" onError={(e) => { e.target.onerror = null; e.target.src = "https://placehold.co/40x40/e0f2fe/0ea5e9?text=A"; }} className="w-9 h-9 md:w-10 md:h-10 rounded-xl object-cover border-2 border-white dark:border-slate-800 shadow-md group-hover:shadow-brand/40 transition-all duration-300" />
+                            <span className="text-xl md:text-2xl font-black tracking-tight text-slate-900 dark:text-white group-hover:text-brand transition-colors duration-300">ASHOP</span>
                         </a>
-
                         <div className="hidden md:flex items-center gap-8">
                             {navLinks.map((link) => (
-                                <a key={link.id} href={link.href} onClick={(e) => handleNavClick(e, link.href)} 
-                                   className={`text-sm font-bold transition-colors duration-200 ${activeSection === link.id ? 'text-brand' : 'text-slate-600 dark:text-slate-300 hover:text-brand'}`}>
-                                    {link.name}
-                                </a>
+                                <a key={link.id} href={link.href} onClick={(e) => handleNavClick(e, link.href)} className={`text-sm font-bold transition-colors duration-200 ${activeSection === link.id ? 'text-brand' : 'text-slate-600 dark:text-slate-300 hover:text-brand'}`}>{link.name}</a>
                             ))}
                         </div>
-
-                        <div className="hidden md:flex items-center gap-4">
-                            <button onClick={() => setDarkMode(!darkMode)} className="w-10 h-10 rounded-full ui-box flex items-center justify-center text-slate-500 dark:text-brand hover:text-brand transition shadow-sm">
-                                <i className={`fa-solid ${darkMode ? 'fa-moon' : 'fa-sun'} text-lg`}></i>
-                            </button>
-                            <div className="flex items-center gap-1.5 text-sm font-bold ui-box px-3 py-1.5 rounded-full shadow-sm">
+                        <div className="flex items-center gap-2 md:gap-4 relative z-[80]">
+                            <div className="hidden md:flex items-center ui-box p-1 rounded-full shadow-sm">
+                                <button onClick={() => setDarkMode(false)} className={`w-8 h-8 rounded-full flex items-center justify-center transition-all ${!darkMode ? 'bg-white dark:bg-slate-800 text-brand shadow-sm' : 'text-slate-400 dark:text-slate-500 hover:text-slate-600'}`}><i className="fa-solid fa-sun text-sm"></i></button>
+                                <button onClick={() => setDarkMode(true)} className={`w-8 h-8 rounded-full flex items-center justify-center transition-all ${darkMode ? 'bg-white dark:bg-slate-800 text-brand shadow-sm' : 'text-slate-400 dark:text-slate-500 hover:text-slate-600'}`}><i className="fa-solid fa-moon text-sm"></i></button>
+                            </div>
+                            <div className="flex items-center gap-1.5 text-xs md:text-sm font-bold ui-box px-2 md:px-3 py-1.5 rounded-full shadow-sm">
                                 <button onClick={() => setLang('EN')} className={`transition-colors ${lang === 'EN' ? 'text-brand' : 'text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:hover:text-slate-300'}`}>EN</button>
                                 <span className="text-slate-300 dark:text-slate-700">/</span>
                                 <button onClick={() => setLang('MM')} className={`transition-colors ${lang === 'MM' ? 'text-brand' : 'text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:hover:text-slate-300'}`}>မြန်မာ</button>
                             </div>
-                            <a href="https://t.me/ashopacey" target="_blank" className="bg-brand text-white px-6 py-2.5 rounded-full font-bold hover:bg-brand-dark transition-all duration-300 shadow-lg shadow-brand/30 transform hover:-translate-y-0.5">{t.buyNow}</a>
+                            <a href="https://t.me/ashopacey" target="_blank" className="bg-brand text-white px-4 md:px-6 py-2 md:py-2.5 rounded-full font-bold hover:bg-brand-dark transition-all duration-300 shadow-lg shadow-brand/30 transform hover:-translate-y-0.5 text-sm md:text-base">{t.buyNow}</a>
+                            <button className="md:hidden text-2xl text-slate-600 dark:text-slate-300 hover:text-brand transition-colors pl-2 relative z-[90]" onClick={() => setMobileMenuOpen(true)}><i className="fa-solid fa-bars"></i></button>
                         </div>
-                        <button className="md:hidden text-2xl text-slate-600 dark:text-slate-300 hover:text-brand transition-colors" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}><i className={`fa-solid ${mobileMenuOpen ? 'fa-xmark' : 'fa-bars'}`}></i></button>
                     </div>
+                    {mobileMenuOpen && (
+                        <div className="md:hidden fixed inset-0 z-[100] bg-white/95 dark:bg-slate-950/95 backdrop-blur-2xl flex flex-col h-[100dvh] w-full overflow-hidden animate-menu-pop">
+                            <div className="flex items-center justify-between p-6 border-b border-sky-100 dark:border-slate-800">
+                                <a href="index.html" className="flex items-center gap-3">
+                                    <img src="./ashoplogo_20260806_144414_0000.png" alt="AShop Logo" onError={(e) => { e.target.onerror = null; e.target.src = "https://placehold.co/40x40/e0f2fe/0ea5e9?text=A"; }} className="w-10 h-10 rounded-xl object-cover border-2 border-slate-200 dark:border-slate-800 shadow-sm" />
+                                    <span className="text-2xl font-black tracking-tight text-slate-900 dark:text-white">ASHOP</span>
+                                </a>
+                                <button onClick={() => setMobileMenuOpen(false)} className="w-10 h-10 rounded-full ui-box flex items-center justify-center text-xl text-slate-600 dark:text-slate-300 hover:text-brand transition-colors"><i className="fa-solid fa-xmark"></i></button>
+                            </div>
+                            <div className="p-6 flex-1 overflow-y-auto">
+                                <p className="text-xs font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-6">{t.explore}</p>
+                                <div className="flex flex-col gap-4">
+                                    <a href="index.html#features" onClick={(e) => handleNavClick(e, 'index.html#features')} className="flex items-center gap-4 p-4 rounded-3xl ui-box active:scale-95 transition-transform"><div className="w-12 h-12 rounded-2xl bg-sky-100 dark:bg-slate-800 flex items-center justify-center text-brand text-xl shadow-inner"><i className="fa-solid fa-star"></i></div><div><h4 className="text-lg font-black text-slate-900 dark:text-white">{t.mobFeatures}</h4><p className="text-xs font-bold text-slate-500">{t.mobFeaturesDesc}</p></div></a>
+                                    <a href="index.html#contact" onClick={(e) => handleNavClick(e, 'index.html#contact')} className="flex items-center gap-4 p-4 rounded-3xl ui-box active:scale-95 transition-transform"><div className="w-12 h-12 rounded-2xl bg-sky-100 dark:bg-slate-800 flex items-center justify-center text-brand text-xl shadow-inner"><i className="fa-solid fa-comment-dots"></i></div><div><h4 className="text-lg font-black text-slate-900 dark:text-white">{t.mobContactTab}</h4><p className="text-xs font-bold text-slate-500">{t.mobContactDesc}</p></div></a>
+                                    <a href="guides.html" className="flex items-center gap-4 p-4 rounded-3xl ui-box active:scale-95 transition-transform"><div className="w-12 h-12 rounded-2xl bg-sky-100 dark:bg-slate-800 flex items-center justify-center text-brand text-xl shadow-inner"><i className="fa-solid fa-book-open"></i></div><div><h4 className="text-lg font-black text-slate-900 dark:text-white">{t.mobGuides}</h4><p className="text-xs font-bold text-slate-500">{t.mobGuidesDesc}</p></div></a>
+                                    <a href="about.html" className="flex items-center gap-4 p-4 rounded-3xl ui-box active:scale-95 transition-transform"><div className="w-12 h-12 rounded-2xl bg-sky-100 dark:bg-slate-800 flex items-center justify-center text-brand text-xl shadow-inner"><i className="fa-solid fa-circle-info"></i></div><div><h4 className="text-lg font-black text-slate-900 dark:text-white">{t.mobAbout}</h4><p className="text-xs font-bold text-slate-500">{t.mobAboutDesc}</p></div></a>
+                                </div>
+                            </div>
+                            <div className="p-6 pb-8 border-t border-sky-100 dark:border-slate-800 bg-sky-50/50 dark:bg-slate-900/50 flex items-center justify-between">
+                                <span className="font-bold text-slate-700 dark:text-slate-300">{t.preferences}</span>
+                                <div className="flex items-center gap-1 ui-box p-1.5 rounded-2xl shadow-sm">
+                                    <button onClick={() => setDarkMode(false)} className={`w-10 h-10 rounded-xl flex items-center justify-center transition-all ${!darkMode ? 'bg-white dark:bg-slate-800 text-brand shadow-md' : 'text-slate-400 dark:text-slate-500'}`}><i className="fa-solid fa-sun text-lg"></i></button>
+                                    <button onClick={() => setDarkMode(true)} className={`w-10 h-10 rounded-xl flex items-center justify-center transition-all ${darkMode ? 'bg-white dark:bg-slate-800 text-brand shadow-md' : 'text-slate-400 dark:text-slate-500'}`}><i className="fa-solid fa-moon text-lg"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    )}
                 </nav>
             );
         };
 
         const AnimatedProfiles = () => {
-            const avatarPool = [
-                { letter: 'P', color: 'bg-indigo-400' }, { letter: 'K', color: 'bg-sky-400' },
-                { letter: 'M', color: 'bg-blue-400' }, { letter: 'A', color: 'bg-emerald-400' },
-                { letter: 'Z', color: 'bg-rose-400' }, { letter: 'J', color: 'bg-purple-400' }
-            ];
+            const avatarPool = [ { letter: 'P', color: 'bg-indigo-400' }, { letter: 'K', color: 'bg-sky-400' }, { letter: 'M', color: 'bg-blue-400' }, { letter: 'A', color: 'bg-emerald-400' }, { letter: 'Z', color: 'bg-rose-400' }, { letter: 'J', color: 'bg-purple-400' } ];
             const [active, setActive] = useState([ { id: 0, ...avatarPool[0] }, { id: 1, ...avatarPool[1] }, { id: 2, ...avatarPool[2] } ]);
             const [counter, setCounter] = useState(3);
-
-            useEffect(() => {
-                const interval = setInterval(() => {
-                    setActive(prev => [
-                        { id: counter, ...avatarPool[counter % avatarPool.length] }, 
-                        prev[0], prev[1]
-                    ]);
-                    setCounter(c => c + 1);
-                }, 6000);
-                return () => clearInterval(interval);
-            }, [counter]);
-
+            useEffect(() => { const interval = setInterval(() => { setActive(prev => [ { id: counter, ...avatarPool[counter % avatarPool.length] }, prev[0], prev[1] ]); setCounter(c => c + 1); }, 6000); return () => clearInterval(interval); }, [counter]);
             return (
                 <div className="flex -space-x-2.5 mr-4 pl-1">
                     {active.map((avatar, index) => (
-                        <div key={avatar.id} className={`w-7 h-7 rounded-full ${avatar.color} border-2 border-white dark:border-slate-800 flex items-center justify-center text-[10px] text-white font-bold transition-all duration-700 ${index === 0 ? 'z-30 animate-[fadeIn_0.8s_ease-out]' : index === 1 ? 'z-20' : 'z-10'}`}>
-                            {avatar.letter}
-                        </div>
+                        <div key={avatar.id} className={`w-7 h-7 rounded-full ${avatar.color} border-2 border-white dark:border-slate-800 flex items-center justify-center text-[10px] text-white font-bold transition-all duration-700 ${index === 0 ? 'z-30 animate-[fadeIn_0.8s_ease-out]' : index === 1 ? 'z-20' : 'z-10'}`}>{avatar.letter}</div>
                     ))}
                 </div>
             );
@@ -217,9 +228,10 @@
         const Hero = ({ lang }) => {
             const t = translations[lang];
             return (
-                <section id="home" className="relative min-h-[95vh] flex items-center justify-center pt-24 pb-16">
-                    <div className="max-w-7xl mx-auto px-6 flex flex-col lg:flex-row items-center gap-16 relative z-10 w-full">
-                        <div className="flex-1 text-center lg:text-left pt-10">
+                <section id="home" className="relative min-h-[95vh] flex items-center justify-center pt-32 pb-40 lg:pb-20">
+                    <div className="max-w-7xl mx-auto px-6 flex flex-col lg:flex-row items-center gap-10 lg:gap-16 relative z-10 w-full">
+                        
+                        <div className="flex-1 text-center lg:text-left pt-6 sm:pt-10">
                             <div className="inline-flex items-center p-1.5 pr-5 rounded-full ui-box mb-8 shadow-md">
                                 <AnimatedProfiles />
                                 <div className="flex items-center gap-2">
@@ -229,13 +241,16 @@
                                     <span className="text-sm font-bold text-brand">{t.liveOrders}</span>
                                 </div>
                             </div>
+                            
                             <h1 className="text-5xl md:text-7xl font-black tracking-tight mb-6 leading-tight text-slate-900 dark:text-white">
                                 {t.cheapest} <br/>
                                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand to-cyan-400 drop-shadow-sm">{t.fastest}</span>
                             </h1>
+                            
                             <p className="text-base md:text-lg text-slate-600 dark:text-slate-400 mb-10 max-w-xl mx-auto lg:mx-0 font-medium leading-relaxed">
                                 {t.desc} <span className="text-slate-900 dark:text-slate-200 font-extrabold">{t.descBold}</span>
                             </p>
+                            
                             <div className="flex flex-col sm:flex-row items-center gap-5 justify-center lg:justify-start w-full sm:w-auto">
                                 <a href="https://t.me/ashopacey" target="_blank" className="w-full sm:w-auto px-8 py-4 rounded-xl bg-brand text-white font-extrabold text-base md:text-lg hover:bg-brand-dark transition-all duration-300 shadow-xl shadow-brand/30 flex items-center justify-center gap-3 transform hover:-translate-y-1">
                                     <i className="fa-brands fa-telegram text-xl"></i> {t.openTelegram}
@@ -246,37 +261,44 @@
                             </div>
                         </div>
 
-                        <div className="flex-1 w-full relative h-[450px] lg:h-[500px] mt-12 lg:mt-0 hidden sm:block">
-                            <div className="absolute top-8 right-4 lg:right-6 w-64 p-4 glass-panel rounded-2xl animate-float" style={{ animationDelay: '0s' }}>
-                                <p className="text-slate-800 dark:text-slate-200 font-extrabold">AceyDaCool</p>
-                                <p className="text-slate-500 dark:text-slate-400 font-medium text-sm mt-0.5">{t.usernameText}</p>
-                            </div>
-                            <div className="absolute top-36 left-0 lg:left-4 w-[340px] p-5 glass-panel rounded-3xl animate-float z-10" style={{ animationDelay: '1.5s' }}>
-                                <div className="flex justify-between items-center mb-4">
-                                    <span className="text-brand font-black text-xs tracking-widest uppercase">{t.paid}</span>
-                                    <span className="text-slate-900 dark:text-white font-black text-xl">33,000 MMK</span>
+                        <div className="flex-1 w-full relative min-h-[480px] sm:min-h-[550px] lg:min-h-[500px] mt-16 lg:mt-0 flex justify-center lg:block">
+                            <div className="relative w-full h-full max-w-[340px] sm:max-w-none mx-auto sm:mx-0 scale-95 sm:scale-100 origin-top">
+                                
+                                <div className="absolute top-0 right-0 sm:top-4 lg:top-8 lg:right-8 w-[260px] sm:w-64 p-4 glass-panel rounded-2xl animate-float" style={{ animationDelay: '0s' }}>
+                                    <p className="text-slate-800 dark:text-slate-200 font-extrabold">AceyDaCool</p>
+                                    <p className="text-slate-500 dark:text-slate-400 font-medium text-sm mt-0.5">{t.usernameText}</p>
                                 </div>
-                                <div className="p-3.5 ui-box rounded-xl flex items-center gap-3">
-                                    <i className="fa-solid fa-wallet text-brand text-lg"></i>
-                                    <span className="text-slate-700 dark:text-slate-300 text-sm font-bold">{t.payKpay}</span>
-                                </div>
-                            </div>
-                            <div className="absolute bottom-12 right-0 lg:-right-4 w-[380px] p-6 glass-panel rounded-3xl animate-float z-20" style={{ animationDelay: '3s' }}>
-                                <div className="flex items-center justify-between mb-5 px-1">
-                                    <div className="flex items-center gap-4">
-                                        <div className="w-12 h-12 rounded-xl bg-sky-50 dark:bg-slate-800 border border-sky-200 dark:border-slate-700 flex items-center justify-center text-brand font-black text-xl shadow-inner">R$</div>
-                                        <div>
-                                            <p className="text-slate-900 dark:text-white font-extrabold text-xl leading-tight">{t.robux}</p>
-                                            <p className="text-brand text-sm font-bold">{t.fastDeliv}</p>
-                                        </div>
+                                
+                                <div className="absolute top-[100px] sm:top-[130px] left-0 lg:left-0 w-[280px] sm:w-[340px] p-5 glass-panel rounded-3xl animate-float z-10" style={{ animationDelay: '1.5s' }}>
+                                    <div className="flex justify-between items-center mb-4">
+                                        <span className="text-brand font-black text-xs tracking-widest uppercase">{t.paid}</span>
+                                        <span className="text-slate-900 dark:text-white font-black text-xl">33,000 MMK</span>
                                     </div>
-                                    <div className="w-8 h-8 rounded-full bg-green-500 flex items-center justify-center text-white shadow-lg shadow-green-500/40 ml-4"><i className="fa-solid fa-check font-bold"></i></div>
+                                    <div className="p-3.5 ui-box rounded-xl flex items-center gap-3">
+                                        <i className="fa-solid fa-wallet text-brand text-lg"></i>
+                                        <span className="text-slate-700 dark:text-slate-300 text-sm font-bold">{t.payKpay}</span>
+                                    </div>
                                 </div>
-                                <div className="p-4 ui-box rounded-xl w-full flex items-center justify-center text-center">
-                                    <p className="text-slate-700 dark:text-slate-300 font-bold text-sm leading-relaxed">{t.successTxt}</p>
+
+                                <div className="absolute top-[210px] sm:top-[270px] right-[-10px] sm:-right-4 lg:-right-16 w-[320px] sm:w-[380px] p-6 glass-panel rounded-3xl animate-float z-20" style={{ animationDelay: '3s' }}>
+                                    <div className="flex items-center justify-between mb-5 px-1">
+                                        <div className="flex items-center gap-4">
+                                            <div className="w-12 h-12 rounded-xl bg-sky-50 dark:bg-slate-800 border border-sky-200 dark:border-slate-700 flex items-center justify-center text-brand font-black text-xl shadow-inner">R$</div>
+                                            <div>
+                                                <p className="text-slate-900 dark:text-white font-extrabold text-xl leading-tight">{t.robux}</p>
+                                                <p className="text-brand text-sm font-bold">{t.fastDeliv}</p>
+                                            </div>
+                                        </div>
+                                        <div className="w-8 h-8 rounded-full bg-green-500 flex items-center justify-center text-white shadow-lg shadow-green-500/40 ml-4"><i className="fa-solid fa-check font-bold"></i></div>
+                                    </div>
+                                    <div className="p-4 ui-box rounded-xl w-full flex items-center justify-center text-center">
+                                        <p className="text-slate-700 dark:text-slate-300 font-bold text-sm leading-relaxed">{t.successTxt}</p>
+                                    </div>
                                 </div>
+                                
                             </div>
                         </div>
+
                     </div>
                 </section>
             );
@@ -359,11 +381,11 @@
                                 <img src="./ashoplogo_20260806_144414_0000.png" alt="Logo" className="w-8 h-8 rounded-lg shadow-sm border border-white dark:border-slate-700" onError={(e) => { e.target.style.display='none' }} />
                                 <p className="text-slate-600 dark:text-slate-400 font-bold">© 2026 {t.rights}</p>
                             </div>
-                            <div className="flex gap-6 text-sm font-black text-slate-700 dark:text-slate-300">
-                                <a href="terms.html" className="hover:text-brand transition">{t.tos}</a>
-                                <a href="policy.html" className="hover:text-brand transition">{t.policy}</a>
+                            <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 text-sm font-black text-slate-700 dark:text-slate-300 w-full md:w-auto mt-2 md:mt-0">
+                                <a href="terms.html" className="px-5 py-3 rounded-2xl ui-box hover:border-brand hover:text-brand transition shadow-sm flex items-center justify-center gap-3"><i className="fa-solid fa-file-contract text-brand text-lg"></i> {t.tos}</a>
+                                <a href="policy.html" className="px-5 py-3 rounded-2xl ui-box hover:border-brand hover:text-brand transition shadow-sm flex items-center justify-center gap-3"><i className="fa-solid fa-shield-halved text-brand text-lg"></i> {t.policy}</a>
                             </div>
-                            <div className="flex flex-col items-center md:items-end gap-3">
+                            <div className="flex flex-col items-center md:items-end gap-3 mt-4 md:mt-0">
                                 <span className="text-[10px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-widest">{t.joinComm}</span>
                                 <div className="flex gap-2.5">
                                     <a href="https://www.facebook.com/share/1RrZdwAgap/" target="_blank" className="w-9 h-9 flex items-center justify-center rounded-xl bg-white dark:bg-slate-800 border border-sky-100 dark:border-slate-700 text-slate-500 hover:text-[#1877F2] hover:border-[#1877F2]/30 hover:shadow-md transition"><i className="fa-brands fa-facebook"></i></a>
@@ -383,14 +405,10 @@
         };
 
         const App = () => {
-            // Local Storage Logic to persist state
             const [lang, setLang] = useState(() => localStorage.getItem('lang') || 'EN');
             const [darkMode, setDarkMode] = useState(() => localStorage.getItem('darkMode') === 'true');
 
-            useEffect(() => {
-                localStorage.setItem('lang', lang);
-            }, [lang]);
-
+            useEffect(() => { localStorage.setItem('lang', lang); }, [lang]);
             useEffect(() => {
                 localStorage.setItem('darkMode', darkMode);
                 if (darkMode) document.documentElement.classList.add('dark');
@@ -413,6 +431,16 @@
                 };
                 window.addEventListener('scroll', handleScrollSpy);
                 return () => window.removeEventListener('scroll', handleScrollSpy);
+            }, []);
+
+            useEffect(() => {
+                if (window.location.hash) {
+                    setTimeout(() => {
+                        const targetId = window.location.hash.substring(1);
+                        const el = document.getElementById(targetId);
+                        if (el) el.scrollIntoView({ behavior: 'smooth' });
+                    }, 300);
+                }
             }, []);
 
             return (
