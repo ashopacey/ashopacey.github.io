@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Privacy Policy - AShop</title>
+    <title>AShop - Privacy Policy </title>
     <!-- Prevents the White Flash in Dark Mode -->
     <script>if (localStorage.getItem('darkMode') === 'true') { document.documentElement.classList.add('dark'); }</script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -55,15 +55,15 @@
             }, [mobileMenuOpen]);
 
             const navLinks = [
-                { name: t.navFeatures, href: 'index.html#features', id: 'features' },
-                { name: t.navContact, href: 'index.html#contact', id: 'contact' },
-                { name: t.navGuides, href: 'guides.html', id: 'guides' },
-                { name: t.navAbout, href: 'about.html', id: 'about' }
+                { name: t.navFeatures, href: '/#features', id: 'features' },
+                { name: t.navContact, href: '/#contact', id: 'contact' },
+                { name: t.navGuides, href: '/guides', id: 'guides' },
+                { name: t.navAbout, href: '/about', id: 'about' }
             ];
 
             const handleNavClick = (e, href) => {
-                const isIndex = window.location.pathname.endsWith('index.html') || window.location.pathname === '/' || window.location.pathname.endsWith('/');
-                if (href.startsWith('index.html#')) {
+                const isIndex = window.location.pathname.endsWith('/') || window.location.pathname === '/' || window.location.pathname.endsWith('/');
+                if (href.startsWith('/#')) {
                     if (isIndex) {
                         e.preventDefault();
                         const targetId = href.split('#')[1];
@@ -85,7 +85,7 @@
             return (
                 <nav className={`fixed w-full z-[60] transition-all duration-300 ${isScrolled ? 'glass-panel py-4' : 'bg-transparent py-4 md:py-6'}`}>
                     <div className="max-w-7xl mx-auto px-4 md:px-6 flex items-center justify-between relative z-[70]">
-                        <a href="index.html" className="flex items-center gap-3 group">
+                        <a href="/" className="flex items-center gap-3 group">
                             <img src="./ashoplogo_20260806_144414_0000.png" alt="AShop Logo" onError={(e) => { e.target.onerror = null; e.target.src = "https://placehold.co/40x40/e0f2fe/0ea5e9?text=A"; }} className="w-9 h-9 md:w-10 md:h-10 rounded-xl object-cover border-2 border-white dark:border-slate-800 shadow-md group-hover:shadow-brand/40 transition-all duration-300" />
                             <span className="text-xl md:text-2xl font-black tracking-tight text-slate-900 dark:text-white group-hover:text-brand transition-colors duration-300">ASHOP</span>
                         </a>
@@ -111,7 +111,7 @@
                     {mobileMenuOpen && (
                         <div className="md:hidden fixed inset-0 z-[100] bg-white/95 dark:bg-slate-950/95 backdrop-blur-2xl flex flex-col h-[100dvh] w-full overflow-hidden animate-menu-pop">
                             <div className="flex items-center justify-between p-6 border-b border-sky-100 dark:border-slate-800">
-                                <a href="index.html" className="flex items-center gap-3">
+                                <a href="/" className="flex items-center gap-3">
                                     <img src="./ashoplogo_20260806_144414_0000.png" alt="AShop Logo" onError={(e) => { e.target.onerror = null; e.target.src = "https://placehold.co/40x40/e0f2fe/0ea5e9?text=A"; }} className="w-10 h-10 rounded-xl object-cover border-2 border-slate-200 dark:border-slate-800 shadow-sm" />
                                     <span className="text-2xl font-black tracking-tight text-slate-900 dark:text-white">ASHOP</span>
                                 </a>
@@ -120,10 +120,10 @@
                             <div className="p-6 flex-1 overflow-y-auto">
                                 <p className="text-xs font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-6">{t.explore}</p>
                                 <div className="flex flex-col gap-4">
-                                    <a href="index.html#features" onClick={(e) => handleNavClick(e, 'index.html#features')} className="flex items-center gap-4 p-4 rounded-3xl ui-box active:scale-95 transition-transform"><div className="w-12 h-12 rounded-2xl bg-sky-100 dark:bg-slate-800 flex items-center justify-center text-brand text-xl shadow-inner"><i className="fa-solid fa-star"></i></div><div><h4 className="text-lg font-black text-slate-900 dark:text-white">{t.mobFeatures}</h4><p className="text-xs font-bold text-slate-500">{t.mobFeaturesDesc}</p></div></a>
-                                    <a href="index.html#contact" onClick={(e) => handleNavClick(e, 'index.html#contact')} className="flex items-center gap-4 p-4 rounded-3xl ui-box active:scale-95 transition-transform"><div className="w-12 h-12 rounded-2xl bg-sky-100 dark:bg-slate-800 flex items-center justify-center text-brand text-xl shadow-inner"><i className="fa-solid fa-comment-dots"></i></div><div><h4 className="text-lg font-black text-slate-900 dark:text-white">{t.mobContactTab}</h4><p className="text-xs font-bold text-slate-500">{t.mobContactDesc}</p></div></a>
-                                    <a href="guides.html" className="flex items-center gap-4 p-4 rounded-3xl ui-box active:scale-95 transition-transform"><div className="w-12 h-12 rounded-2xl bg-sky-100 dark:bg-slate-800 flex items-center justify-center text-brand text-xl shadow-inner"><i className="fa-solid fa-book-open"></i></div><div><h4 className="text-lg font-black text-slate-900 dark:text-white">{t.mobGuides}</h4><p className="text-xs font-bold text-slate-500">{t.mobGuidesDesc}</p></div></a>
-                                    <a href="about.html" className="flex items-center gap-4 p-4 rounded-3xl ui-box active:scale-95 transition-transform"><div className="w-12 h-12 rounded-2xl bg-sky-100 dark:bg-slate-800 flex items-center justify-center text-brand text-xl shadow-inner"><i className="fa-solid fa-circle-info"></i></div><div><h4 className="text-lg font-black text-slate-900 dark:text-white">{t.mobAbout}</h4><p className="text-xs font-bold text-slate-500">{t.mobAboutDesc}</p></div></a>
+                                    <a href="/#features" onClick={(e) => handleNavClick(e, '/#features')} className="flex items-center gap-4 p-4 rounded-3xl ui-box active:scale-95 transition-transform"><div className="w-12 h-12 rounded-2xl bg-sky-100 dark:bg-slate-800 flex items-center justify-center text-brand text-xl shadow-inner"><i className="fa-solid fa-star"></i></div><div><h4 className="text-lg font-black text-slate-900 dark:text-white">{t.mobFeatures}</h4><p className="text-xs font-bold text-slate-500">{t.mobFeaturesDesc}</p></div></a>
+                                    <a href="/#contact" onClick={(e) => handleNavClick(e, '/#contact')} className="flex items-center gap-4 p-4 rounded-3xl ui-box active:scale-95 transition-transform"><div className="w-12 h-12 rounded-2xl bg-sky-100 dark:bg-slate-800 flex items-center justify-center text-brand text-xl shadow-inner"><i className="fa-solid fa-comment-dots"></i></div><div><h4 className="text-lg font-black text-slate-900 dark:text-white">{t.mobContactTab}</h4><p className="text-xs font-bold text-slate-500">{t.mobContactDesc}</p></div></a>
+                                    <a href="/guides" className="flex items-center gap-4 p-4 rounded-3xl ui-box active:scale-95 transition-transform"><div className="w-12 h-12 rounded-2xl bg-sky-100 dark:bg-slate-800 flex items-center justify-center text-brand text-xl shadow-inner"><i className="fa-solid fa-book-open"></i></div><div><h4 className="text-lg font-black text-slate-900 dark:text-white">{t.mobGuides}</h4><p className="text-xs font-bold text-slate-500">{t.mobGuidesDesc}</p></div></a>
+                                    <a href="/about" className="flex items-center gap-4 p-4 rounded-3xl ui-box active:scale-95 transition-transform"><div className="w-12 h-12 rounded-2xl bg-sky-100 dark:bg-slate-800 flex items-center justify-center text-brand text-xl shadow-inner"><i className="fa-solid fa-circle-info"></i></div><div><h4 className="text-lg font-black text-slate-900 dark:text-white">{t.mobAbout}</h4><p className="text-xs font-bold text-slate-500">{t.mobAboutDesc}</p></div></a>
                                 </div>
                             </div>
                             <div className="p-6 pb-8 border-t border-sky-100 dark:border-slate-800 bg-sky-50/50 dark:bg-slate-900/50 flex items-center justify-between">
@@ -143,7 +143,7 @@
             const t = translations[lang];
             return (
                 <section className="pt-32 pb-20 max-w-4xl mx-auto px-6 min-h-[85vh]">
-                    <a href="index.html" className="inline-flex items-center gap-2 text-slate-500 dark:text-slate-400 hover:text-brand transition mb-8 font-bold">
+                    <a href="/" className="inline-flex items-center gap-2 text-slate-500 dark:text-slate-400 hover:text-brand transition mb-8 font-bold">
                         <i className="fa-solid fa-arrow-left"></i> {t.backHome}
                     </a>
                     <div className="text-center mb-12">
@@ -171,7 +171,7 @@
                         <p>{t.polP5}</p>
 
                         <div className="mt-12 text-center border-t border-sky-100 dark:border-slate-800 pt-8">
-                            <a href="terms.html" className="text-brand font-bold hover:text-brand-dark transition">{t.readTos} <i className="fa-solid fa-arrow-right ml-1"></i></a>
+                            <a href="/terms" className="text-brand font-bold hover:text-brand-dark transition">{t.readTos} <i className="fa-solid fa-arrow-right ml-1"></i></a>
                         </div>
                     </div>
                 </section>
@@ -189,8 +189,8 @@
                                 <p className="text-slate-600 dark:text-slate-400 font-bold">© 2026 {t.rights}</p>
                             </div>
                             <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 text-sm font-black text-slate-700 dark:text-slate-300 w-full md:w-auto mt-2 md:mt-0">
-                                <a href="terms.html" className="px-5 py-3 rounded-2xl ui-box hover:border-brand hover:text-brand transition shadow-sm flex items-center justify-center gap-3"><i className="fa-solid fa-file-contract text-brand text-lg"></i> {t.tos}</a>
-                                <a href="policy.html" className="px-5 py-3 rounded-2xl ui-box hover:border-brand hover:text-brand transition shadow-sm flex items-center justify-center gap-3"><i className="fa-solid fa-shield-halved text-brand text-lg"></i> {t.policy}</a>
+                                <a href="/terms" className="px-5 py-3 rounded-2xl ui-box hover:border-brand hover:text-brand transition shadow-sm flex items-center justify-center gap-3"><i className="fa-solid fa-file-contract text-brand text-lg"></i> {t.tos}</a>
+                                <a href="/policy" className="px-5 py-3 rounded-2xl ui-box hover:border-brand hover:text-brand transition shadow-sm flex items-center justify-center gap-3"><i className="fa-solid fa-shield-halved text-brand text-lg"></i> {t.policy}</a>
                             </div>
                             <div className="flex flex-col items-center md:items-end gap-3 mt-4 md:mt-0">
                                 <span className="text-[10px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-widest">{t.joinComm}</span>
