@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms of Service - AShop</title>
+    <!-- Prevents the White Flash in Dark Mode -->
+    <script>
+        if (localStorage.getItem('darkMode') === 'true') {
+            document.documentElement.classList.add('dark');
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = { darkMode: 'class', theme: { extend: { fontFamily: { sans: ['Inter', 'sans-serif'] }, colors: { brand: { DEFAULT: '#0EA5E9', dark: '#0284C7', light: '#38BDF8' } }, animation: { 'float-slow': 'float 8s ease-in-out infinite' }, keyframes: { float: { '0%, 100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-15px)' } } } } } }
+    </script>
+    <style>
+        body { background-color: #F0F9FF; color: #0f172a; overflow-x: hidden; transition: background-color 0.3s ease; } .dark body { background-color: #030712; color: #ffffff; } ::-webkit-scrollbar { width: 8px; } ::-webkit-scrollbar-track { background: #E0F2FE; } .dark ::-webkit-scrollbar-track { background: #030712; } ::-webkit-scrollbar-thumb { background: #38BDF8; border-radius: 4px; } ::-webkit-scrollbar-thumb:hover { background: #0EA5E9; }
+        .glass-panel { background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.65) 100%); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); border: 1px solid rgba(255, 255, 255, 0.9); box-shadow: 0 20px 40px -10px rgba(14, 165, 233, 0.15); transition: all 0.3s ease; } .dark .glass-panel { background: linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(15, 23, 42, 0.65) 100%); border-color: rgba(56, 189, 248, 0.2); box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.5); }
+        .ui-box { background: linear-gradient(to bottom right, #ffffff, rgba(240, 249, 255, 0.8)); border: 1px solid rgba(224, 242, 254, 0.8); transition: all 0.3s ease;} .dark .ui-box { background: linear-gradient(to bottom right, #0f172a, rgba(15, 23, 42, 0.8)); border-color: rgba(56, 189, 248, 0.2); }
+    </style>
+</head>
+<body class="antialiased selection:bg-brand selection:text-white">
+    <div class="fixed top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none transition-opacity duration-500 dark:opacity-30">
+        <div class="absolute top-[20%] right-[10%] w-[500px] h-[500px] bg-cyan-300/30 rounded-full blur-[120px] animate-float-slow"></div>
+    </div>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+        const translations = {
+            EN: { navFeatures: "Features", navContact: "Contact", navGuides: "Guides", navAbout: "About", buyNow: "Buy Now", rights: "AShop. All rights reserved.", tos: "Terms of Service", policy: "Privacy Policy", joinComm: "Join our community", notAffil: "Not affiliated with Roblox Corporation. All trademarks belong to their respective owners.", backHome: "Back to Home", lastUpdated: "Last updated:", readPolicy: "Read the Privacy Policy",
+                tosWelcome: "Welcome to AShop. By purchasing any products or using our services, you agree to be bound by the following Terms of Service.",
+                tosH1: "1. Payment & Currency", tosP1_1: "We exclusively accept payments in Myanmar Kyat (MMK). Transactions must be completed via our designated KBZPay or WavePay accounts. We may accept alternative payment platforms under specific conditions; you must request and receive approval from us prior to sending any funds.", tosP1_2: "Valid proof of payment (receipt/slip) must be provided immediately after transferring funds. AShop reserves the right to manually verify payments, place orders on hold, or cancel orders without fulfillment if we suspect fraudulent activity, manipulated receipts, or triangle scams.",
+                tosH2: "2. Refunds & Cancellations", tosP2_1: "All sales are final. We do not provide refunds for initiated orders (processed but pending arrival on the user's end) or completed orders.", tosL1_title: "Ineligibility:", tosL1_desc: "If you place an order but your account is not currently eligible to receive it, you will not lose your funds. Your order will remain pending until you fulfill the eligibility requirements. Refunds will not be issued for impatience.", tosL2_title: "User Error:", tosL2_desc: "We do not issue refunds if a buyer misspells their username resulting in a completed order to the wrong account. Furthermore, we reserve the right to decline refunds for manual mistakes made on the buyer's end, such as accidentally sending surplus funds.", tosL3_title: "Third-Party Moderation:", tosL3_desc: "We are not responsible for, and will not issue refunds for, any actions taken by third-party moderators (e.g., Roblox Corporation or game developers), including account suspensions, bans, or item removals.",
+                tosH3: "3. Platform Independence", tosP3: "AShop is an independent service and is not affiliated, endorsed, or associated in any way with Roblox Corporation or its subsidiaries. You hold sole responsibility for adhering to the Terms of Service of Roblox and the policies of your chosen payment provider.",
+                tosH4: "4. Refusal of Service", tosP4: "We reserve the right to refuse service, terminate transactions, or ban users from our platforms without prior notice if we suspect malicious intent, rule-breaking, or any behavior that threatens the security of our shop and community.",
+                tosH5: "5. Support", tosP5: "If you encounter any issues or require assistance with your order, please direct message @aceyredd on Telegram."
+            },
+            MM: { navFeatures: "အချက်အလက်များ", navContact: "ဆက်သွယ်ရန်", navGuides: "လမ်းညွှန်", navAbout: "အကြောင်း", buyNow: "ယခုဝယ်မည်", rights: "AShop. မူပိုင်ခွင့်များရယူထားသည်။", tos: "စည်းကမ်းချက်များ", policy: "ကိုယ်ရေးကိုယ်တာမူဝါဒ", joinComm: "Community သို့ ဝင်ရောက်ရန်", notAffil: "Roblox Corporation နှင့် သက်ဆိုင်ခြင်းမရှိပါ။ ကုန်အမှတ်တံဆိပ်အားလုံးသည် ၎င်းတို့၏ သက်ဆိုင်ရာပိုင်ရှင်များသာဖြစ်သည်။", backHome: "ပင်မစာမျက်နှာသို့ ပြန်သွားမည်", lastUpdated: "နောက်ဆုံးပြင်ဆင်ခဲ့သည့်ရက် -", readPolicy: "ကိုယ်ရေးကိုယ်တာမူဝါဒကို ဖတ်ရန်",
+                tosWelcome: "AShop မှကြိုဆိုပါသည်! ဝန်ဆောင်မှုများကို အသုံးပြုခြင်းဖြင့် အောက်ပါစည်းကမ်းချက်များကို သဘောတူလက်ခံရာရောက်ပါသည်။",
+                tosH1: "၁။ ငွေပေးချေမှုစနစ် နှင့် ငွေကြေး", tosP1_1: "ငွေပေးချေမှုအားလုံးကို မြန်မာကျပ်ငွေ (MMK) ဖြင့်သာ လက်ခံပါသည်။ KBZPay သို့မဟုတ် WavePay ဖြင့်သာ ပေးချေရပါမည်။ အခြားသော ငွေပေးချေမှုစနစ်များကို အခြေအနေပေါ်မူတည်၍ လက်ခံနိုင်သော်လည်း ကြိုတင်မေးမြန်းခွင့်ပြုချက်ရယူရန် လိုအပ်ပါသည်။", tosP1_2: "ငွေလွှဲပြီးပါက ငွေလွှဲပြေစာ (Slip) ကို ချက်ချင်းပေးပို့ရပါမည်။ လိမ်လည်မှုများ၊ ပြေစာအတုများနှင့် Triangle Scam များဟု သံသယရှိပါက အော်ဒါကို ယာယီဆိုင်းငံ့ထားခြင်း၊ သို့မဟုတ် ဖျက်သိမ်းပိုင်ခွင့်ရှိပါသည်။",
+                tosH2: "၂။ ငွေပြန်အမ်းခြင်း နှင့် အော်ဒါဖျက်သိမ်းခြင်း", tosP2_1: "ဝယ်ယူမှုအားလုံးသည် အပြီးသတ်ဖြစ်ပြီး လုပ်ဆောင်ဆဲ သို့မဟုတ် ပြီးစီးသွားသောအော်ဒါများအတွက် ငွေပြန်အမ်းမည်မဟုတ်ပါ။", tosL1_title: "သတ်မှတ်ချက်မပြည့်မီခြင်း -", tosL1_desc: "သင့်အကောင့်သည် Robux လက်ခံရန် သတ်မှတ်ချက်မပြည့်မီပါက အော်ဒါကို ဆိုင်းငံ့ထားမည်ဖြစ်ပြီး ငွေပြန်အမ်းမည်မဟုတ်ပါ။ သတ်မှတ်ချက်ပြည့်မီချိန်တွင်မှသာ ဆက်လက်လုပ်ဆောင်ပေးမည်ဖြစ်သည်။", tosL2_title: "ဝယ်ယူသူ၏ အမှားများ -", tosL2_desc: "ဝယ်ယူသူဘက်မှ Username အမှားပေးခြင်းကြောင့် အခြားအကောင့်သို့ ရောက်ရှိသွားပါက တာဝန်ယူမည်မဟုတ်ပါ။ ပိုမိုငွေလွှဲမိခြင်း အစရှိသော အမှားများအတွက်လည်း ငွေပြန်အမ်းပေးမည်မဟုတ်ပါ။", tosL3_title: "တတိယအဖွဲ့အစည်းများ၏ လုပ်ဆောင်ချက်များ -", tosL3_desc: "Roblox Corporation မှ အကောင့်ပိတ်ခြင်း၊ ပစ္စည်းများရုပ်သိမ်းခြင်း အစရှိသော ပြဿနာများအတွက် ကျွန်ုပ်တို့မှ တာဝန်ယူမည်မဟုတ်ဘဲ ငွေပြန်အမ်းပေးမည်မဟုတ်ပါ။",
+                tosH3: "၃။ ပလက်ဖောင်း လွတ်လပ်မှု", tosP3: "AShop သည် Roblox Corporation နှင့် မည်သို့မျှ သက်ဆိုင်မှုမရှိသော သီးခြားဝန်ဆောင်မှုတစ်ခုဖြစ်သည်။ သုံးစွဲသူသည် Roblox ၏ စည်းကမ်းချက်များနှင့် မိမိအသုံးပြုသော ငွေပေးချေမှုစနစ်၏ စည်းကမ်းများကို လိုက်နာရန် ကိုယ်တိုင်တာဝန်ယူရမည်ဖြစ်သည်။",
+                tosH4: "၄။ ဝန်ဆောင်မှုငြင်းပယ်ခွင့်", tosP4: "အွန်လိုင်းစတိုးနှင့် အသိုင်းအဝိုင်း၏ လုံခြုံရေးကို ထိခိုက်စေနိုင်သော အပြုအမူ၊ စည်းကမ်းဖောက်ဖျက်မှုများ ရှိပါက အသိပေးခြင်းမရှိဘဲ ဝန်ဆောင်မှုငြင်းပယ်ခြင်း၊ ပိတ်ပင်ခြင်းများကို ပြုလုပ်ပိုင်ခွင့်ရှိသည်။",
+                tosH5: "၅။ အကူအညီရယူရန်", tosP5: "အော်ဒါနှင့်ပတ်သက်၍ အကူအညီလိုအပ်ပါက Telegram ရှိ @aceyredd သို့ တိုက်ရိုက် စာပို့နိုင်ပါသည်။"
+            }
+        };
+
+        const Navbar = ({ lang, setLang, darkMode, setDarkMode }) => {
+            const [isScrolled, setIsScrolled] = useState(false);
+            const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+            const t = translations[lang];
+
+            useEffect(() => {
+                const handleScroll = () => setIsScrolled(window.scrollY > 20);
+                window.addEventListener('scroll', handleScroll);
+                return () => window.removeEventListener('scroll', handleScroll);
+            }, []);
+
+            const navLinks = [
+                { name: t.navFeatures, href: 'index.html#features' },
+                { name: t.navContact, href: 'index.html#contact' },
+                { name: t.navGuides, href: 'guides.html' },
+                { name: t.navAbout, href: 'about.html' }
+            ];
+
+            return (
+                <nav className={`fixed w-full z-50 transition-all duration-300 ${isScrolled ? 'glass-panel py-4' : 'bg-transparent py-6'}`}>
+                    <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
+                        <a href="index.html" className="flex items-center gap-3 group">
+                            <img src="./ashoplogo_20260806_144414_0000.png" alt="AShop Logo" onError={(e) => { e.target.onerror = null; e.target.src = "https://placehold.co/40x40/e0f2fe/0ea5e9?text=A"; }} className="w-10 h-10 rounded-xl object-cover border-2 border-white dark:border-slate-800 shadow-md group-hover:shadow-brand/40 transition-all duration-300" />
+                            <span className="text-2xl font-black tracking-tight text-slate-900 dark:text-white group-hover:text-brand transition-colors duration-300">ASHOP</span>
+                        </a>
+                        <div className="hidden md:flex items-center gap-8">
+                            {navLinks.map((link, i) => (
+                                <a key={i} href={link.href} className="text-sm font-bold transition-colors duration-200 text-slate-600 dark:text-slate-300 hover:text-brand">{link.name}</a>
+                            ))}
+                        </div>
+                        <div className="hidden md:flex items-center gap-4">
+                            <button onClick={() => setDarkMode(!darkMode)} className="w-10 h-10 rounded-full ui-box flex items-center justify-center text-slate-500 dark:text-brand hover:text-brand transition shadow-sm"><i className={`fa-solid ${darkMode ? 'fa-moon' : 'fa-sun'} text-lg`}></i></button>
+                            <div className="flex items-center gap-1.5 text-sm font-bold ui-box px-3 py-1.5 rounded-full shadow-sm">
+                                <button onClick={() => setLang('EN')} className={`transition-colors ${lang === 'EN' ? 'text-brand' : 'text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:hover:text-slate-300'}`}>EN</button>
+                                <span className="text-slate-300 dark:text-slate-700">/</span>
+                                <button onClick={() => setLang('MM')} className={`transition-colors ${lang === 'MM' ? 'text-brand' : 'text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:hover:text-slate-300'}`}>မြန်မာ</button>
+                            </div>
+                            <a href="https://t.me/ashopacey" target="_blank" className="bg-brand text-white px-6 py-2.5 rounded-full font-bold hover:bg-brand-dark transition-all duration-300 shadow-lg shadow-brand/30 transform hover:-translate-y-0.5">{t.buyNow}</a>
+                        </div>
+                        <button className="md:hidden text-2xl text-slate-600 dark:text-slate-300 hover:text-brand transition-colors" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}><i className={`fa-solid ${mobileMenuOpen ? 'fa-xmark' : 'fa-bars'}`}></i></button>
+                    </div>
+                </nav>
+            );
+        };
+
+        const Terms = ({ lang }) => {
+            const t = translations[lang];
+            return (
+                <section className="pt-32 pb-20 max-w-4xl mx-auto px-6 min-h-[85vh]">
+                    <a href="index.html" className="inline-flex items-center gap-2 text-slate-500 dark:text-slate-400 hover:text-brand transition mb-8 font-bold">
+                        <i className="fa-solid fa-arrow-left"></i> {t.backHome}
+                    </a>
+                    <div className="text-center mb-12">
+                        <h2 className="text-4xl md:text-5xl font-black mb-4 text-slate-900 dark:text-white">{t.tos}</h2>
+                        <p className="text-slate-500 dark:text-slate-400 font-bold">{t.lastUpdated} 23 August 2026</p>
+                    </div>
+                    
+                    <div className="p-8 md:p-12 glass-panel rounded-3xl text-slate-700 dark:text-slate-300 font-medium leading-loose space-y-6">
+                        <p>{t.tosWelcome}</p>
+                        <h3 className="text-xl font-black text-slate-900 dark:text-white pt-4">{t.tosH1}</h3>
+                        <p>{t.tosP1_1}</p>
+                        <p>{t.tosP1_2}</p>
+
+                        <h3 className="text-xl font-black text-slate-900 dark:text-white pt-4">{t.tosH2}</h3>
+                        <p>{t.tosP2_1}</p>
+                        <ul className="list-disc list-inside space-y-2 ml-4">
+                            <li><strong className="text-slate-900 dark:text-white">{t.tosL1_title}</strong> {t.tosL1_desc}</li>
+                            <li><strong className="text-slate-900 dark:text-white">{t.tosL2_title}</strong> {t.tosL2_desc}</li>
+                            <li><strong className="text-slate-900 dark:text-white">{t.tosL3_title}</strong> {t.tosL3_desc}</li>
+                        </ul>
+
+                        <h3 className="text-xl font-black text-slate-900 dark:text-white pt-4">{t.tosH3}</h3>
+                        <p>{t.tosP3}</p>
+
+                        <h3 className="text-xl font-black text-slate-900 dark:text-white pt-4">{t.tosH4}</h3>
+                        <p>{t.tosP4}</p>
+
+                        <h3 className="text-xl font-black text-slate-900 dark:text-white pt-4">{t.tosH5}</h3>
+                        <p>{t.tosP5}</p>
+
+                        <div className="mt-12 text-center border-t border-sky-100 dark:border-slate-800 pt-8">
+                            <a href="policy.html" className="text-brand font-bold hover:text-brand-dark transition">{t.readPolicy} <i className="fa-solid fa-arrow-right ml-1"></i></a>
+                        </div>
+                    </div>
+                </section>
+            );
+        };
+
+        const Footer = ({ lang }) => {
+            const t = translations[lang];
+            return (
+                <footer className="pt-10 pb-6 bg-sky-100/60 dark:bg-slate-900/60 backdrop-blur-xl border-t border-sky-200 dark:border-slate-800 mt-auto shadow-[0_-10px_40px_rgba(14,165,233,0.05)]">
+                    <div className="max-w-7xl mx-auto px-6">
+                        <div className="flex flex-col md:flex-row justify-between items-center gap-8 mb-8">
+                            <div className="flex items-center gap-3">
+                                <img src="./ashoplogo_20260806_144414_0000.png" alt="Logo" className="w-8 h-8 rounded-lg shadow-sm border border-white dark:border-slate-700" onError={(e) => { e.target.style.display='none' }} />
+                                <p className="text-slate-600 dark:text-slate-400 font-bold">© 2026 {t.rights}</p>
+                            </div>
+                            <div className="flex gap-6 text-sm font-black text-slate-700 dark:text-slate-300">
+                                <a href="terms.html" className="hover:text-brand transition">{t.tos}</a>
+                                <a href="policy.html" className="hover:text-brand transition">{t.policy}</a>
+                            </div>
+                            <div className="flex flex-col items-center md:items-end gap-3">
+                                <span className="text-[10px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-widest">{t.joinComm}</span>
+                                <div className="flex gap-2.5">
+                                    <a href="https://www.facebook.com/share/1RrZdwAgap/" target="_blank" className="w-9 h-9 flex items-center justify-center rounded-xl bg-white dark:bg-slate-800 border border-sky-100 dark:border-slate-700 text-slate-500 hover:text-[#1877F2] hover:border-[#1877F2]/30 hover:shadow-md transition"><i className="fa-brands fa-facebook"></i></a>
+                                    <a href="https://www.tiktok.com/@ashopacey" target="_blank" className="w-9 h-9 flex items-center justify-center rounded-xl bg-white dark:bg-slate-800 border border-sky-100 dark:border-slate-700 text-slate-500 hover:text-[#ff0050] hover:border-[#ff0050]/30 hover:shadow-md transition"><i className="fa-brands fa-tiktok"></i></a>
+                                    <a href="https://www.youtube.com/@ashopacey" target="_blank" className="w-9 h-9 flex items-center justify-center rounded-xl bg-white dark:bg-slate-800 border border-sky-100 dark:border-slate-700 text-slate-500 hover:text-[#FF0000] hover:border-[#FF0000]/30 hover:shadow-md transition"><i className="fa-brands fa-youtube"></i></a>
+                                    <a href="https://discord.gg/69dMVE8qj5" target="_blank" className="w-9 h-9 flex items-center justify-center rounded-xl bg-white dark:bg-slate-800 border border-sky-100 dark:border-slate-700 text-slate-500 hover:text-[#5865F2] hover:border-[#5865F2]/30 hover:shadow-md transition"><i className="fa-brands fa-discord"></i></a>
+                                    <a href="https://t.me/ashopacey" target="_blank" className="w-9 h-9 flex items-center justify-center rounded-xl bg-white dark:bg-slate-800 border border-sky-100 dark:border-slate-700 text-slate-500 hover:text-[#229ED9] hover:border-[#229ED9]/30 hover:shadow-md transition"><i className="fa-brands fa-telegram"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="text-center border-t border-sky-200/60 dark:border-slate-800 pt-6">
+                            <p className="text-[10px] text-slate-500 dark:text-slate-500 font-semibold uppercase tracking-wider">{t.notAffil}</p>
+                        </div>
+                    </div>
+                </footer>
+            );
+        };
+
+        const App = () => {
+            const [lang, setLang] = useState(() => localStorage.getItem('lang') || 'EN');
+            const [darkMode, setDarkMode] = useState(() => localStorage.getItem('darkMode') === 'true');
+
+            useEffect(() => { localStorage.setItem('lang', lang); }, [lang]);
+            useEffect(() => {
+                localStorage.setItem('darkMode', darkMode);
+                if (darkMode) document.documentElement.classList.add('dark');
+                else document.documentElement.classList.remove('dark');
+            }, [darkMode]);
+            
+            return (<div className="min-h-screen flex flex-col font-sans"><Navbar lang={lang} setLang={setLang} darkMode={darkMode} setDarkMode={setDarkMode} /><Terms lang={lang} /><Footer lang={lang} /></div>);
+        };
+        const root = ReactDOM.createRoot(document.getElementById('root')); root.render(<App />);
+    </script>
+</body>
+</html>
