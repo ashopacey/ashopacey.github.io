@@ -4,98 +4,119 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AShop - Premium Robux Provider</title>
-
-    <!-- Google Fonts: Inter -->
+    <!-- Prevents the White Flash in Dark Mode -->
+    <script>
+        if (localStorage.getItem('darkMode') === 'true') {
+            document.documentElement.classList.add('dark');
+        }
+    </script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    
-    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <!-- React 18 & ReactDOM -->
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-    
-    <!-- Babel Standalone -->
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Tailwind Configuration -->
     <script>
         tailwind.config = {
+            darkMode: 'class',
             theme: {
                 extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    },
-                    colors: {
-                        brand: {
-                            DEFAULT: '#38BDF8', 
-                            dark: '#0284C7',
-                            light: '#7DD3FC',
-                        },
-                        slate: {
-                            800: '#1e293b',
-                            850: '#131d31',
-                            900: '#0b1329',
-                            950: '#030712',
-                        }
-                    },
-                    animation: {
-                        'pulse-glow': 'pulseGlow 2s ease-in-out infinite',
-                        'float': 'float 6s ease-in-out infinite',
-                    },
-                    keyframes: {
-                        pulseGlow: {
-                            '0%, 100%': { opacity: '0.6', transform: 'scale(1)' },
-                            '50%': { opacity: '1', transform: 'scale(1.05)' },
-                        },
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0)' },
-                            '50%': { transform: 'translateY(-15px)' },
-                        }
-                    }
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: { brand: { DEFAULT: '#0EA5E9', dark: '#0284C7', light: '#38BDF8' } },
+                    animation: { 'pulse-glow': 'pulseGlow 2s ease-in-out infinite', 'float': 'float 6s ease-in-out infinite', 'float-slow': 'float 8s ease-in-out infinite' },
+                    keyframes: { pulseGlow: { '0%, 100%': { opacity: '0.6', transform: 'scale(1)' }, '50%': { opacity: '1', transform: 'scale(1.05)' } }, float: { '0%, 100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-15px)' } }, fadeIn: { '0%': { opacity: '0', transform: 'translateX(-10px)' }, '100%': { opacity: '1', transform: 'translateX(0)' } } }
                 }
             }
         }
     </script>
-
     <style>
-        body {
-            background-color: #030712;
-            color: #ffffff;
-            overflow-x: hidden;
-        }
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #030712; 
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #38BDF8; 
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #0284C7; 
-        }
+        body { background-color: #F0F9FF; color: #0f172a; overflow-x: hidden; transition: background-color 0.3s ease; } .dark body { background-color: #030712; color: #ffffff; }
+        ::-webkit-scrollbar { width: 8px; } ::-webkit-scrollbar-track { background: #E0F2FE; } .dark ::-webkit-scrollbar-track { background: #030712; }
+        ::-webkit-scrollbar-thumb { background: #38BDF8; border-radius: 4px; } ::-webkit-scrollbar-thumb:hover { background: #0EA5E9; }
+        .glass-panel { background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.65) 100%); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); border: 1px solid rgba(255, 255, 255, 0.9); box-shadow: 0 20px 40px -10px rgba(14, 165, 233, 0.15); transition: all 0.3s ease; }
+        .dark .glass-panel { background: linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(15, 23, 42, 0.65) 100%); border-color: rgba(56, 189, 248, 0.2); box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.5); }
+        .glass-panel-hover:hover { transform: translateY(-4px); border-color: rgba(14, 165, 233, 0.4); }
+        .ui-box { background: linear-gradient(to bottom right, #ffffff, rgba(240, 249, 255, 0.8)); border: 1px solid rgba(224, 242, 254, 0.8); transition: all 0.3s ease;} .dark .ui-box { background: linear-gradient(to bottom right, #0f172a, rgba(15, 23, 42, 0.8)); border-color: rgba(56, 189, 248, 0.2); }
     </style>
 </head>
-<body class="antialiased selection:bg-brand selection:text-slate-950">
-    
-    <!-- React Root -->
+<body class="antialiased selection:bg-brand selection:text-white">
+    <div class="fixed top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none transition-opacity duration-500 dark:opacity-30">
+        <div class="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-cyan-300/30 rounded-full blur-[120px] animate-float-slow"></div>
+        <div class="absolute bottom-[-10%] right-[-10%] w-[600px] h-[600px] bg-blue-400/20 rounded-full blur-[150px] animate-float"></div>
+        <div class="absolute top-[40%] left-[60%] w-[300px] h-[300px] bg-sky-300/30 rounded-full blur-[100px] animate-float" style="animation-delay: 2s;"></div>
+    </div>
     <div id="root"></div>
 
-    <!-- React Application Code -->
     <script type="text/babel">
         const { useState, useEffect } = React;
 
-        const Navbar = () => {
+        const translations = {
+            EN: {
+                navFeatures: "Features", navContact: "Contact", navGuides: "Guides", navAbout: "About", buyNow: "Buy Now",
+                liveOrders: "154 Orders Completed", cheapest: "Cheapest Robux,", fastest: "Fastest Services.",
+                desc: "Your go-to Roblox Shop in Myanmar. AShop makes buying Robux simple and secure with", descBold: "local payment methods, fast delivery, and reliable support whenever you need it.",
+                openTelegram: "Open in Telegram", viewGuides: "View Guides", usernameText: "only need username", paid: "Paid", payKpay: "Pay with KBZ pay",
+                robux: "Robux", fastDeliv: "Fast Delivery", successTxt: "1000 Robux Successfully transferred via group payout.", orderComp: "Order complete.",
+                whyChoose: "Why Choose", safeFunds: "100% Safe Funds", safeFundsDesc: "All Robux is cleanly sourced via legitimate methods and verified developer earnings to keep your account safe.",
+                easyPay: "Easy Local Payments", easyPayDesc: "Pay easily using local payment methods including KBZPay and WavePay. No credit card required.",
+                liveSup: "Direct Live Support", liveSupDesc: "Got questions? Reach our support team directly through our Telegram for personal assistance with your order.",
+                connect: "Connect With Us", connectDesc: "Join our community for updates and frequent giveaways.", socials: "Social Media Links", owner: "Owner & Support",
+                msgTele: "Message on Telegram", genSup: "For general support, orders and business inquiries.", rights: "AShop. All rights reserved.",
+                tos: "Terms of Service", policy: "Privacy Policy", joinComm: "Join our community", notAffil: "Not affiliated with Roblox Corporation. All trademarks belong to their respective owners.",
+                guidesTitle: "Guides & FAQ", guidesDesc: "Everything you need to know about purchasing and receiving your items safely.", howToBuy: "How do I place an order?", isSafe: "Is this service safe for my Roblox account?",
+                aboutTitle: "About AShop", aboutDesc: "Welcome to AShop! We are dedicated to providing the Myanmar community with the cheapest and fastest Robux services. Our goal is to make purchasing digital goods accessible, easy, and completely secure using local payment methods you already trust.", ourPolicy: "Our Policy", policyDesc: "Customer satisfaction is our top priority. We guarantee delivery on all valid orders and ensure transparent communication throughout the process.", workingHours: "Working Hours", hoursDesc: "We aim to fulfill orders as fast as possible. Drop us a message on Telegram, and we will assist you right away.",
+                backHome: "Back to Home", lastUpdated: "Last updated:", readPolicy: "Read the Privacy Policy", readTos: "Read the Terms of Service",
+                // ToS EN
+                tosWelcome: "Welcome to AShop. By purchasing any products or using our services, you agree to be bound by the following Terms of Service.",
+                tosH1: "1. Payment & Currency", tosP1_1: "We exclusively accept payments in Myanmar Kyat (MMK). Transactions must be completed via our designated KBZPay or WavePay accounts. We may accept alternative payment platforms under specific conditions; you must request and receive approval from us prior to sending any funds.", tosP1_2: "Valid proof of payment (receipt/slip) must be provided immediately after transferring funds. AShop reserves the right to manually verify payments, place orders on hold, or cancel orders without fulfillment if we suspect fraudulent activity, manipulated receipts, or triangle scams.",
+                tosH2: "2. Refunds & Cancellations", tosP2_1: "All sales are final. We do not provide refunds for initiated orders (processed but pending arrival on the user's end) or completed orders.", tosL1_title: "Ineligibility:", tosL1_desc: "If you place an order but your account is not currently eligible to receive it, you will not lose your funds. Your order will remain pending until you fulfill the eligibility requirements. Refunds will not be issued for impatience.", tosL2_title: "User Error:", tosL2_desc: "We do not issue refunds if a buyer misspells their username resulting in a completed order to the wrong account. Furthermore, we reserve the right to decline refunds for manual mistakes made on the buyer's end, such as accidentally sending surplus funds.", tosL3_title: "Third-Party Moderation:", tosL3_desc: "We are not responsible for, and will not issue refunds for, any actions taken by third-party moderators (e.g., Roblox Corporation or game developers), including account suspensions, bans, or item removals.",
+                tosH3: "3. Platform Independence", tosP3: "AShop is an independent service and is not affiliated, endorsed, or associated in any way with Roblox Corporation or its subsidiaries. You hold sole responsibility for adhering to the Terms of Service of Roblox and the policies of your chosen payment provider.",
+                tosH4: "4. Refusal of Service", tosP4: "We reserve the right to refuse service, terminate transactions, or ban users from our platforms without prior notice if we suspect malicious intent, rule-breaking, or any behavior that threatens the security of our shop and community.",
+                tosH5: "5. Support", tosP5: "If you encounter any issues or require assistance with your order, please direct message @aceyredd on Telegram.",
+                // Policy EN
+                polWelcome: "At AShop, we respect your privacy. We currently do not utilize automated data-collection bots on our website, meaning we only process the information strictly necessary to fulfill your manual transactions.",
+                polH1: "1. Information We Collect", polP1_1: "To successfully process a standard Robux delivery, we only ask for your designated Roblox Username.", polP1_2: "For payment verification, we may ask for the name registered to your KBZPay, WavePay, or alternative payment account, alongside related transaction slips. This information is used explicitly for manual verification and is never utilized for secondary purposes.",
+                polH2: "2. Account Security & Credentials", polP2: "We will never ask for your Roblox password for standard transactions. If you ever require a specialized service that necessitates logging in (such as providing temporary email or password access), we guarantee that this sensitive information will not be stored, misused, or sold under any circumstances once the service concludes.",
+                polH3: "3. Public Communications", polP3: "You assume full responsibility for any personal information you voluntarily share within our public community spaces, group chats, or external messaging platforms associated with our services.",
+                polH4: "4. Age Restrictions", polP4: "You must be 13 years of age or older to purchase from AShop or utilize our services. We do not intentionally collect or solicit data from users under the age of 13 without verifiable consent from a parent or legal guardian. If you violate this rule, you bear total responsibility for your usage.",
+                polH5: "5. Support & Data Inquiries", polP5: "If you have any questions regarding our data footprint, privacy practices, or require assistance, please direct message @aceyredd on Telegram for support."
+            },
+            MM: {
+                navFeatures: "အချက်အလက်များ", navContact: "ဆက်သွယ်ရန်", navGuides: "လမ်းညွှန်", navAbout: "အကြောင်း", buyNow: "ယခုဝယ်မည်",
+                liveOrders: "အော်ဒါ ၁၅၄ ခု ပြီးဆုံးပါပြီ", cheapest: "စျေးအသက်သာဆုံး Robux၊", fastest: "အမြန်ဆန်ဆုံး ဝန်ဆောင်မှု။",
+                desc: "မြန်မာနိုင်ငံရှိ သင့်အတွက် အကောင်းဆုံး Roblox ဆိုင်။ AShop သည် Robux ဝယ်ယူခြင်းကို ပိုမိုလွယ်ကူလုံခြုံစေပြီး ", descBold: "ပြည်တွင်းငွေပေးချေမှုစနစ်များ၊ အမြန်ဆန်ဆုံးပို့ဆောင်မှုနှင့် ယုံကြည်ရသော ဝန်ဆောင်မှုများကို ပေးစွမ်းပါသည်။",
+                openTelegram: "Telegram တွင် ဖွင့်မည်", viewGuides: "လမ်းညွှန်များကို ဖတ်မည်", usernameText: "username သာလိုအပ်သည်", paid: "ငွေပေးချေပြီး", payKpay: "KBZ pay ဖြင့်ပေးချေသည်",
+                robux: "Robux", fastDeliv: "အမြန်ပို့ဆောင်မှု", successTxt: "Robux 1000 ကို group payout မှတစ်ဆင့် အောင်မြင်စွာလွှဲပြောင်းပြီးပါပြီ။", orderComp: "အော်ဒါပြီးဆုံးပါပြီ။",
+                whyChoose: "ဘာကြောင့်ရွေးချယ်သင့်တာလဲ", safeFunds: "၁၀၀% လုံခြုံစိတ်ချရသော ငွေကြေး", safeFundsDesc: "သင့်အကောင့်လုံခြုံစေရန် Robux အားလုံးကို တရားဝင်နည်းလမ်းများနှင့် verified developer များထံမှသာ ရယူထားပါသည်။",
+                easyPay: "လွယ်ကူသော ငွေပေးချေမှု", easyPayDesc: "KBZPay နှင့် WavePay အပါအဝင် ပြည်တွင်းငွေပေးချေမှုစနစ်များဖြင့် အလွယ်တကူ ပေးချေနိုင်ပါသည်။",
+                liveSup: "တိုက်ရိုက် အကူအညီ", liveSupDesc: "မေးခွန်းများရှိပါက ကျွန်ုပ်တို့၏ Telegram မှတစ်ဆင့် တိုက်ရိုက်ဆက်သွယ်မေးမြန်းနိုင်ပါသည်။",
+                connect: "ကျွန်ုပ်တို့နှင့် ဆက်သွယ်ရန်", connectDesc: "အသစ်သစ်သောအရာများနှင့် လက်ဆောင်များအတွက် ကျွန်ုပ်တို့၏ community သို့ ဝင်ရောက်ပါ။", socials: "လူမှုကွန်ရက် လင့်ခ်များ", owner: "ပိုင်ရှင် နှင့် အကူအညီပေးသူ",
+                msgTele: "Telegram တွင် စာပို့ရန်", genSup: "အထွေထွေအကူအညီ၊ အော်ဒါများနှင့် စီးပွားရေးဆိုင်ရာများအတွက်။", rights: "AShop. မူပိုင်ခွင့်များရယူထားသည်။",
+                tos: "စည်းကမ်းချက်များ", policy: "ကိုယ်ရေးကိုယ်တာမူဝါဒ", joinComm: "Community သို့ ဝင်ရောက်ရန်", notAffil: "Roblox Corporation နှင့် သက်ဆိုင်ခြင်းမရှိပါ။ ကုန်အမှတ်တံဆိပ်အားလုံးသည် ၎င်းတို့၏ သက်ဆိုင်ရာပိုင်ရှင်များသာဖြစ်သည်။",
+                guidesTitle: "လမ်းညွှန် နှင့် အမေးများသောမေးခွန်းများ", guidesDesc: "ဝယ်ယူခြင်းနှင့် ပစ္စည်းလက်ခံခြင်းအတွက် သိထားသင့်သောအရာများ။", howToBuy: "အော်ဒါဘယ်လိုတင်ရမလဲ?", isSafe: "ကျွန်တော့်အကောင့်အတွက် လုံခြုံမှုရှိပါသလား?",
+                aboutTitle: "AShop အကြောင်း", aboutDesc: "AShop မှကြိုဆိုပါသည်! မြန်မာနိုင်ငံရှိ ကစားသမားများအတွက် စျေးအသက်သာဆုံးနှင့် အမြန်ဆန်ဆုံး Robux ဝန်ဆောင်မှုများကို ပေးအပ်ရန် ရည်ရွယ်ပါသည်။", ourPolicy: "ကျွန်ုပ်တို့၏ မူဝါဒ", policyDesc: "ဝယ်ယူသူများ စိတ်ကျေနပ်မှုရရှိစေရန် အထူးဦးစားပေးပါသည်။ အော်ဒါများကို မှန်ကန်မြန်ဆန်စွာ ပို့ဆောင်ပေးမည်ဟု အာမခံပါသည်။", workingHours: "အလုပ်လုပ်ချိန်", hoursDesc: "အော်ဒါများကို အမြန်ဆန်ဆုံး ပို့ဆောင်ပေးနိုင်ရန် ကြိုးစားနေပါသည်။ Telegram မှတစ်ဆင့် စာပို့ပြီး ဆက်သွယ်နိုင်ပါသည်။",
+                backHome: "ပင်မစာမျက်နှာသို့ ပြန်သွားမည်", lastUpdated: "နောက်ဆုံးပြင်ဆင်ခဲ့သည့်ရက် -", readPolicy: "ကိုယ်ရေးကိုယ်တာမူဝါဒကို ဖတ်ရန်", readTos: "စည်းကမ်းချက်များကို ဖတ်ရန်",
+                // ToS MM
+                tosWelcome: "AShop မှကြိုဆိုပါသည်! ဝန်ဆောင်မှုများကို အသုံးပြုခြင်းဖြင့် အောက်ပါစည်းကမ်းချက်များကို သဘောတူလက်ခံရာရောက်ပါသည်။",
+                tosH1: "၁။ ငွေပေးချေမှုစနစ် နှင့် ငွေကြေး", tosP1_1: "ငွေပေးချေမှုအားလုံးကို မြန်မာကျပ်ငွေ (MMK) ဖြင့်သာ လက်ခံပါသည်။ KBZPay သို့မဟုတ် WavePay ဖြင့်သာ ပေးချေရပါမည်။ အခြားသော ငွေပေးချေမှုစနစ်များကို အခြေအနေပေါ်မူတည်၍ လက်ခံနိုင်သော်လည်း ကြိုတင်မေးမြန်းခွင့်ပြုချက်ရယူရန် လိုအပ်ပါသည်။", tosP1_2: "ငွေလွှဲပြီးပါက ငွေလွှဲပြေစာ (Slip) ကို ချက်ချင်းပေးပို့ရပါမည်။ လိမ်လည်မှုများ၊ ပြေစာအတုများနှင့် Triangle Scam များဟု သံသယရှိပါက အော်ဒါကို ယာယီဆိုင်းငံ့ထားခြင်း၊ သို့မဟုတ် ဖျက်သိမ်းပိုင်ခွင့်ရှိပါသည်။",
+                tosH2: "၂။ ငွေပြန်အမ်းခြင်း နှင့် အော်ဒါဖျက်သိမ်းခြင်း", tosP2_1: "ဝယ်ယူမှုအားလုံးသည် အပြီးသတ်ဖြစ်ပြီး လုပ်ဆောင်ဆဲ သို့မဟုတ် ပြီးစီးသွားသောအော်ဒါများအတွက် ငွေပြန်အမ်းမည်မဟုတ်ပါ။", tosL1_title: "သတ်မှတ်ချက်မပြည့်မီခြင်း -", tosL1_desc: "သင့်အကောင့်သည် Robux လက်ခံရန် သတ်မှတ်ချက်မပြည့်မီပါက အော်ဒါကို ဆိုင်းငံ့ထားမည်ဖြစ်ပြီး ငွေပြန်အမ်းမည်မဟုတ်ပါ။ သတ်မှတ်ချက်ပြည့်မီချိန်တွင်မှသာ ဆက်လက်လုပ်ဆောင်ပေးမည်ဖြစ်သည်။", tosL2_title: "ဝယ်ယူသူ၏ အမှားများ -", tosL2_desc: "ဝယ်ယူသူဘက်မှ Username အမှားပေးခြင်းကြောင့် အခြားအကောင့်သို့ ရောက်ရှိသွားပါက တာဝန်ယူမည်မဟုတ်ပါ။ ပိုမိုငွေလွှဲမိခြင်း အစရှိသော အမှားများအတွက်လည်း ငွေပြန်အမ်းပေးမည်မဟုတ်ပါ။", tosL3_title: "တတိယအဖွဲ့အစည်းများ၏ လုပ်ဆောင်ချက်များ -", tosL3_desc: "Roblox Corporation မှ အကောင့်ပိတ်ခြင်း၊ ပစ္စည်းများရုပ်သိမ်းခြင်း အစရှိသော ပြဿနာများအတွက် ကျွန်ုပ်တို့မှ တာဝန်ယူမည်မဟုတ်ဘဲ ငွေပြန်အမ်းပေးမည်မဟုတ်ပါ။",
+                tosH3: "၃။ ပလက်ဖောင်း လွတ်လပ်မှု", tosP3: "AShop သည် Roblox Corporation နှင့် မည်သို့မျှ သက်ဆိုင်မှုမရှိသော သီးခြားဝန်ဆောင်မှုတစ်ခုဖြစ်သည်။ သုံးစွဲသူသည် Roblox ၏ စည်းကမ်းချက်များနှင့် မိမိအသုံးပြုသော ငွေပေးချေမှုစနစ်၏ စည်းကမ်းများကို လိုက်နာရန် ကိုယ်တိုင်တာဝန်ယူရမည်ဖြစ်သည်။",
+                tosH4: "၄။ ဝန်ဆောင်မှုငြင်းပယ်ခွင့်", tosP4: "အွန်လိုင်းစတိုးနှင့် အသိုင်းအဝိုင်း၏ လုံခြုံရေးကို ထိခိုက်စေနိုင်သော အပြုအမူ၊ စည်းကမ်းဖောက်ဖျက်မှုများ ရှိပါက အသိပေးခြင်းမရှိဘဲ ဝန်ဆောင်မှုငြင်းပယ်ခြင်း၊ ပိတ်ပင်ခြင်းများကို ပြုလုပ်ပိုင်ခွင့်ရှိသည်။",
+                tosH5: "၅။ အကူအညီရယူရန်", tosP5: "အော်ဒါနှင့်ပတ်သက်၍ အကူအညီလိုအပ်ပါက Telegram ရှိ @aceyredd သို့ တိုက်ရိုက် စာပို့နိုင်ပါသည်။",
+                // Policy MM
+                polWelcome: "AShop တွင် သုံးစွဲသူများ၏ ကိုယ်ရေးကိုယ်တာလုံခြုံမှုကို လေးစားပါသည်။ ကျွန်ုပ်တို့သည် အော်ဒါများလုပ်ဆောင်ရန် အမှန်တကယ် လိုအပ်သော အချက်အလက်များကိုသာ ကောက်ယူပါသည်။",
+                polH1: "၁။ ကောက်ယူသော အချက်အလက်များ", polP1_1: "Robux အော်ဒါများကို လုပ်ဆောင်ရန်အတွက် သင့်၏ Roblox Username ကိုသာ လိုအပ်ပါသည်။", polP1_2: "ငွေပေးချေမှုကို စစ်ဆေးရန်အတွက် သင့်၏ KBZPay, WavePay စသည့် ငွေပေးချေမှု အကောင့်အမည်နှင့် ပြေစာများကို တောင်းဆိုနိုင်ပါသည်။ ထိုအချက်အလက်များကို ငွေပေးချေမှု မှန်ကန်ကြောင်း စစ်ဆေးရန်သာ အသုံးပြုမည်ဖြစ်သည်။",
+                polH2: "၂။ အကောင့်လုံခြုံရေး", polP2: "ပုံမှန်အော်ဒါများအတွက် သင့် Roblox Password ကို မည်သည့်အခါမျှ တောင်းခံမည်မဟုတ်ပါ။ အထူးဝန်ဆောင်မှုများအတွက် အကောင့်ဝင်ရန် လိုအပ်ပါက သင့်အချက်အလက်များကို ဝန်ဆောင်မှုပြီးဆုံးပါက သိမ်းဆည်းထားခြင်း၊ အလွဲသုံးစားလုပ်ခြင်း သို့မဟုတ် ရောင်းချခြင်းများ လုံးဝ ပြုလုပ်မည်မဟုတ်ပါ။",
+                polH3: "၃။ အများပြည်သူနှင့် ဆက်သွယ်မှုများ", polP3: "ကျွန်ုပ်တို့၏ Community, Group Chat များတွင် မိမိသဘောအလျောက် မျှဝေလိုက်သော ကိုယ်ရေးကိုယ်တာ အချက်အလက်များအတွက် သုံးစွဲသူကိုယ်တိုင်သာ တာဝန်ယူရမည်ဖြစ်သည်။",
+                polH4: "၄။ အသက်ကန့်သတ်ချက်", polP4: "AShop တွင် ဝယ်ယူရန် အသက် ၁၃ နှစ်နှင့်အထက် ဖြစ်ရမည်။ အသက် ၁၃ နှစ်အောက် ကလေးများ၏ အချက်အလက်များကို မိဘအုပ်ထိန်းသူ၏ ခွင့်ပြုချက်မရှိဘဲ ရယူမည်မဟုတ်ပါ။ အကယ်၍ ဤစည်းကမ်းကို ချိုးဖောက်ပါက သုံးစွဲသူတွင်သာ တာဝန်ရှိသည်။",
+                polH5: "၅။ အကူအညီရယူရန်", polP5: "ကိုယ်ရေးကိုယ်တာမူဝါဒနှင့် ပတ်သက်၍ မေးမြန်းလိုသည်များရှိပါက Telegram ရှိ @aceyredd သို့ ဆက်သွယ်နိုင်ပါသည်။"
+            }
+        };
+
+        const Navbar = ({ lang, setLang, darkMode, setDarkMode, activeSection }) => {
             const [isScrolled, setIsScrolled] = useState(false);
             const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-            const [lang, setLang] = useState('EN');
+            const t = translations[lang];
 
             useEffect(() => {
                 const handleScroll = () => setIsScrolled(window.scrollY > 20);
@@ -104,206 +125,179 @@
             }, []);
 
             const navLinks = [
-                { name: 'Features', href: '#features' },
-                { name: 'FAQ', href: '#faq' },
-                { name: 'Contact', href: '#contact' },
-                { name: 'About', href: '#about' }
+                { name: t.navFeatures, href: '#features', id: 'features' },
+                { name: t.navContact, href: '#contact', id: 'contact' },
+                { name: t.navGuides, href: 'guides.html', id: 'guides' },
+                { name: t.navAbout, href: 'about.html', id: 'about' }
             ];
 
+            const handleNavClick = (e, href) => {
+                if (href.startsWith('#')) {
+                    e.preventDefault();
+                    const targetId = href.split('#')[1];
+                    const el = document.getElementById(targetId);
+                    if (el) {
+                        const rect = el.getBoundingClientRect();
+                        if (Math.abs(rect.top) < 150) {
+                            window.scrollBy({ top: -10, behavior: 'smooth' });
+                            setTimeout(() => el.scrollIntoView({ behavior: 'smooth' }), 150);
+                        } else {
+                            el.scrollIntoView({ behavior: 'smooth' });
+                        }
+                        setMobileMenuOpen(false);
+                    }
+                }
+            };
+
             return (
-                <nav className={`fixed w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-slate-950/85 backdrop-blur-lg py-4 border-b border-slate-800/80 shadow-lg' : 'bg-transparent py-6'}`}>
+                <nav className={`fixed w-full z-50 transition-all duration-300 ${isScrolled ? 'glass-panel py-4' : 'bg-transparent py-6'}`}>
                     <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
-                        
-                        {/* Logo */}
-                        <a href="#" className="flex items-center gap-3 group">
-                            <img 
-                                src="./ashoplogo_20260806_144414_0000.png" 
-                                alt="AShop Logo" 
-                                onError={(e) => { 
-                                    e.target.onerror = null; 
-                                    e.target.src = "https://placehold.co/40x40/0b1329/38BDF8?text=A"; 
-                                }}
-                                className="w-10 h-10 rounded-xl object-cover border border-brand/40 group-hover:border-brand transition-colors duration-300 shadow-[0_0_15px_rgba(56,189,248,0.25)]"
-                            />
-                            <span className="text-2xl font-black tracking-tight text-white group-hover:text-brand transition-colors duration-300">
-                                ASHOP
-                            </span>
+                        <a href="index.html" className="flex items-center gap-3 group">
+                            <img src="./ashoplogo_20260806_144414_0000.png" alt="AShop Logo" onError={(e) => { e.target.onerror = null; e.target.src = "https://placehold.co/40x40/e0f2fe/0ea5e9?text=A"; }} className="w-10 h-10 rounded-xl object-cover border-2 border-white dark:border-slate-800 shadow-md group-hover:shadow-brand/40 transition-all duration-300" />
+                            <span className="text-2xl font-black tracking-tight text-slate-900 dark:text-white group-hover:text-brand transition-colors duration-300">ASHOP</span>
                         </a>
 
-                        {/* Desktop Links */}
                         <div className="hidden md:flex items-center gap-8">
                             {navLinks.map((link) => (
-                                <a key={link.name} href={link.href} className="text-sm font-medium text-slate-300 hover:text-brand transition-colors duration-200">
+                                <a key={link.id} href={link.href} onClick={(e) => handleNavClick(e, link.href)} 
+                                   className={`text-sm font-bold transition-colors duration-200 ${activeSection === link.id ? 'text-brand' : 'text-slate-600 dark:text-slate-300 hover:text-brand'}`}>
                                     {link.name}
                                 </a>
                             ))}
                         </div>
 
-                        {/* Actions */}
-                        <div className="hidden md:flex items-center gap-6">
-                            {/* EN / MM Toggle */}
-                            <div className="flex items-center gap-1.5 text-sm font-bold bg-slate-900/60 px-3 py-1.5 rounded-full border border-slate-800">
-                                <button onClick={() => setLang('EN')} className={`transition-colors ${lang === 'EN' ? 'text-brand drop-shadow-[0_0_8px_rgba(56,189,248,0.8)]' : 'text-slate-500 hover:text-slate-300'}`}>
-                                    EN
-                                </button>
-                                <span className="text-slate-700">/</span>
-                                <button onClick={() => setLang('MM')} className={`transition-colors ${lang === 'MM' ? 'text-brand drop-shadow-[0_0_8px_rgba(56,189,248,0.8)]' : 'text-slate-500 hover:text-slate-300'}`}>
-                                    MM
-                                </button>
+                        <div className="hidden md:flex items-center gap-4">
+                            <button onClick={() => setDarkMode(!darkMode)} className="w-10 h-10 rounded-full ui-box flex items-center justify-center text-slate-500 dark:text-brand hover:text-brand transition shadow-sm">
+                                <i className={`fa-solid ${darkMode ? 'fa-moon' : 'fa-sun'} text-lg`}></i>
+                            </button>
+                            <div className="flex items-center gap-1.5 text-sm font-bold ui-box px-3 py-1.5 rounded-full shadow-sm">
+                                <button onClick={() => setLang('EN')} className={`transition-colors ${lang === 'EN' ? 'text-brand' : 'text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:hover:text-slate-300'}`}>EN</button>
+                                <span className="text-slate-300 dark:text-slate-700">/</span>
+                                <button onClick={() => setLang('MM')} className={`transition-colors ${lang === 'MM' ? 'text-brand' : 'text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:hover:text-slate-300'}`}>မြန်မာ</button>
                             </div>
-                            <a href="https://t.me/ashopacey" target="_blank" className="bg-brand text-slate-950 px-6 py-2.5 rounded-full font-bold hover:bg-white transition-all duration-300 shadow-[0_0_20px_rgba(56,189,248,0.4)] hover:shadow-[0_0_30px_rgba(56,189,248,0.8)] transform hover:-translate-y-0.5">
-                                Order Now
-                            </a>
+                            <a href="https://t.me/ashopacey" target="_blank" className="bg-brand text-white px-6 py-2.5 rounded-full font-bold hover:bg-brand-dark transition-all duration-300 shadow-lg shadow-brand/30 transform hover:-translate-y-0.5">{t.buyNow}</a>
                         </div>
-
-                        {/* Mobile Menu Button */}
-                        <button className="md:hidden text-2xl text-slate-300 hover:text-brand transition-colors" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
-                            <i className={`fa-solid ${mobileMenuOpen ? 'fa-xmark' : 'fa-bars'}`}></i>
-                        </button>
+                        <button className="md:hidden text-2xl text-slate-600 dark:text-slate-300 hover:text-brand transition-colors" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}><i className={`fa-solid ${mobileMenuOpen ? 'fa-xmark' : 'fa-bars'}`}></i></button>
                     </div>
-
-                    {/* Mobile Menu Dropdown */}
-                    {mobileMenuOpen && (
-                        <div className="md:hidden absolute top-full left-0 w-full bg-slate-900/95 backdrop-blur-xl border-b border-slate-800 py-6 px-6 flex flex-col gap-4 shadow-2xl">
-                            {navLinks.map((link) => (
-                                <a key={link.name} href={link.href} onClick={() => setMobileMenuOpen(false)} className="text-lg font-medium text-slate-200 hover:text-brand">
-                                    {link.name}
-                                </a>
-                            ))}
-                            <div className="h-px w-full bg-slate-800 my-2"></div>
-                            <div className="flex items-center justify-between pt-2">
-                                <div className="flex items-center gap-2 text-lg font-bold">
-                                    <button onClick={() => setLang('EN')} className={lang === 'EN' ? 'text-brand' : 'text-slate-500'}>EN</button>
-                                    <span className="text-slate-700">/</span>
-                                    <button onClick={() => setLang('MM')} className={lang === 'MM' ? 'text-brand' : 'text-slate-500'}>MM</button>
-                                </div>
-                                <a href="https://t.me/ashopacey" className="bg-brand text-slate-950 px-6 py-2.5 rounded-xl font-bold">
-                                    Order Now
-                                </a>
-                            </div>
-                        </div>
-                    )}
                 </nav>
             );
         };
 
-        const Hero = () => {
-            return (
-                <section id="home" className="relative min-h-[95vh] flex items-center justify-center pt-24 pb-16 overflow-hidden">
-                    {/* Background Neon Glows */}
-                    <div className="absolute top-1/4 left-1/4 w-[400px] h-[400px] bg-brand/10 rounded-full blur-[130px] pointer-events-none"></div>
-                    <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-blue-600/10 rounded-full blur-[150px] pointer-events-none"></div>
+        const AnimatedProfiles = () => {
+            const avatarPool = [
+                { letter: 'P', color: 'bg-indigo-400' }, { letter: 'K', color: 'bg-sky-400' },
+                { letter: 'M', color: 'bg-blue-400' }, { letter: 'A', color: 'bg-emerald-400' },
+                { letter: 'Z', color: 'bg-rose-400' }, { letter: 'J', color: 'bg-purple-400' }
+            ];
+            const [active, setActive] = useState([ { id: 0, ...avatarPool[0] }, { id: 1, ...avatarPool[1] }, { id: 2, ...avatarPool[2] } ]);
+            const [counter, setCounter] = useState(3);
 
+            useEffect(() => {
+                const interval = setInterval(() => {
+                    setActive(prev => [
+                        { id: counter, ...avatarPool[counter % avatarPool.length] }, 
+                        prev[0], prev[1]
+                    ]);
+                    setCounter(c => c + 1);
+                }, 6000);
+                return () => clearInterval(interval);
+            }, [counter]);
+
+            return (
+                <div className="flex -space-x-2.5 mr-4 pl-1">
+                    {active.map((avatar, index) => (
+                        <div key={avatar.id} className={`w-7 h-7 rounded-full ${avatar.color} border-2 border-white dark:border-slate-800 flex items-center justify-center text-[10px] text-white font-bold transition-all duration-700 ${index === 0 ? 'z-30 animate-[fadeIn_0.8s_ease-out]' : index === 1 ? 'z-20' : 'z-10'}`}>
+                            {avatar.letter}
+                        </div>
+                    ))}
+                </div>
+            );
+        };
+
+        const Hero = ({ lang }) => {
+            const t = translations[lang];
+            return (
+                <section id="home" className="relative min-h-[95vh] flex items-center justify-center pt-24 pb-16">
                     <div className="max-w-7xl mx-auto px-6 flex flex-col lg:flex-row items-center gap-16 relative z-10 w-full">
-                        
-                        {/* Left Side: Text & Actions */}
                         <div className="flex-1 text-center lg:text-left pt-10">
-                            
-                            {/* Live Orders Pill */}
-                            <div className="inline-flex items-center p-1.5 pr-5 rounded-full bg-slate-900/80 border border-slate-700/80 mb-8 backdrop-blur-md shadow-[0_0_15px_rgba(0,0,0,0.3)]">
-                                <div className="flex -space-x-2.5 mr-4 pl-1">
-                                    <div className="w-7 h-7 rounded-full bg-indigo-500 border-2 border-slate-900 flex items-center justify-center text-[10px] text-white font-bold z-30">P</div>
-                                    <div className="w-7 h-7 rounded-full bg-sky-500 border-2 border-slate-900 flex items-center justify-center text-[10px] text-white font-bold z-20">K</div>
-                                    <div className="w-7 h-7 rounded-full bg-blue-500 border-2 border-slate-900 flex items-center justify-center text-[10px] text-white font-bold z-10">M</div>
-                                </div>
+                            <div className="inline-flex items-center p-1.5 pr-5 rounded-full ui-box mb-8 shadow-md">
+                                <AnimatedProfiles />
                                 <div className="flex items-center gap-2">
-                                    <span className="w-2.5 h-2.5 rounded-full bg-brand shadow-[0_0_10px_#38bdf8] animate-pulse"></span>
-                                    <span className="text-sm font-bold text-white tracking-wide">Live</span>
-                                    <span className="text-slate-600 mx-1">|</span>
-                                    <span className="text-sm font-medium text-brand">154 Orders Completed</span>
+                                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 shadow-[0_0_8px_#34d399] animate-pulse"></span>
+                                    <span className="text-sm font-extrabold text-slate-800 dark:text-slate-200 tracking-wide">Live</span>
+                                    <span className="text-slate-300 dark:text-slate-700 mx-1">|</span>
+                                    <span className="text-sm font-bold text-brand">{t.liveOrders}</span>
                                 </div>
                             </div>
-                            
-                            <h1 className="text-5xl md:text-7xl font-black tracking-tight mb-6 leading-tight">
-                                Cheapest <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand via-sky-300 to-blue-400 drop-shadow-[0_0_20px_rgba(56,189,248,0.3)]">Robux,</span> <br/>
-                                Fastest <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand via-sky-300 to-blue-400 drop-shadow-[0_0_20px_rgba(56,189,248,0.3)]">Services.</span>
+                            <h1 className="text-5xl md:text-7xl font-black tracking-tight mb-6 leading-tight text-slate-900 dark:text-white">
+                                {t.cheapest} <br/>
+                                <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand to-cyan-400 drop-shadow-sm">{t.fastest}</span>
                             </h1>
-                            
-                            <p className="text-base md:text-lg text-slate-300 mb-10 max-w-xl mx-auto lg:mx-0 font-normal leading-relaxed">
-                                Upgrade your Roblox experience with AShop. We provide safe transactions, support for easy local payments, and dedicated customer service to get you your items quickly.
+                            <p className="text-base md:text-lg text-slate-600 dark:text-slate-400 mb-10 max-w-xl mx-auto lg:mx-0 font-medium leading-relaxed">
+                                {t.desc} <span className="text-slate-900 dark:text-slate-200 font-extrabold">{t.descBold}</span>
                             </p>
-                            
                             <div className="flex flex-col sm:flex-row items-center gap-5 justify-center lg:justify-start w-full sm:w-auto">
-                                <a href="https://t.me/ashopacey" target="_blank" className="w-full sm:w-auto px-8 py-4 rounded-xl bg-brand text-slate-950 font-extrabold text-base md:text-lg hover:bg-white transition-all duration-300 shadow-[0_0_25px_rgba(56,189,248,0.4)] hover:shadow-[0_0_35px_rgba(56,189,248,0.7)] flex items-center justify-center gap-3 transform hover:-translate-y-1">
-                                    <i className="fa-brands fa-telegram text-xl"></i>
-                                    Order in Telegram
+                                <a href="https://t.me/ashopacey" target="_blank" className="w-full sm:w-auto px-8 py-4 rounded-xl bg-brand text-white font-extrabold text-base md:text-lg hover:bg-brand-dark transition-all duration-300 shadow-xl shadow-brand/30 flex items-center justify-center gap-3 transform hover:-translate-y-1">
+                                    <i className="fa-brands fa-telegram text-xl"></i> {t.openTelegram}
                                 </a>
-                                <a href="#how-to-buy" className="w-full sm:w-auto px-8 py-4 rounded-xl bg-slate-850/90 border border-slate-700/80 hover:border-brand/60 text-white font-bold text-base md:text-lg transition-all duration-300 flex items-center justify-center gap-3 hover:bg-slate-800">
-                                    <i className="fa-solid fa-circle-question text-brand"></i>
-                                    How to buy
+                                <a href="guides.html" className="w-full sm:w-auto px-8 py-4 rounded-xl ui-box text-slate-700 dark:text-slate-300 hover:border-brand/40 font-bold text-base md:text-lg transition-all duration-300 flex items-center justify-center gap-3 shadow-md">
+                                    <i className="fa-solid fa-book-open text-brand"></i> {t.viewGuides}
                                 </a>
                             </div>
                         </div>
 
-                        {/* Right Side: Dynamic Floating Cards */}
                         <div className="flex-1 w-full relative h-[450px] lg:h-[500px] mt-12 lg:mt-0 hidden sm:block">
-                            
-                            {/* Card 1 - Username */}
-                            <div className="absolute top-8 right-4 lg:right-12 w-64 p-4 bg-slate-900/60 border border-slate-800 rounded-2xl backdrop-blur-sm animate-float shadow-xl" style={{ animationDelay: '0s' }}>
-                                <p className="text-slate-200 font-bold">randomusername123</p>
-                                <p className="text-slate-500 text-sm mt-0.5">provided username</p>
+                            <div className="absolute top-8 right-4 lg:right-6 w-64 p-4 glass-panel rounded-2xl animate-float" style={{ animationDelay: '0s' }}>
+                                <p className="text-slate-800 dark:text-slate-200 font-extrabold">AceyDaCool</p>
+                                <p className="text-slate-500 dark:text-slate-400 font-medium text-sm mt-0.5">{t.usernameText}</p>
                             </div>
-
-                            {/* Card 2 - Payment */}
-                            <div className="absolute top-36 left-0 lg:left-8 w-[340px] p-5 bg-slate-900/85 border border-slate-700/80 rounded-3xl backdrop-blur-md animate-float shadow-2xl z-10" style={{ animationDelay: '1.5s' }}>
+                            <div className="absolute top-36 left-0 lg:left-4 w-[340px] p-5 glass-panel rounded-3xl animate-float z-10" style={{ animationDelay: '1.5s' }}>
                                 <div className="flex justify-between items-center mb-4">
-                                    <span className="text-brand font-bold text-xs tracking-widest uppercase">Paid</span>
-                                    <span className="text-white font-black text-xl">33,000 MMK</span>
+                                    <span className="text-brand font-black text-xs tracking-widest uppercase">{t.paid}</span>
+                                    <span className="text-slate-900 dark:text-white font-black text-xl">33,000 MMK</span>
                                 </div>
-                                <div className="p-3.5 bg-slate-950/60 rounded-xl border border-slate-800 flex items-center gap-3">
+                                <div className="p-3.5 ui-box rounded-xl flex items-center gap-3">
                                     <i className="fa-solid fa-wallet text-brand text-lg"></i>
-                                    <span className="text-slate-300 text-sm font-medium">Pay with KBZ pay</span>
+                                    <span className="text-slate-700 dark:text-slate-300 text-sm font-bold">{t.payKpay}</span>
                                 </div>
                             </div>
-
-                            {/* Card 3 - Success */}
-                            <div className="absolute bottom-12 right-0 lg:-right-4 w-[360px] p-6 bg-gradient-to-br from-slate-850 to-slate-900 border border-brand/30 rounded-3xl backdrop-blur-xl animate-float shadow-[0_0_40px_rgba(56,189,248,0.15)] z-20" style={{ animationDelay: '3s' }}>
-                                <div className="flex items-center justify-between mb-5">
+                            <div className="absolute bottom-12 right-0 lg:-right-4 w-[380px] p-6 glass-panel rounded-3xl animate-float z-20" style={{ animationDelay: '3s' }}>
+                                <div className="flex items-center justify-between mb-5 px-1">
                                     <div className="flex items-center gap-4">
-                                        <div className="w-12 h-12 rounded-xl bg-brand/10 border border-brand/20 flex items-center justify-center text-brand font-black text-xl">
-                                            R$
-                                        </div>
+                                        <div className="w-12 h-12 rounded-xl bg-sky-50 dark:bg-slate-800 border border-sky-200 dark:border-slate-700 flex items-center justify-center text-brand font-black text-xl shadow-inner">R$</div>
                                         <div>
-                                            <p className="text-white font-bold text-xl leading-tight">Robux</p>
-                                            <p className="text-brand text-sm font-medium">Instant Delivery</p>
+                                            <p className="text-slate-900 dark:text-white font-extrabold text-xl leading-tight">{t.robux}</p>
+                                            <p className="text-brand text-sm font-bold">{t.fastDeliv}</p>
                                         </div>
                                     </div>
-                                    <div className="w-8 h-8 rounded-full bg-brand flex items-center justify-center text-slate-950 shadow-[0_0_15px_rgba(56,189,248,0.5)]">
-                                        <i className="fa-solid fa-check font-bold"></i>
-                                    </div>
+                                    <div className="w-8 h-8 rounded-full bg-green-500 flex items-center justify-center text-white shadow-lg shadow-green-500/40 ml-4"><i className="fa-solid fa-check font-bold"></i></div>
                                 </div>
-                                <div className="p-4 bg-slate-950/50 border border-slate-800/80 rounded-xl">
-                                    <p className="text-slate-400 text-sm mb-1">Successfully transferred via group payout.</p>
-                                    <p className="text-white text-sm font-semibold">Order complete.</p>
+                                <div className="p-4 ui-box rounded-xl w-full flex items-center justify-center text-center">
+                                    <p className="text-slate-700 dark:text-slate-300 font-bold text-sm leading-relaxed">{t.successTxt}</p>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </section>
             );
         };
 
-        const Features = () => {
+        const Features = ({ lang }) => {
+            const t = translations[lang];
             const items = [
-                { icon: 'fa-shield-halved', title: '100% Safe Funds', desc: 'All Robux is cleanly sourced via legitimate methods and verified developer earnings to keep your account safe.' },
-                { icon: 'fa-wallet', title: 'Easy Local Payments', desc: 'Pay easily using local payment methods including KBZPay and WavePay. No credit card required.' },
-                { icon: 'fa-headset', title: 'Direct Live Support', desc: 'Got questions? Reach our support team directly through our Telegram for personal assistance with your order.' }
+                { icon: 'fa-shield-halved', title: t.safeFunds, desc: t.safeFundsDesc },
+                { icon: 'fa-wallet', title: t.easyPay, desc: t.easyPayDesc },
+                { icon: 'fa-headset', title: t.liveSup, desc: t.liveSupDesc }
             ];
-
             return (
-                <section id="features" className="py-20 max-w-7xl mx-auto px-6 border-t border-slate-800/50">
-                    <h2 className="text-3xl md:text-4xl font-extrabold text-center mb-12">
-                        Why Choose <span className="text-brand">AShop</span>
-                    </h2>
+                <section id="features" className="py-20 max-w-7xl mx-auto px-6 scroll-mt-24">
+                    <h2 className="text-3xl md:text-4xl font-black text-center mb-12 text-slate-900 dark:text-white">{t.whyChoose} <span className="text-brand">AShop</span></h2>
                     <div className="grid md:grid-cols-3 gap-8">
                         {items.map((item, idx) => (
-                            <div key={idx} className="p-8 bg-slate-900/80 border border-slate-800 rounded-3xl hover:border-brand/50 transition-all duration-300 hover:shadow-[0_0_25px_rgba(56,189,248,0.1)] group">
-                                <div className="w-14 h-14 rounded-2xl bg-brand/10 border border-brand/30 flex items-center justify-center text-brand text-2xl mb-6 group-hover:bg-brand group-hover:text-slate-950 transition-all duration-300 shadow-[0_0_15px_rgba(56,189,248,0.2)]">
-                                    <i className={`fa-solid ${item.icon}`}></i>
-                                </div>
-                                <h3 className="text-xl font-bold mb-3 text-white">{item.title}</h3>
-                                <p className="text-slate-400 text-sm leading-relaxed">{item.desc}</p>
+                            <div key={idx} className="p-8 glass-panel glass-panel-hover rounded-3xl group">
+                                <div className="w-14 h-14 rounded-2xl bg-white dark:bg-slate-800 border border-sky-100 dark:border-slate-700 flex items-center justify-center text-brand text-2xl mb-6 group-hover:bg-brand group-hover:text-white transition-all duration-300 shadow-sm"><i className={`fa-solid ${item.icon}`}></i></div>
+                                <h3 className="text-xl font-extrabold mb-3 text-slate-800 dark:text-slate-200">{item.title}</h3>
+                                <p className="text-slate-600 dark:text-slate-400 font-medium text-sm leading-relaxed">{item.desc}</p>
                             </div>
                         ))}
                     </div>
@@ -311,148 +305,77 @@
             );
         };
 
-        const FAQ = () => {
+        const Contact = ({ lang }) => {
+            const t = translations[lang];
             return (
-                <section id="faq" className="py-20 max-w-4xl mx-auto px-6 border-t border-slate-800/50">
-                    <h2 className="text-3xl md:text-4xl font-extrabold text-center mb-12">Frequently Asked Questions</h2>
-                    
-                    <div className="space-y-6">
-                        {/* How To Buy Section */}
-                        <div id="how-to-buy" className="p-6 md:p-8 bg-slate-900/80 border border-brand/30 rounded-3xl shadow-[0_0_20px_rgba(56,189,248,0.1)] scroll-mt-24">
-                            <h3 className="text-xl md:text-2xl font-bold text-white mb-5 flex items-center gap-3">
-                                <i className="fa-solid fa-cart-shopping text-brand"></i> How do I place an order?
-                            </h3>
-                            <ol className="list-decimal list-inside space-y-4 text-slate-300 text-base md:text-lg">
-                                <li>Click the <strong className="text-white">Order in Telegram</strong> button to message our official account.</li>
-                                <li>Tell us how much Robux you want to purchase.</li>
-                                <li>We will provide our KBZPay or WavePay details.</li>
-                                <li>Send the payment and reply with the screenshot/slip.</li>
-                                <li>We will process your order and transfer the Robux to your account!</li>
-                            </ol>
-                        </div>
-
-                        <div className="p-6 md:p-8 bg-slate-900/50 border border-slate-800 rounded-3xl">
-                            <h3 className="text-lg md:text-xl font-bold text-white mb-3">Is this service safe for my Roblox account?</h3>
-                            <p className="text-slate-400 leading-relaxed">Yes! We strictly use clean funds from verified sources. We do not use exploits, meaning your account is 100% safe from bans.</p>
-                        </div>
-                    </div>
-                </section>
-            );
-        };
-
-        const Contact = () => {
-            return (
-                <section id="contact" className="py-20 max-w-5xl mx-auto px-6 border-t border-slate-800/50">
+                <section id="contact" className="py-20 max-w-6xl mx-auto px-6 scroll-mt-24">
                     <div className="text-center mb-12">
-                        <h2 className="text-3xl md:text-4xl font-extrabold mb-4">Connect With Us</h2>
-                        <p className="text-slate-400 text-lg">Follow us on social media or reach out directly for support.</p>
+                        <h2 className="text-3xl md:text-4xl font-black mb-3 text-slate-900 dark:text-white">{t.connect}</h2>
+                        <p className="text-slate-600 dark:text-slate-400 font-medium">{t.connectDesc}</p>
                     </div>
-
-                    <div className="grid md:grid-cols-2 gap-8">
-                        {/* Social Links */}
-                        <div className="p-8 bg-slate-900/80 border border-slate-800 rounded-3xl">
-                            <h3 className="text-xl font-bold mb-6 text-white">Official Channels</h3>
-                            <div className="space-y-4">
-                                <a href="https://www.facebook.com/share/1RrZdwAgap/" target="_blank" className="flex items-center gap-4 p-4 rounded-2xl bg-slate-850 border border-slate-800 hover:border-[#1877F2] hover:bg-[#1877F2]/10 transition group">
-                                    <i className="fa-brands fa-facebook text-2xl text-slate-400 group-hover:text-[#1877F2] transition"></i>
-                                    <span className="font-medium text-slate-200">Facebook</span>
+                    <div className="grid md:grid-cols-12 gap-8 items-stretch">
+                        <div className="md:col-span-7 p-8 glass-panel rounded-3xl">
+                            <h3 className="text-xl font-extrabold mb-6 text-slate-800 dark:text-slate-200">{t.socials}</h3>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <a href="https://www.facebook.com/share/1RrZdwAgap/" target="_blank" className="flex items-center gap-4 p-4 rounded-2xl ui-box hover:border-[#1877F2] hover:shadow-md transition group">
+                                    <div className="w-10 h-10 rounded-xl bg-white dark:bg-slate-800 flex items-center justify-center text-[#1877F2] shadow-sm"><i className="fa-brands fa-facebook text-xl"></i></div>
+                                    <span className="font-bold text-slate-700 dark:text-slate-300">Facebook</span>
                                 </a>
-                                <a href="https://www.tiktok.com/@ashopacey" target="_blank" className="flex items-center gap-4 p-4 rounded-2xl bg-slate-850 border border-slate-800 hover:border-[#ff0050] hover:bg-[#ff0050]/10 transition group">
-                                    <i className="fa-brands fa-tiktok text-2xl text-slate-400 group-hover:text-[#ff0050] transition"></i>
-                                    <span className="font-medium text-slate-200">TikTok</span>
+                                <a href="https://www.tiktok.com/@ashopacey" target="_blank" className="flex items-center gap-4 p-4 rounded-2xl ui-box hover:border-[#ff0050] hover:shadow-md transition group">
+                                    <div className="w-10 h-10 rounded-xl bg-white dark:bg-slate-800 flex items-center justify-center text-[#ff0050] shadow-sm"><i className="fa-brands fa-tiktok text-xl"></i></div>
+                                    <span className="font-bold text-slate-700 dark:text-slate-300">TikTok</span>
                                 </a>
-                                <a href="https://www.youtube.com/@ashopacey" target="_blank" className="flex items-center gap-4 p-4 rounded-2xl bg-slate-850 border border-slate-800 hover:border-[#FF0000] hover:bg-[#FF0000]/10 transition group">
-                                    <i className="fa-brands fa-youtube text-2xl text-slate-400 group-hover:text-[#FF0000] transition"></i>
-                                    <span className="font-medium text-slate-200">YouTube</span>
+                                <a href="https://www.youtube.com/@ashopacey" target="_blank" className="flex items-center gap-4 p-4 rounded-2xl ui-box hover:border-[#FF0000] hover:shadow-md transition group">
+                                    <div className="w-10 h-10 rounded-xl bg-white dark:bg-slate-800 flex items-center justify-center text-[#FF0000] shadow-sm"><i className="fa-brands fa-youtube text-xl"></i></div>
+                                    <span className="font-bold text-slate-700 dark:text-slate-300">YouTube</span>
                                 </a>
-                                <a href="https://discord.gg/69dMVE8qj5" target="_blank" className="flex items-center gap-4 p-4 rounded-2xl bg-slate-850 border border-slate-800 hover:border-[#5865F2] hover:bg-[#5865F2]/10 transition group">
-                                    <i className="fa-brands fa-discord text-2xl text-slate-400 group-hover:text-[#5865F2] transition"></i>
-                                    <span className="font-medium text-slate-200">Discord Community</span>
+                                <a href="https://discord.gg/69dMVE8qj5" target="_blank" className="flex items-center gap-4 p-4 rounded-2xl ui-box hover:border-[#5865F2] hover:shadow-md transition group">
+                                    <div className="w-10 h-10 rounded-xl bg-white dark:bg-slate-800 flex items-center justify-center text-[#5865F2] shadow-sm"><i className="fa-brands fa-discord text-xl"></i></div>
+                                    <span className="font-bold text-slate-700 dark:text-slate-300">Discord</span>
                                 </a>
                             </div>
                         </div>
+                        <div className="md:col-span-5 p-8 glass-panel rounded-3xl flex flex-col justify-center text-center">
+                            <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-white dark:bg-slate-800 border-4 border-white dark:border-slate-800 shadow-lg overflow-hidden">
+                                <img src="./photo_2026-08-23_13-48-35.jpg" alt="Acey" onError={(e) => { e.target.onerror = null; e.target.src = "https://placehold.co/96x96/e0f2fe/0ea5e9?text=A"; }} className="w-full h-full object-cover" />
+                            </div>
+                            <h3 className="text-2xl font-black text-slate-900 dark:text-white">Acey</h3>
+                            <p className="text-brand font-bold mb-6">{t.owner}</p>
+                            <a href="https://t.me/aceyredd" target="_blank" className="w-full py-3.5 rounded-xl bg-brand text-white font-bold flex items-center justify-center gap-2 hover:bg-brand-dark transition-all duration-300 shadow-lg shadow-brand/30 transform hover:-translate-y-1"><i className="fa-brands fa-telegram text-xl"></i> {t.msgTele}</a>
+                            <p className="mt-4 text-xs text-slate-500 dark:text-slate-400 font-semibold tracking-wide">{t.genSup}</p>
+                        </div>
+                    </div>
+                </section>
+            );
+        };
 
-                        {/* Direct Contact Card with Profile Image */}
-                        <div className="p-8 bg-slate-900/80 border border-slate-800 rounded-3xl flex flex-col justify-center">
-                            <h3 className="text-xl font-bold mb-6 text-white">Direct Support</h3>
-                            <div className="p-6 bg-slate-850 border border-brand/30 rounded-2xl relative overflow-hidden">
-                                <div className="absolute -right-6 -top-6 w-24 h-24 bg-brand/10 rounded-full blur-2xl"></div>
-                                
-                                <div className="flex items-center gap-5 relative z-10">
-                                    {/* User Avatar */}
-                                    <div className="w-16 h-16 rounded-full bg-slate-800 border-2 border-brand overflow-hidden flex-shrink-0 shadow-[0_0_15px_rgba(56,189,248,0.25)]">
-                                        <img 
-                                            src="./photo_2026-08-23_13-48-35.jpg" 
-                                            alt="Acey" 
-                                            onError={(e) => { 
-                                                e.target.onerror = null; 
-                                                e.target.src = "https://placehold.co/64x64/0b1329/38BDF8?text=Acey"; 
-                                            }}
-                                            className="w-full h-full object-cover" 
-                                        />
-                                    </div>
-                                    <div>
-                                        <h4 className="text-white font-extrabold text-xl">Acey</h4>
-                                        <p className="text-slate-400 text-sm mb-1">Owner & Support</p>
-                                        <a href="https://t.me/aceyredd" target="_blank" className="text-brand font-medium hover:text-white transition flex items-center gap-1.5">
-                                            @aceyredd <i className="fa-solid fa-arrow-up-right-from-square text-xs"></i>
-                                        </a>
-                                    </div>
+        const Footer = ({ lang }) => {
+            const t = translations[lang];
+            return (
+                <footer className="pt-10 pb-6 bg-sky-100/60 dark:bg-slate-900/60 backdrop-blur-xl border-t border-sky-200 dark:border-slate-800 mt-auto shadow-[0_-10px_40px_rgba(14,165,233,0.05)]">
+                    <div className="max-w-7xl mx-auto px-6">
+                        <div className="flex flex-col md:flex-row justify-between items-center gap-8 mb-8">
+                            <div className="flex items-center gap-3">
+                                <img src="./ashoplogo_20260806_144414_0000.png" alt="Logo" className="w-8 h-8 rounded-lg shadow-sm border border-white dark:border-slate-700" onError={(e) => { e.target.style.display='none' }} />
+                                <p className="text-slate-600 dark:text-slate-400 font-bold">© 2026 {t.rights}</p>
+                            </div>
+                            <div className="flex gap-6 text-sm font-black text-slate-700 dark:text-slate-300">
+                                <a href="terms.html" className="hover:text-brand transition">{t.tos}</a>
+                                <a href="policy.html" className="hover:text-brand transition">{t.policy}</a>
+                            </div>
+                            <div className="flex flex-col items-center md:items-end gap-3">
+                                <span className="text-[10px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-widest">{t.joinComm}</span>
+                                <div className="flex gap-2.5">
+                                    <a href="https://www.facebook.com/share/1RrZdwAgap/" target="_blank" className="w-9 h-9 flex items-center justify-center rounded-xl bg-white dark:bg-slate-800 border border-sky-100 dark:border-slate-700 text-slate-500 hover:text-[#1877F2] hover:border-[#1877F2]/30 hover:shadow-md transition"><i className="fa-brands fa-facebook"></i></a>
+                                    <a href="https://www.tiktok.com/@ashopacey" target="_blank" className="w-9 h-9 flex items-center justify-center rounded-xl bg-white dark:bg-slate-800 border border-sky-100 dark:border-slate-700 text-slate-500 hover:text-[#ff0050] hover:border-[#ff0050]/30 hover:shadow-md transition"><i className="fa-brands fa-tiktok"></i></a>
+                                    <a href="https://www.youtube.com/@ashopacey" target="_blank" className="w-9 h-9 flex items-center justify-center rounded-xl bg-white dark:bg-slate-800 border border-sky-100 dark:border-slate-700 text-slate-500 hover:text-[#FF0000] hover:border-[#FF0000]/30 hover:shadow-md transition"><i className="fa-brands fa-youtube"></i></a>
+                                    <a href="https://discord.gg/69dMVE8qj5" target="_blank" className="w-9 h-9 flex items-center justify-center rounded-xl bg-white dark:bg-slate-800 border border-sky-100 dark:border-slate-700 text-slate-500 hover:text-[#5865F2] hover:border-[#5865F2]/30 hover:shadow-md transition"><i className="fa-brands fa-discord"></i></a>
+                                    <a href="https://t.me/ashopacey" target="_blank" className="w-9 h-9 flex items-center justify-center rounded-xl bg-white dark:bg-slate-800 border border-sky-100 dark:border-slate-700 text-slate-500 hover:text-[#229ED9] hover:border-[#229ED9]/30 hover:shadow-md transition"><i className="fa-brands fa-telegram"></i></a>
                                 </div>
-                                <a href="https://t.me/aceyredd" target="_blank" className="mt-6 w-full py-3 rounded-xl bg-brand/10 border border-brand/30 text-brand font-bold flex items-center justify-center gap-2 hover:bg-brand hover:text-slate-950 transition">
-                                    <i className="fa-brands fa-telegram text-lg"></i> Message on Telegram
-                                </a>
                             </div>
                         </div>
-                    </div>
-                </section>
-            );
-        };
-
-        const About = () => {
-            return (
-                <section id="about" className="py-20 max-w-4xl mx-auto px-6 border-t border-slate-800/50">
-                    <div className="text-center mb-10">
-                        <div className="w-16 h-16 mx-auto rounded-3xl bg-brand/10 border border-brand/30 flex items-center justify-center text-brand text-3xl mb-6 shadow-[0_0_15px_rgba(56,189,248,0.2)]">
-                            <i className="fa-solid fa-store"></i>
-                        </div>
-                        <h2 className="text-3xl md:text-4xl font-extrabold mb-6">About AShop</h2>
-                        <p className="text-slate-300 text-lg leading-relaxed">
-                            Welcome to AShop! We are dedicated to providing the Myanmar community with the cheapest and fastest Robux services. Our goal is to make purchasing digital goods accessible, easy, and completely secure using local payment methods you already trust. 
-                        </p>
-                    </div>
-                    <div className="grid sm:grid-cols-2 gap-6 mt-12">
-                        <div className="p-8 bg-slate-900/50 border border-slate-800 rounded-3xl text-center hover:border-brand/30 transition">
-                            <i className="fa-solid fa-handshake text-brand text-3xl mb-5"></i>
-                            <h3 className="text-white text-xl font-bold mb-3">Our Policy</h3>
-                            <p className="text-sm text-slate-400 leading-relaxed">Customer satisfaction is our top priority. We guarantee delivery on all valid orders and ensure transparent communication.</p>
-                        </div>
-                        <div className="p-8 bg-slate-900/50 border border-slate-800 rounded-3xl text-center hover:border-brand/30 transition">
-                            <i className="fa-solid fa-clock text-brand text-3xl mb-5"></i>
-                            <h3 className="text-white text-xl font-bold mb-3">Working Hours</h3>
-                            <p className="text-sm text-slate-400 leading-relaxed">We aim to fulfill orders as fast as possible. Drop us a message on Telegram, and we will assist you right away.</p>
-                        </div>
-                    </div>
-                </section>
-            );
-        };
-
-        const Footer = () => {
-            return (
-                <footer className="border-t border-slate-800/80 py-10 bg-slate-950">
-                    <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
-                        <div className="flex items-center gap-2">
-                            <img src="./ashoplogo_20260806_144414_0000.png" alt="Logo" className="w-6 h-6 rounded" onError={(e) => { e.target.style.display='none' }} />
-                            <p className="text-slate-500 font-medium">© {new Date().getFullYear()} AShop. All rights reserved.</p>
-                        </div>
-                        
-                        {/* Footer Mini Socials */}
-                        <div className="flex gap-5">
-                            <a href="https://www.facebook.com/share/1RrZdwAgap/" target="_blank" className="text-slate-500 hover:text-[#1877F2] transition"><i className="fa-brands fa-facebook text-xl"></i></a>
-                            <a href="https://www.tiktok.com/@ashopacey" target="_blank" className="text-slate-500 hover:text-[#ff0050] transition"><i className="fa-brands fa-tiktok text-xl"></i></a>
-                            <a href="https://www.youtube.com/@ashopacey" target="_blank" className="text-slate-500 hover:text-[#FF0000] transition"><i className="fa-brands fa-youtube text-xl"></i></a>
-                            <a href="https://discord.gg/69dMVE8qj5" target="_blank" className="text-slate-500 hover:text-[#5865F2] transition"><i className="fa-brands fa-discord text-xl"></i></a>
-                            <a href="https://t.me/ashopacey" target="_blank" className="text-slate-500 hover:text-[#229ED9] transition"><i className="fa-brands fa-telegram text-xl"></i></a>
+                        <div className="text-center border-t border-sky-200/60 dark:border-slate-800 pt-6">
+                            <p className="text-[10px] text-slate-500 dark:text-slate-500 font-semibold uppercase tracking-wider">{t.notAffil}</p>
                         </div>
                     </div>
                 </footer>
@@ -460,15 +383,45 @@
         };
 
         const App = () => {
+            // Local Storage Logic to persist state
+            const [lang, setLang] = useState(() => localStorage.getItem('lang') || 'EN');
+            const [darkMode, setDarkMode] = useState(() => localStorage.getItem('darkMode') === 'true');
+
+            useEffect(() => {
+                localStorage.setItem('lang', lang);
+            }, [lang]);
+
+            useEffect(() => {
+                localStorage.setItem('darkMode', darkMode);
+                if (darkMode) document.documentElement.classList.add('dark');
+                else document.documentElement.classList.remove('dark');
+            }, [darkMode]);
+
+            const [activeSection, setActiveSection] = useState('home');
+
+            useEffect(() => {
+                const handleScrollSpy = () => {
+                    const sections = ['home', 'features', 'contact'];
+                    let current = 'home';
+                    for (let section of sections) {
+                        const el = document.getElementById(section);
+                        if (el && window.scrollY >= (el.offsetTop - 300)) {
+                            current = section;
+                        }
+                    }
+                    setActiveSection(current);
+                };
+                window.addEventListener('scroll', handleScrollSpy);
+                return () => window.removeEventListener('scroll', handleScrollSpy);
+            }, []);
+
             return (
-                <div className="min-h-screen bg-slate-950 flex flex-col">
-                    <Navbar />
-                    <Hero />
-                    <Features />
-                    <FAQ />
-                    <Contact />
-                    <About />
-                    <Footer />
+                <div className="min-h-screen flex flex-col font-sans">
+                    <Navbar lang={lang} setLang={setLang} darkMode={darkMode} setDarkMode={setDarkMode} activeSection={activeSection} />
+                    <Hero lang={lang} />
+                    <Features lang={lang} />
+                    <Contact lang={lang} />
+                    <Footer lang={lang} />
                 </div>
             );
         };
