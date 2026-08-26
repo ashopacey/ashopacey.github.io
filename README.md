@@ -1,2 +1,0 @@
-# ashopacey.github.io
-AShop 
